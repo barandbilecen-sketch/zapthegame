@@ -839,7 +839,8 @@ function chooseMode(id){
   if(id==='isin'||id==='tutku'){var st=ageGet();if(st!=='ok'){gatePend=id;showGate(st==='no');return}}
   setMode(id);closeMenu();
 }
-var hold=false;
+var hold=false,perf=null;
+function pidOf(id){var f=fingers.get(id);return f&&f.remote?f.pid:OL.selfId}
 var dcCat='dogruluk';
 function newTask(){
   var key=mode==='dc'?dcCat:mode;
@@ -848,8 +849,9 @@ function newTask(){
 function popConfirm(){
   popEl.innerHTML='<b></b><div class="pb"><button class="ok" data-a="ok">✅ Tamam</button><button data-a="pas">⏭ Pas</button><button data-a="yeni">🔄 Başka</button></div>';
   popEl.querySelector('b').textContent=(mode==='tutku'||mode==='ceza'||(mode==='dc'&&dcCat==='cesaret'))?'Görev tamamlandı mı?':'Cevaplandı mı?';
+  if(OL.popRole)OL.popRole();
 }
-function popChoose(){popEl.innerHTML='<b>Seçimini yap! Doğruluk mu, Cesaret mi?</b><div class="pb"><button class="ok" data-a="dog">🤔 Doğruluk</button><button data-a="ces">🔥 Cesaret</button></div>'}
+function popChoose(){popEl.innerHTML='<b>Seçimini yap! Doğruluk mu, Cesaret mi?</b><div class="pb"><button class="ok" data-a="dog">🤔 Doğruluk</button><button data-a="ces">🔥 Cesaret</button></div>';if(OL.popRole)OL.popRole()}
 function holdStart(ch){hold=true;if(ch)popChoose();else popConfirm();later(function(){document.getElementById('toast').classList.remove('show');popEl.classList.add('show')},ch?1800:3500)}
 function proceed(){hold=false;popEl.classList.remove('show');reset()}
 function mkEl(tag,id){var e=document.createElement(tag);e.id=id;document.body.appendChild(e);return e}
@@ -995,6 +997,7 @@ function pick(){
   }
   var k=mode==='coklu'?Math.max(1,Math.min(KN,n-1)):mode==='duello'?Math.min(2,n):1,win=sh.slice(0,k);
   ids.forEach(function(id){var f=fingers.get(id);if(win.indexOf(id)>=0)mWin(f,true);else mLose(f)});
+  perf=OL.on&&sh.length?pidOf(sh[0]):null;
   sndWin();later(sndLose,250);flash();
   if(mode==='ters')say(LOSE[rnd(LOSE.length)]);
   else if(mode==='coklu')say(k+' kişi seçildi ✨');
@@ -1198,14 +1201,48 @@ OL.onDone=function(){
   clearTimeout(OL.dt);
   OL.dt=setTimeout(function(){if(OL.on&&phase==='done'&&!hold&&OL.ld===0)reset()},12000);
 };
+OL.votes={};OL.vc=null;
+OL.restrict=function(){return !!perf&&OL.players.length>1&&OL.players.some(function(p){return p.id===perf})};
+OL.canChoose=function(id){return !OL.restrict()||id===perf};
+OL.canVote=function(id){return !OL.restrict()||id!==perf};
 OL.popReq=function(a){
-  if(OL.host){OL.popDo(a);OL.bcast({t:'pop',a:a})}
-  else if(OLC&&OLC.open){try{OLC.send({t:'pop',a:a})}catch(e){}}
+  if(OL.host)OL.popVote(OL.selfId,a);
+  else if(OLC&&OLC.open){try{OLC.send({t:'pop',a:a})}catch(e){}say('🗳️ Oyun verildi')}
+};
+OL.popVote=function(pid,a){
+  if(!popEl.classList.contains('show'))return;
+  var isCh=a==='dog'||a==='ces',ch=!!popEl.querySelector('[data-a=dog]');
+  if(isCh!==ch)return;
+  if(isCh){if(!OL.canChoose(pid))return;OL.popDo(a);OL.bcast({t:'pop',a:a});return}
+  if(a!=='ok'&&a!=='pas'&&a!=='yeni')return;
+  if(!OL.canVote(pid))return;
+  OL.votes[pid]=a;
+  var ids=OL.players.map(function(p){return p.id}).filter(OL.canVote),cnt={ok:0,pas:0,yeni:0},win=null;
+  Object.keys(OL.votes).forEach(function(k){if(ids.indexOf(k)>=0)cnt[OL.votes[k]]++});
+  var need=OL.restrict()?Math.floor(ids.length/2)+1:1;
+  ['ok','pas','yeni'].forEach(function(x){if(cnt[x]>=need)win=x});
+  if(win){OL.popDo(win);OL.bcast({t:'pop',a:win})}
+  else{OL.vc={ok:cnt.ok,pas:cnt.pas,yeni:cnt.yeni,need:need};OL.popRole();OL.bcast({t:'pv',c:cnt,n:need})}
 };
 OL.popDo=function(a){
   if(a!=='ok'&&a!=='pas'&&a!=='yeni'&&a!=='dog'&&a!=='ces')return;
   if(!popEl.classList.contains('show'))return;
+  OL.votes={};OL.vc=null;
   popAct(a);
+};
+/* online: görevi yapan kişi soruyu/görevi kendi geçemez; diğer oyuncular onaylar (çoğunluk) */
+OL.popRole=function(){
+  if(!OL.on||!OL.restrict())return;
+  var b=popEl.querySelector('b'),ch=!!popEl.querySelector('[data-a=dog]'),me=OL.selfId,nm=pname(perf),
+      task=mode==='tutku'||mode==='ceza'||(mode==='dc'&&dcCat==='cesaret'),off=false,c=OL.vc;
+  if(ch){if(me!==perf){b.textContent='🎭 '+nm+' seçim yapıyor…';off=true}}
+  else if(me===perf){b.textContent='⏳ Diğer oyuncular '+(task?'görevi':'cevabı')+' onaylıyor…';off=true}
+  else{
+    b.textContent='👀 '+nm+(task?' görevi yaptı mı?':' cevapladı mı?');
+    var L={ok:'✅ Tamam',pas:'⏭ Pas',yeni:'🔄 Başka'};
+    Array.prototype.forEach.call(popEl.querySelectorAll('button'),function(x){var a=x.getAttribute('data-a');x.textContent=L[a]+(c&&c[a]?' '+c[a]+'/'+c.need:'')});
+  }
+  if(off)Array.prototype.forEach.call(popEl.querySelectorAll('button'),function(x){x.disabled=true;x.style.opacity='.4';x.style.pointerEvents='none'});
 };
 function netMode(m){
   if(!m||!mInfo(m.m))return;
@@ -1231,8 +1268,7 @@ function onHost(c,m){
     if(m.k!=='u'){ev.x=Math.max(0,Math.min(1,+m.x||0));ev.y=Math.max(0,Math.min(1,+m.y||0));if(typeof m.h==='number')ev.h=m.h}
     OL.bcast(ev,pid);OL.apply(ev);
   }else if(m.t==='pop'){
-    if(typeof m.a!=='string')return;
-    if(popEl.classList.contains('show')){OL.popDo(m.a);OL.bcast({t:'pop',a:m.a})}
+    if(typeof m.a==='string')OL.popVote(pid,m.a);
   }
 }
 function dropConn(c){
@@ -1322,6 +1358,7 @@ function onGuest(m){
     case 'go':OL.onGo(m);break;
     case 'mode':netMode(m);break;
     case 'pop':OL.popDo(m.a);break;
+    case 'pv':if(m.c&&+m.n>0){OL.vc={ok:+m.c.ok||0,pas:+m.c.pas||0,yeni:+m.c.yeni||0,need:+m.n};OL.popRole()}break;
     case 'gone':OL.drop(m.p);break;
     case 'bye':OL.leave(m.why||'Odadan çıkarıldın.');break;
   }

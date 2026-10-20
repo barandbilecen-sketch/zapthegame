@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Zap! Parmağını koy, şans birini seçsin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Zap!: arkadaş grupları için parmakla karar oyunu. Hesabı kim ödeyecek, ilk kim başlayacak? 19 mod, online oda, iPhone, iPad ve Android.">
+<meta name="theme-color" content="#12082e">
+<link rel="icon" type="image/png" href="zap_fox.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#12082e}
+a{color:inherit;text-decoration:none}
+.btn{transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible,.lnk:focus-visible{outline:3px solid #ffe46b;outline-offset:3px}
+.lnk:hover{color:#ffe46b}
+.card{transition:transform .25s,background .25s}
+.card:hover{transform:translateY(-4px);background:rgba(255,255,255,.1)}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes pulse{0%,100%{transform:scale(.9);opacity:.7}50%{transform:scale(1.12);opacity:1}}
+.fox{animation:floaty 5s ease-in-out infinite}
+.fd{animation:pulse 2.4s ease-in-out infinite}
+.fd2{animation:pulse 2.4s ease-in-out .6s infinite}
+.fd3{animation:pulse 2.4s ease-in-out 1.2s infinite}
+@media (prefers-reduced-motion:reduce){.fox,.fd,.fd2,.fd3{animation:none}}
+</style>
+
+</head>
+<body>
+
+<div style="background: linear-gradient(160deg,#1b0a3c,#0b3a5c 70%); color:#fff; font-family:'Outfit',system-ui,sans-serif; min-height:100%; overflow:hidden">
+
+<!-- NAV -->
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px 24px; padding:22px 40px; max-width:1200px; margin:0 auto; box-sizing:border-box">
+<div style="display:flex; align-items:center; gap:10px; flex:1 1 auto">
+<img src="zap_fox.png" alt="" style="width:38px; height:38px; filter:drop-shadow(0 0 9px rgba(255,255,255,.6))">
+<span style="font-family:'Unbounded',sans-serif; font-weight:900; font-size:21px; letter-spacing:-1px">ZAP<span style="color:#ff5fa2">!</span></span>
+</div>
+<div style="display:flex; flex-wrap:wrap; gap:6px 26px; font-weight:600; font-size:15px">
+<a class="lnk" href="#nasil" style="padding:10px 0">Nasıl oynanır</a>
+<a class="lnk" href="#modlar" style="padding:10px 0">Modlar</a>
+<a class="lnk" href="#online" style="padding:10px 0">Online</a>
+<a class="lnk" href="#indir" style="padding:10px 0">İndir</a>
+</div>
+</div>
+
+<!-- HERO -->
+<div style="max-width:1200px; margin:0 auto; padding:40px 40px 90px; box-sizing:border-box; display:flex; flex-wrap:wrap; align-items:center; gap:48px">
+<div style="flex:1 1 440px; min-width:0">
+<div style="display:inline-block; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,.12); font-weight:700; font-size:14px; margin-bottom:24px">Arkadaş grupları için karar oyunu</div>
+<h1 style="margin:0 0 22px; font-family:'Unbounded',sans-serif; font-weight:900; font-size:clamp(44px,9vw,84px); line-height:1; letter-spacing:-3px">Parmağını koy,<br><span style="color:#ffe46b">şans</span> birini seçsin.</h1>
+<p style="margin:0 0 34px; font-size:20px; line-height:1.55; max-width:520px; color:rgba(255,255,255,.82)">Bu hesabı kim ödeyecek, ilk kim başlayacak, cezayı kim çekecek? Telefonu masanın ortasına koy, herkes parmağını bassın, Zap! saniyeler içinde karar versin.</p>
+<div style="display:flex; flex-wrap:wrap; gap:14px">
+<a class="btn" href="https://www.zapthegame.com" style="display:inline-flex; align-items:center; min-height:56px; padding:0 30px; border-radius:18px; background:linear-gradient(135deg,#ffe46b,#ff5fa2); color:#1b0a3c; font-weight:800; font-size:18px; box-shadow:0 10px 30px rgba(255,95,162,.35)">Hemen oyna</a>
+<a class="btn" href="#indir" style="display:inline-flex; align-items:center; min-height:56px; padding:0 28px; border-radius:18px; background:rgba(255,255,255,.14); color:#fff; font-weight:700; font-size:18px; border:1px solid rgba(255,255,255,.28)">Uygulamayı indir</a>
+</div>
+<p style="margin:22px 0 0; font-size:15px; color:rgba(255,255,255,.65)">Kurulum yok, hesap yok. iPhone, iPad ve Android.</p>
+</div>
+
+<!-- phone mock -->
+<div style="flex:1 1 340px; display:flex; justify-content:center">
+<div style="position:relative; width:300px; height:560px; border-radius:44px; background:linear-gradient(160deg,#1b0a3c,#0b3a5c); border:3px solid rgba(255,255,255,.35); box-shadow:0 30px 80px rgba(0,0,0,.5), 0 0 80px rgba(255,95,162,.25); box-sizing:border-box; overflow:hidden">
+<div style="position:absolute; left:50%; top:12px; width:90px; height:24px; margin-left:-45px; border-radius:999px; background:rgba(0,0,0,.55)"></div>
+<div class="fd" style="position:absolute; left:46px; top:150px; width:84px; height:84px; border-radius:50%; background:#fff; box-shadow:0 0 50px 14px rgba(255,255,255,.6)"></div>
+<div class="fd2" style="position:absolute; left:170px; top:230px; width:84px; height:84px; border-radius:50%; background:#ff5fa2; box-shadow:0 0 50px 14px rgba(255,95,162,.6)"></div>
+<div class="fd3" style="position:absolute; left:70px; top:340px; width:84px; height:84px; border-radius:50%; background:#3a86ff; box-shadow:0 0 50px 14px rgba(58,134,255,.6)"></div>
+<div style="position:absolute; left:0; right:0; bottom:44px; text-align:center; font-family:'Unbounded',sans-serif; font-weight:900; font-size:19px; color:#ffe46b">Şans seçiyor…</div>
+</div>
+</div>
+</div>
+
+<!-- NASIL -->
+<div id="nasil" style="background:rgba(10,5,28,.45); padding:90px 40px">
+<div style="max-width:1200px; margin:0 auto">
+<h2 style="margin:0 0 12px; font-family:'Unbounded',sans-serif; font-weight:900; font-size:clamp(30px,5vw,44px); letter-spacing:-1.5px">Üç adımda karar</h2>
+<p style="margin:0 0 48px; font-size:18px; color:rgba(255,255,255,.75)">Ekranda beklemek yok, kimin yapacağını konuşup tartışmak yok.</p>
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px">
+<div class="card" style="padding:30px; border-radius:26px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14)">
+<div style="width:52px; height:52px; border-radius:16px; background:#ffe46b; color:#1b0a3c; display:flex; align-items:center; justify-content:center; font-family:'Unbounded',sans-serif; font-weight:900; font-size:22px; margin-bottom:20px">1</div>
+<h3 style="margin:0 0 10px; font-size:22px">Telefonu masaya koy</h3>
+<p style="margin:0; font-size:16px; line-height:1.55; color:rgba(255,255,255,.78)">Oyunu aç, telefonu herkesin uzanabileceği bir yere bırak.</p>
+</div>
+<div class="card" style="padding:30px; border-radius:26px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14)">
+<div style="width:52px; height:52px; border-radius:16px; background:#ff5fa2; color:#1b0a3c; display:flex; align-items:center; justify-content:center; font-family:'Unbounded',sans-serif; font-weight:900; font-size:22px; margin-bottom:20px">2</div>
+<h3 style="margin:0 0 10px; font-size:22px">Herkes parmağını bassın</h3>
+<p style="margin:0; font-size:16px; line-height:1.55; color:rgba(255,255,255,.78)">Her parmağın altında parlayan bir küre belirir. Kürelerin yanıp sönmesi ritmi hızlanan bir sesle gerilimi artırır.</p>
+</div>
+<div class="card" style="padding:30px; border-radius:26px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14)">
+<div style="width:52px; height:52px; border-radius:16px; background:#3a86ff; color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Unbounded',sans-serif; font-weight:900; font-size:22px; margin-bottom:20px">3</div>
+<h3 style="margin:0 0 10px; font-size:22px">Şans seçsin</h3>
+<p style="margin:0; font-size:16px; line-height:1.55; color:rgba(255,255,255,.78)">Küreler tek tek sönerken biri parlayarak kalır. Kimin yapacağı saniyeler içinde netleşir.</p>
+</div>
+</div>
+<p style="margin:28px 0 0; font-size:15px; color:rgba(255,255,255,.6)">iPhone aynı anda en fazla 5 parmak algılar, bu yüzden tek telefonda 5 kişiye kadar oynanır. Daha kalabalık gruplar için online modu var.</p>
+</div>
+</div>
+
+<!-- MODLAR -->
+<div id="modlar" style="padding:90px 40px">
+<div style="max-width:1200px; margin:0 auto">
+<h2 style="margin:0 0 12px; font-family:'Unbounded',sans-serif; font-weight:900; font-size:clamp(30px,5vw,44px); letter-spacing:-1.5px">19 farklı mod</h2>
+<p style="margin:0 0 44px; font-size:18px; color:rgba(255,255,255,.75); max-width:640px">Arkadaşlarla, ailede ya da sevgiliyle. Her ortama göre bir mod var.</p>
+
+<h3 style="margin:0 0 16px; font-size:15px; letter-spacing:2px; text-transform:uppercase; color:#ffe46b">Parmak modları</h3>
+<div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:38px">
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,255,255,.1); font-weight:700">Seçim</span>
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,255,255,.1); font-weight:700">Kaybeden</span>
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,255,255,.1); font-weight:700">Çoklu</span>
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,255,255,.1); font-weight:700">Düello</span>
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,255,255,.1); font-weight:700">Sıralama</span>
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,255,255,.1); font-weight:700">Taç &amp; Son</span>
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,255,255,.1); font-weight:700">Takım</span>
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,255,255,.1); font-weight:700">Elemeli</span>
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,255,255,.1); font-weight:700">Bomba</span>
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,255,255,.1); font-weight:700">Zar</span>
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,255,255,.1); font-weight:700">Hedef Süre</span>
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,255,255,.1); font-weight:700">Şişe Çevirme</span>
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,255,255,.1); font-weight:700">Çark</span>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:22px">
+<div class="card" style="padding:28px; border-radius:26px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14)">
+<h3 style="margin:0 0 10px; font-size:21px; color:#ffe46b">Doğruluk / Cesaret</h3>
+<p style="margin:0; font-size:16px; line-height:1.55; color:rgba(255,255,255,.78)">Seçilen kişi Doğruluk mu Cesaret mi seçer. 40 kişisel soru, 40 gerçek hareket isteyen görev. Pas ve Başka seçenekleri var.</p>
+</div>
+<div class="card" style="padding:28px; border-radius:26px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14)">
+<h3 style="margin:0 0 10px; font-size:21px; color:#ff5fa2">Ceza</h3>
+<p style="margin:0; font-size:16px; line-height:1.55; color:rgba(255,255,255,.78)">30 zor ceza kartı. Aynı ceza bir daha çıkmaz, hepsi bitince baştan karışır.</p>
+</div>
+<div class="card" style="padding:28px; border-radius:26px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14)">
+<h3 style="margin:0 0 10px; font-size:21px; color:#3a86ff">Şişe Çevirme</h3>
+<p style="margin:0; font-size:16px; line-height:1.55; color:rgba(255,255,255,.78)">Herkes parmağını koyar, şişe döner. Ucu SOR, arkası CEVAPLA olur.</p>
+</div>
+<div class="card" style="padding:28px; border-radius:26px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14)">
+<h3 style="margin:0 0 10px; font-size:21px; color:#2ee59d">Hedef Süre</h3>
+<p style="margin:0; font-size:16px; line-height:1.55; color:rgba(255,255,255,.78)">Hedef süre üstte yazar, herkes parmağını basılı tutar. Hedefe en yakın bırakan kazanır.</p>
+</div>
+</div>
+
+<h3 style="margin:44px 0 16px; font-size:15px; letter-spacing:2px; text-transform:uppercase; color:#ff5fa2">Sevgililer için</h3>
+<div style="display:flex; flex-wrap:wrap; gap:12px">
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,95,162,.18); border:1px solid rgba(255,95,162,.5); font-weight:700">Muhabbet</span>
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,95,162,.18); border:1px solid rgba(255,95,162,.5); font-weight:700">Sevgiline Sor</span>
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,95,162,.18); border:1px solid rgba(255,95,162,.5); font-weight:700">Ateşle <span style="font-size:12px; opacity:.8">18+</span></span>
+<span style="padding:12px 20px; border-radius:999px; background:rgba(255,95,162,.18); border:1px solid rgba(255,95,162,.5); font-weight:700">Tutku <span style="font-size:12px; opacity:.8">18+</span></span>
+</div>
+<p style="margin:18px 0 0; font-size:15px; color:rgba(255,255,255,.6)">18+ modlar her oturumda bir kez yaş doğrulaması ister. Her modda soru ve görevler tekrar etmez.</p>
+</div>
+</div>
+
+<!-- ONLINE -->
+<div id="online" style="background:rgba(10,5,28,.45); padding:90px 40px">
+<div style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:48px">
+<div style="flex:1 1 420px; min-width:0">
+<div style="display:inline-block; padding:8px 16px; border-radius:999px; background:#2ee59d; color:#06202a; font-weight:800; font-size:14px; margin-bottom:22px">Yeni</div>
+<h2 style="margin:0 0 16px; font-family:'Unbounded',sans-serif; font-weight:900; font-size:clamp(30px,5vw,44px); letter-spacing:-1.5px; line-height:1.1">Uzaktaysanız da oynayın</h2>
+<p style="margin:0 0 26px; font-size:18px; line-height:1.55; color:rgba(255,255,255,.8)">Bir oda kur, 5 harfli kodu arkadaşlarına gönder. Herkes kendi telefonundan katılır, parmaklar isimleriyle ekranda görünür ve sonuç herkeste aynı çıkar.</p>
+<div style="display:flex; flex-direction:column; gap:14px; font-size:17px">
+<div style="display:flex; gap:14px; align-items:flex-start"><span style="flex:none; margin-top:8px; width:10px; height:10px; border-radius:50%; background:#2ee59d"></span><span>Oda kodu veya davet linkiyle tek dokunuşla katılım</span></div>
+<div style="display:flex; gap:14px; align-items:flex-start"><span style="flex:none; margin-top:8px; width:10px; height:10px; border-radius:50%; background:#2ee59d"></span><span>En fazla 8 kişi, 16 mod</span></div>
+<div style="display:flex; gap:14px; align-items:flex-start"><span style="flex:none; margin-top:8px; width:10px; height:10px; border-radius:50%; background:#2ee59d"></span><span>Modu oda kurucusu seçer, görev kartlarını herkes aynı anda görür</span></div>
+</div>
+</div>
+<div style="flex:1 1 320px; display:flex; justify-content:center">
+<div style="width:100%; max-width:360px; padding:34px 28px; border-radius:30px; background:linear-gradient(160deg,rgba(40,24,84,.97),rgba(18,10,44,.97)); border:1px solid rgba(255,255,255,.2); box-shadow:0 20px 60px rgba(0,0,0,.5); box-sizing:border-box; text-align:center">
+<div style="font-weight:700; font-size:12px; letter-spacing:2px; opacity:.7">ODA KODU</div>
+<div style="font-family:'Unbounded',sans-serif; font-weight:900; font-size:46px; letter-spacing:6px; color:#ffe46b; margin:6px 0 20px">K7M2X</div>
+<div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center">
+<span style="padding:8px 14px; border-radius:999px; background:rgba(255,255,255,.14); font-weight:700; font-size:14px">Ayşe (kurucu)</span>
+<span style="padding:8px 14px; border-radius:999px; background:rgba(255,255,255,.14); font-weight:700; font-size:14px">Mert</span>
+<span style="padding:8px 14px; border-radius:999px; background:rgba(255,255,255,.14); font-weight:700; font-size:14px">Deniz</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- TEMALAR -->
+<div style="padding:90px 40px">
+<div style="max-width:1200px; margin:0 auto; text-align:center">
+<h2 style="margin:0 0 12px; font-family:'Unbounded',sans-serif; font-weight:900; font-size:clamp(30px,5vw,44px); letter-spacing:-1.5px">Kendi tarzını seç</h2>
+<p style="margin:0 auto 40px; font-size:18px; color:rgba(255,255,255,.75); max-width:620px">12 hazır tema, her birinin kendi ses paketi. Renk ve gradyan seç, Galaksi, Şehir Gecesi, Dağ Günbatımı gibi resimli temalar kullan ya da galerinden bir fotoğraf koy.</p>
+<div style="display:flex; flex-wrap:wrap; gap:18px; justify-content:center">
+<div style="width:96px; height:96px; border-radius:50%; background:radial-gradient(circle at 32% 28%,#fff,#b9a8ff); box-shadow:0 0 40px rgba(255,255,255,.35)"></div>
+<div style="width:96px; height:96px; border-radius:50%; background:radial-gradient(circle at 32% 28%,#ffe46b,#ff8a3d); box-shadow:0 0 40px rgba(255,200,80,.45)"></div>
+<div style="width:96px; height:96px; border-radius:50%; background:radial-gradient(circle at 32% 28%,#ff9fc8,#ff3d81); box-shadow:0 0 40px rgba(255,95,162,.5)"></div>
+<div style="width:96px; height:96px; border-radius:50%; background:radial-gradient(circle at 32% 28%,#8fc0ff,#2a5fe0); box-shadow:0 0 40px rgba(58,134,255,.5)"></div>
+<div style="width:96px; height:96px; border-radius:50%; background:radial-gradient(circle at 32% 28%,#9ff5d0,#17a06b); box-shadow:0 0 40px rgba(46,229,157,.45)"></div>
+</div>
+</div>
+</div>
+
+<!-- INDIR -->
+<div id="indir" style="background:rgba(10,5,28,.45); padding:90px 40px">
+<div style="max-width:1200px; margin:0 auto">
+<h2 style="margin:0 0 12px; font-family:'Unbounded',sans-serif; font-weight:900; font-size:clamp(30px,5vw,44px); letter-spacing:-1.5px; text-align:center">Hemen başla</h2>
+<p style="margin:0 auto 48px; font-size:18px; color:rgba(255,255,255,.75); text-align:center; max-width:560px">Ücretsiz, hesap yok. Telefonuna uygun yolu seç.</p>
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:22px">
+
+<div style="padding:32px; border-radius:28px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14); display:flex; flex-direction:column">
+<h3 style="margin:0 0 6px; font-size:24px">iPhone ve iPad</h3>
+<p style="margin:0 0 18px; font-size:15px; color:#ffe46b; font-weight:700">Web, kurulumsuz</p>
+<ol style="margin:0 0 26px; padding-left:20px; font-size:16px; line-height:1.7; color:rgba(255,255,255,.85); flex:1">
+<li>Safari'de zapthegame.com'u aç</li>
+<li>Alt taraftaki Paylaş düğmesine dokun</li>
+<li>Ana Ekrana Ekle'yi seç</li>
+</ol>
+<a class="btn" href="https://www.zapthegame.com" style="display:flex; align-items:center; justify-content:center; min-height:52px; border-radius:16px; background:linear-gradient(135deg,#ffe46b,#ff5fa2); color:#1b0a3c; font-weight:800; font-size:17px">Siteyi aç</a>
+</div>
+
+<div style="padding:32px; border-radius:28px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14); display:flex; flex-direction:column">
+<h3 style="margin:0 0 6px; font-size:24px">Android</h3>
+<p style="margin:0 0 18px; font-size:15px; color:#ffe46b; font-weight:700">APK dosyası</p>
+<ol style="margin:0 0 26px; padding-left:20px; font-size:16px; line-height:1.7; color:rgba(255,255,255,.85); flex:1">
+<li>Zap.apk'yı indir ve dosyaya dokun</li>
+<li>İzin isterse "Bu kaynaktan yüklemeye izin ver"i aç</li>
+<li>Play Protect uyarısı çıkarsa "Yine de yükle"yi seç</li>
+</ol>
+<a class="btn" href="https://github.com/barandbilecen-sketch/zapthegame/raw/main/Zap%21.apk" style="display:flex; align-items:center; justify-content:center; min-height:52px; border-radius:16px; background:#fff; color:#1b0a3c; font-weight:800; font-size:17px">Zap.apk'yı indir</a>
+</div>
+
+<div style="padding:32px; border-radius:28px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14); display:flex; flex-direction:column">
+<h3 style="margin:0 0 6px; font-size:24px">Tarayıcıda oyna</h3>
+<p style="margin:0 0 18px; font-size:15px; color:#ffe46b; font-weight:700">Her dokunmatik ekranda</p>
+<p style="margin:0 0 26px; font-size:16px; line-height:1.7; color:rgba(255,255,255,.85); flex:1">Dokunmatik ekranlı herhangi bir telefon ya da tablette tarayıcıdan açıp hemen oynayabilirsin. Sesler için telefonun sessiz modunu kapat.</p>
+<a class="btn" href="https://www.zapthegame.com" style="display:flex; align-items:center; justify-content:center; min-height:52px; border-radius:16px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.28); color:#fff; font-weight:800; font-size:17px">zapthegame.com</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<div style="padding:60px 40px 50px; text-align:center">
+<img class="fox" src="zap_fox.png" alt="Zap! tilki logosu" style="width:96px; height:96px; filter:drop-shadow(0 0 16px rgba(255,255,255,.7))">
+<div style="font-family:'Unbounded',sans-serif; font-weight:900; font-size:30px; letter-spacing:-1px; margin:10px 0 6px">ZAP<span style="color:#ff5fa2">!</span></div>
+<p style="margin:0 0 22px; font-size:16px; color:rgba(255,255,255,.7)">Parmağını koy, şans birini seçsin.</p>
+<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:6px 28px; font-weight:600; font-size:15px">
+<a class="lnk" href="https://www.zapthegame.com" style="padding:10px 0">Oyna</a>
+<a class="lnk" href="https://github.com/barandbilecen-sketch/zapthegame" style="padding:10px 0">GitHub</a>
+<a class="lnk" href="https://github.com/barandbilecen-sketch/zapthegame/raw/main/Zap%21.apk" style="padding:10px 0">Android APK</a>
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

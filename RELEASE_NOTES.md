@@ -1,5 +1,12 @@
 # ⚡ Zap! Sürüm Notları
-
+## v3.1: Online mod 🌐
+- **Uzaktan oyna:** Mods menüsündeki 🌐 düğmesiyle oda kur, 5 harfli kodu arkadaşlarına ver. Herkes kendi telefonundan katılır.
+- Herkes parmağını basılı tutar, Zap! herkes için aynı kişiyi seçer. Uzaktaki oyuncuların küreleri isimleriyle görünür.
+- Doğruluk, Ceza ve sevgili modlarında herkes aynı kartı görür.
+- Modu oda kurucusu seçer. En fazla 8 kişi katılabilir.
+- Davet linkini paylaşarak katılım tek dokunuşla olur.
+- Online'da olmayan modlar: 🎯 Hedef Süre, 🍾 Şişe Çevirme, 🎡 Çark.
+- 
 ## v3.0: Son revizeler
 - **😈 Ceza:** 30 zor ceza, aynı ceza tekrar etmez.
 - **🍾 Şişe Çevirme** (Dönen ok'un yerine): Herkes parmağını koyar, şişe döner. Şişenin ucu **SOR**, arkası **CEVAPLA** olur.

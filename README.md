@@ -16,7 +16,7 @@
 Oyun tam ekran, uygulama gibi açılır.
 
 ### 🤖 Android (APK)
-1. [**Zap.apk'yı indir**](https://github.com/barandbilecen-sketch/zapthegame/raw/main/Zap%21.apk)
+1. [**Zap.apk'yı indir**](https://github.com/barandbilecen-sketch/zapthegame/raw/main/Zap.apk)
 2. İndirilen dosyaya dokun ve kur.
 3. Telefon izin isterse **"Bu kaynaktan yüklemeye izin ver"** seçeneğini aç. APK Google Play dışından geldiği için bu normaldir.
 4. "Google Play Protect" uyarısı çıkarsa **Yine de yükle**'yi seç.

@@ -1,5 +1,9 @@
 # ⚡ Zap! The Game Sürüm Notları
 
+## v3.2: Daha çok soru, adil online onay
+- **Her soru/görev modunda 100'den fazla içerik:** Muhabbet, Sevgiline Sor, Ateşle, Tutku, Doğruluk, Cesaret ve Ceza. Aynı kart bir daha çıkmaz, hepsi bitince baştan karışır.
+- **Online onay:** Görevi yapan oyuncu soruyu değiştiremez, pas geçemez ve görevini kendi onaylayamaz. Diğer oyuncular oy verir, çoğunluk karar verir.
+
 ## v3.1: Online mod 🌐
 - **Uzaktan oyna:** Mods menüsündeki 🌐 düğmesiyle oda kur, 5 harfli kodu arkadaşlarına ver. Herkes kendi telefonundan katılır. En fazla 8 kişi.
 - Herkes parmağını basılı tutar, Zap! herkes için aynı kişiyi seçer. Uzaktaki oyuncuların küreleri isimleriyle görünür.

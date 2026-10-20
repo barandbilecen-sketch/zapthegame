@@ -1,4 +1,5 @@
-# ⚡ Zap! Sürüm Notları
+# ⚡ Zap! The Game Sürüm Notları
+
 ## v3.1: Online mod 🌐
 - **Uzaktan oyna:** Mods menüsündeki 🌐 düğmesiyle oda kur, 5 harfli kodu arkadaşlarına ver. Herkes kendi telefonundan katılır.
 - Herkes parmağını basılı tutar, Zap! herkes için aynı kişiyi seçer. Uzaktaki oyuncuların küreleri isimleriyle görünür.
@@ -6,7 +7,8 @@
 - Modu oda kurucusu seçer. En fazla 8 kişi katılabilir.
 - Davet linkini paylaşarak katılım tek dokunuşla olur.
 - Online'da olmayan modlar: 🎯 Hedef Süre, 🍾 Şişe Çevirme, 🎡 Çark.
-- 
+- Uygulama adı artık **Zap! The Game**.
+
 ## v3.0: Son revizeler
 - **😈 Ceza:** 30 zor ceza, aynı ceza tekrar etmez.
 - **🍾 Şişe Çevirme** (Dönen ok'un yerine): Herkes parmağını koyar, şişe döner. Şişenin ucu **SOR**, arkası **CEVAPLA** olur.
@@ -69,4 +71,4 @@
 - iPhone aynı anda en fazla **5 parmak** algılar.
 - Fotoğraf seçme ve ses, Claude uygulamasının içindeki görüntüleyicide engellenebilir, kendi sitende çalışır.
 - Yaş doğrulama kişinin kendi beyanına dayanır.
- - Online mod internet gerektirir. Bazı operatör ağlarında bağlantı kurulamayabilir, bu durumda wifi ile deneyin.
+- Online mod internet gerektirir. Bazı operatör ağlarında bağlantı kurulamayabilir, bu durumda wifi ile deneyin.

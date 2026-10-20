@@ -1,4 +1,4 @@
-## 📲 İndir / Oyna
+## 📲 İndir / Oyna www.zapthegame.com/info
 
 ### 🌐 Online oyna (herkes kendi telefonundan)
 1. Oyunu aç, sol üstteki **🧩 Mods** düğmesine dokun.

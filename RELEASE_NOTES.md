@@ -69,3 +69,4 @@
 - iPhone aynı anda en fazla **5 parmak** algılar.
 - Fotoğraf seçme ve ses, Claude uygulamasının içindeki görüntüleyicide engellenebilir, kendi sitende çalışır.
 - Yaş doğrulama kişinin kendi beyanına dayanır.
+ - Online mod internet gerektirir. Bazı operatör ağlarında bağlantı kurulamayabilir, bu durumda wifi ile deneyin.

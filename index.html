@@ -268,6 +268,17 @@ body.ph::before{opacity:0}
 @keyframes spSpin{to{transform:rotate(360deg)}}
 @keyframes spPulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.06)}}
 @keyframes spRip{from{transform:translate(-50%,-50%) scale(1);opacity:.55}to{transform:translate(-50%,-50%) scale(2.6);opacity:0}}
+
+/* big sliding wordmark */
+@keyframes wmSlide{0%{background-position:150% 0,0 0}100%{background-position:-50% 0,0 0}}
+@keyframes wmIn{from{opacity:0;transform:translateX(-8vw) scale(.96)}to{opacity:1;transform:none}}
+@keyframes wmInB{from{opacity:0;transform:translateX(8vw)}to{opacity:1;transform:none}}
+#hint h1,#splash .sp-t{font-family:var(--ffd);font-weight:900;font-size:clamp(92px,31vw,200px);letter-spacing:-.065em;line-height:.92;padding:0 .04em .06em 0;margin:0 0 6px;
+ background:linear-gradient(100deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%) 150% 0/250% 100% no-repeat,linear-gradient(180deg,#fff 18%,#b9a8ff 66%,rgba(185,168,255,.12) 100%);
+ -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;opacity:1;
+ animation:wmIn .9s cubic-bezier(.2,.8,.2,1) both,wmSlide 3.6s 1s ease-in-out infinite}
+#hint h1 span,#splash .sp-t span{display:inline-block;background:linear-gradient(180deg,#ff8cc0 25%,rgba(255,95,162,.15) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:wmInB .9s .1s cubic-bezier(.2,.8,.2,1) both}
+@media (prefers-reduced-motion:reduce){#hint h1,#splash .sp-t,#hint h1 span,#splash .sp-t span{animation:none}}
 </style>
 </head>
 <body>

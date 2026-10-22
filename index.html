@@ -331,12 +331,13 @@ body:has(.dot) #hdr .hb,body:has(.ring) #hdr .hb{opacity:0;pointer-events:none}
 #zs .tb button{flex:1;height:38px;border:0;border-radius:12px;background:transparent;color:#fff;font:700 14px var(--ff);opacity:.75}
 #zs .tb button.on{background:rgba(255,255,255,.2);opacity:1}
 #zs h3{margin:0 0 10px;font:900 13px var(--ffd);letter-spacing:1px;color:#ffe46b}
-#zs .av{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px}
+#zs .av{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;align-items:start;margin-bottom:16px}
+#zs .av>*{width:100%;min-width:0;aspect-ratio:1/1;height:auto;box-sizing:border-box}
 #zs .av button{aspect-ratio:1;border:2px solid transparent;border-radius:16px;background:rgba(255,255,255,.1);font-size:28px;line-height:1}
 #zs .av button.on{border-color:#ffe46b;background:rgba(255,228,107,.18)}
 #zs input[type=text]{width:100%;box-sizing:border-box;height:48px;padding:0 16px;border-radius:14px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font:600 16px var(--ff);outline:none;margin-bottom:16px;-webkit-user-select:text;user-select:text}
 #zs .st{display:flex;gap:10px;margin-bottom:6px}
-#zs .st div{flex:1;padding:14px 10px;border-radius:16px;background:rgba(255,255,255,.1);text-align:center}
+#zs .st div{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:84px;padding:14px 10px;border-radius:16px;background:rgba(255,255,255,.1);text-align:center}
 #zs .st b{display:block;font:900 24px var(--ffd);margin-bottom:4px}
 #zs .st small{font:500 12px var(--ff);opacity:.75}
 #zs .rw{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;box-sizing:border-box;padding:14px 16px;margin-bottom:8px;border:0;border-radius:16px;background:rgba(255,255,255,.1);color:#fff;font:600 16px var(--ff);text-align:left;text-decoration:none}
@@ -355,7 +356,7 @@ body:has(.dot) #hdr .hb,body:has(.ring) #hdr .hb{opacity:0;pointer-events:none}
 #zs .av button{padding:0;overflow:hidden;border-radius:50%}
 #zs .av button img{width:100%;height:100%;display:block;object-fit:cover;border-radius:50%}
 #zs .av button.on{border-color:#ffe46b;box-shadow:0 0 0 3px rgba(255,228,107,.25)}
-#zs .av .up{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:2px dashed rgba(255,255,255,.4);border-radius:50%;background:rgba(255,255,255,.08);text-align:center;cursor:pointer}
+#zs .av .up{overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:2px dashed rgba(255,255,255,.4);border-radius:50%;background:rgba(255,255,255,.08);text-align:center;cursor:pointer}
 #zs .av .up small{font:600 9px var(--ff);opacity:.85;line-height:1.1;padding:0 6px}
 </style>
 </head>

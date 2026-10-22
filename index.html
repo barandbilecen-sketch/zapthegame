@@ -310,6 +310,7 @@ body.ph::before{opacity:0}
 #dock button i{font-style:normal;font-size:22px;line-height:1}
 #dock button span{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.88}
 #dock button:active{transform:scale(.92);background:rgba(255,255,255,.16)}
+#dock button.main i{font-size:25px}
 #dock button.main{background:linear-gradient(135deg,rgba(255,95,162,.9),rgba(58,134,255,.9));box-shadow:0 4px 16px rgba(255,95,162,.35)}
 body:has(.dot) #dock,body:has(.ring) #dock{opacity:0;pointer-events:none;transform:translateY(14px)}
 #mhint{bottom:calc(env(safe-area-inset-bottom,0px) + 92px)}
@@ -1007,7 +1008,7 @@ function closeMenu(){menu.classList.remove('show');dt.forEach(clearTimeout);dt=[
 document.getElementById('mx').addEventListener('click',closeMenu);
 document.getElementById('fm').addEventListener('click',function(){pv=mode;buildMenu();showDetail();menu.classList.add('show');var on=ml.querySelector('.on');ml.scrollTop=on?Math.max(0,on.offsetTop-90):0});
 function setMode(m){
-  mode=m;var i=mInfo(m);fl.textContent=i[1];idleEl.querySelector('small').textContent=i[1]+' '+i[2]+' modu';idleEl.classList.toggle('show',firstDone&&m!=='cark');
+  mode=m;var i=mInfo(m);fl.textContent=i[1];window.dkSet&&dkSet(i);idleEl.querySelector('small').textContent=i[1]+' '+i[2]+' modu';idleEl.classList.toggle('show',firstDone&&m!=='cark');
   if(ready){say(i[1]+' '+i[2]+' modu');setTimeout(function(){if(phase==='idle')document.getElementById('toast').classList.remove('show')},1600)}
   wheel.classList.toggle('show',m==='cark');mbar.classList.remove('hide');if(m==='cark')drawWheel();
   if(OL.on&&OL.host)OL.bcast({t:'mode',m:m,KN:KN,TN:TN});
@@ -1503,7 +1504,10 @@ if(!infoSeen)showInfo();
 var hdr=mkEl('div','hdr'),spc=document.createElement('div');spc.className='sp';
 hdr.appendChild(brand);hdr.appendChild(spc);hdr.appendChild(mbar);hdr.appendChild(gear);
 var dock=mkEl('div','dock');
-dock.innerHTML='<button id="dk2"><i>🌐</i><span>Online</span></button><button id="dk4"><i>🎨</i><span>Tema</span></button><button id="dk3" class="main"><i>🎡</i><span>Çark</span></button><button id="dk5"><i>ℹ️</i><span>Nasıl?</span></button>';
+dock.innerHTML='<button id="dk2"><i>🌐</i><span>Online</span></button><button id="dk4"><i>🎨</i><span>Tema</span></button><button id="dk3" class="main"><i>🎡</i><span>Çark</span></button><button id="dk5"><i>ℹ️</i><span>Nasıl?</span></button><button id="dk6"><i>⚙️</i><span>Ayarlar</span></button>';
+window.dkSet=function(i){var b=document.getElementById('dk3');if(!b||!i)return;b.querySelector('i').textContent=i[1];b.querySelector('span').textContent=i[2]};
+dkSet(mInfo(mode));
+document.getElementById('dk6').addEventListener('click',function(){zsOpen('set')});
 document.getElementById('dk2').addEventListener('click',function(){openOnline()});
 document.getElementById('dk4').addEventListener('click',function(){gear.click()});
 document.getElementById('dk5').addEventListener('click',showInfo);
@@ -1563,9 +1567,8 @@ document.getElementById('dk5').addEventListener('click',showInfo);
   var seen=false;try{seen=localStorage.getItem('zap-mp')==='1'}catch(e){}if(!seen)btn.classList.add('pulse');
 })();
 
-var hs=document.createElement('button');hs.className='hb';hs.id='hs';hs.innerHTML='<i>⚙️</i>Ayarlar';
 var hp=document.createElement('button');hp.className='hb pr';hp.id='hp';
-hdr.insertBefore(hs,mbar);hdr.insertBefore(hp,mbar);
+hdr.insertBefore(hp,mbar);
 var zs=mkEl('div','zs');
 var zsTab='pro',ZPH='';try{ZPH=localStorage.getItem('zap-photo')||''}catch(e){}
 function foxSrc(){var i=document.querySelector('#hint .mark img');return i?i.src:''}
@@ -1636,7 +1639,6 @@ zs.addEventListener('click',function(e){
 });
 zs.addEventListener('change',function(e){if(e.target.id==='zsf'){pickPhoto(e.target.files&&e.target.files[0])}});
 zs.addEventListener('input',function(e){if(e.target.id==='zsn'){var v=e.target.value.replace(/[<>&]/g,'').slice(0,12);try{localStorage.setItem('zap-name',v.trim())}catch(x){}var o=oq('onm');if(o)o.value=v;var bb=zs.querySelector('.big b');if(bb)bb.textContent=v.trim()||'Oyuncu'}});
-hs.addEventListener('click',function(){zsOpen('set')});
 hp.addEventListener('click',function(){zsOpen('pro')});
 
 /* aşağı kaydırarak kapat */

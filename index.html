@@ -366,18 +366,19 @@ body:has(.dot) #hdr .hb,body:has(.ring) #hdr .hb{opacity:0;pointer-events:none}
 #mp2{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 92px);z-index:87;display:none;flex-direction:column;align-items:center;opacity:0;transform:translateY(18px) scale(.97);transition:opacity .22s,transform .22s;touch-action:pan-x}
 #mp2.show{display:flex;opacity:1;transform:none}
 #mp2 .mpx{display:flex;align-items:center;gap:12px;margin-bottom:34px;position:relative;z-index:2;font:700 11px var(--ff);letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.75)}
-#mp2 .mpx::before,#mp2 .mpx::after{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6))}
-#mp2 .mpx::after{transform:scaleX(-1)}
 #mp2 .mpx button{pointer-events:auto;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;border-radius:99px;padding:5px 12px;font:700 11px var(--ff);letter-spacing:.06em}
-#mpc{width:100%;display:flex;gap:10px;overflow-x:auto;padding:14px calc(50% - 56px) 26px;box-sizing:border-box;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;perspective:700px}
+#mpc{width:100%;display:flex;gap:10px;overflow-x:auto;padding:60px calc(50% - 56px) 60px;margin:-46px 0 -34px;box-sizing:border-box;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;perspective:700px}
 #mpc::-webkit-scrollbar{display:none}
-#mpc .mq{position:relative;flex:none;width:112px;height:150px;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border-radius:26px;background:linear-gradient(160deg,rgba(255,255,255,.2),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.28);box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.35);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff;transition:box-shadow .2s,border-color .2s;will-change:transform,opacity}
+#mpc .mq{box-shadow:none;position:relative;flex:none;width:112px;height:150px;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border-radius:26px;background:linear-gradient(160deg,rgba(255,255,255,.2),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.28);box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.35);color:#fff;transition:border-color .2s;will-change:transform,opacity}
 #mpc .mq i{font-style:normal;font-size:46px;line-height:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,.4))}
 #mpc .mq b{font:900 12.5px var(--ffd);letter-spacing:-.3px;text-align:center;padding:0 6px;line-height:1.15}
-#mpc .mq.c{border-color:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.7),0 0 34px rgba(255,95,162,.7),0 0 70px rgba(58,134,255,.5),inset 0 1px 0 rgba(255,255,255,.5)}
+#mpc .mq.c{border-color:#fff;background:linear-gradient(160deg,rgba(255,255,255,.3),rgba(255,255,255,.08))}
 #mpc .mq.cur::after{content:"SEÇİLİ";position:absolute;top:10px;left:0;right:0;text-align:center;font:800 8.5px var(--ff);letter-spacing:.16em;color:#ffe46b}
 #mpc .mq.off{filter:grayscale(1)}
 #mpd{max-width:82%;text-align:center;font:500 13.5px/1.35 var(--ff);color:rgba(255,255,255,.88);min-height:36px;margin-top:-6px;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+#mpg{position:absolute;left:50%;top:38px;width:min(120vw,560px);height:340px;margin-left:calc(min(120vw,560px)/-2);pointer-events:none;background:radial-gradient(closest-side,rgba(255,95,162,.55),rgba(112,70,255,.32) 45%,rgba(58,134,255,.12) 72%,transparent);filter:blur(10px);animation:mpgp 3s ease-in-out infinite}
+@keyframes mpgp{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+#mp2>*:not(#mpg){position:relative}
 #dk3.pulse{animation:dkp 2.2s ease-in-out infinite}
 @keyframes dkp{0%,100%{box-shadow:0 4px 16px rgba(255,95,162,.35)}50%{box-shadow:0 0 0 7px rgba(255,95,162,.18),0 4px 22px rgba(255,95,162,.6)}}
 #dock.hold{z-index:88}
@@ -1515,7 +1516,7 @@ document.getElementById('dk5').addEventListener('click',showInfo);
 /* ---- mod seçici ---- */
 (function(){
   var mpb=mkEl('div','mpb'),mp2=mkEl('div','mp2'),btn=document.getElementById('dk3');
-  mp2.innerHTML='<div class="mpx"><span id="mpn">MOD SEÇ</span><button id="mpl">Liste ›</button></div><div id="mpc"></div><div id="mpd"></div>';
+  mp2.innerHTML='<div id="mpg"></div><div class="mpx"><span id="mpn">MOD SEÇ</span><button id="mpl">Liste ›</button></div><div id="mpc"></div><div id="mpd"></div>';
   var mpc=document.getElementById('mpc'),mpd=document.getElementById('mpd'),cards=[],STEP=122,open=false,lastI=-1,holding=false,sx=0,s0=0,timer=null,moved=false;
   MODES.forEach(function(m){var c=document.createElement('div');c.className='mq';c.dataset.id=m[0];c.innerHTML='<i>'+m[1]+'</i><b>'+m[2]+'</b>';mpc.appendChild(c);cards.push(c)});
   function idxOf(id){for(var i=0;i<MODES.length;i++)if(MODES[i][0]===id)return i;return 0}
@@ -1545,24 +1546,24 @@ document.getElementById('dk5').addEventListener('click',showInfo);
     var i=cards.indexOf(c);if(i!==cur()){mpc.style.scrollSnapType='x mandatory';mpc.scrollTo({left:i*STEP,behavior:'smooth'});return}
     closeP2();chooseMode(c.dataset.id)});
   document.getElementById('mpl').addEventListener('click',function(){closeP2();document.getElementById('fm').click()});
-  /* basılı tut */
+  /* bas-kaydır-bırak: dokununca açılır, kaydırıp bırakınca seçer */
+  var wasOpen=false;
   btn.addEventListener('pointerdown',function(e){
-    moved=false;sx=e.clientX;holding=false;try{btn.setPointerCapture(e.pointerId)}catch(x){}
-    timer=setTimeout(function(){timer=null;holding=true;openP();s0=mpc.scrollLeft;sx=sx},320);
+    moved=false;sx=e.clientX;wasOpen=open;holding=true;try{btn.setPointerCapture(e.pointerId)}catch(x){}
+    openP();s0=mpc.scrollLeft;mpc.style.scrollSnapType='none';mpc.style.scrollBehavior='auto';
   });
   btn.addEventListener('pointermove',function(e){
-    var dx=e.clientX-sx;
-    if(timer&&Math.abs(dx)>12){clearTimeout(timer);timer=null}
-    if(holding){if(Math.abs(dx)>8)moved=true;mpc.scrollLeft=s0-dx*1.25;paint()}
+    if(!holding)return;var dx=e.clientX-sx;
+    if(Math.abs(dx)>6)moved=true;
+    mpc.scrollLeft=s0-dx*1.7;paint();
   });
   function up(){
-    if(timer){clearTimeout(timer);timer=null;chooseMode('cark');return}   /* kısa dokunuş: Çark */
-    if(holding){holding=false;
-      if(moved){choose()}                  /* kaydırıp bıraktı: seçilen mod */
-      else{mpc.style.scrollSnapType='x mandatory'}   /* kaydırmadan bıraktı: seçici açık kalsın */
-    }
+    if(!holding)return;holding=false;
+    if(moved){choose()}                 /* kaydırıp bıraktı: seçilen mod */
+    else if(wasOpen){closeP2()}         /* açıkken dokundu: kapat */
+    else{mpc.style.scrollSnapType='x mandatory'}   /* kısa dokunuş: seçici açık kalsın */
   }
-  btn.addEventListener('pointerup',up);btn.addEventListener('pointercancel',function(){if(timer){clearTimeout(timer);timer=null}holding=false});
+  btn.addEventListener('pointerup',up);btn.addEventListener('pointercancel',function(){holding=false;mpc.style.scrollSnapType='x mandatory'});
   btn.addEventListener('contextmenu',function(e){e.preventDefault()});
   var seen=false;try{seen=localStorage.getItem('zap-mp')==='1'}catch(e){}if(!seen)btn.classList.add('pulse');
 })();

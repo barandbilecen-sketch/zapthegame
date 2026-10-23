@@ -35,8 +35,9 @@ function apply(t,b){t=hex(t);b=hex(b);m.content=t;paint(t,b);try{localStorage.se
 try{var v=localStorage.getItem(KEY);if(v){m.content=v.split('|')[0];H.style.background='linear-gradient(to bottom,'+v.split('|')[0]+','+(v.split('|')[1]||v.split('|')[0])+')'}}catch(e){}
 window.tcolor=function(){try{var cs=getComputedStyle(document.body),bi=cs.backgroundImage,u=/url\(["']?([^"')]+)["']?\)/.exec(bi);
 if(u){var im=new Image();im.onload=function(){try{var c=document.createElement('canvas');c.width=c.height=1;var x=c.getContext('2d'),h=Math.max(1,im.height*.06);
-x.drawImage(im,0,0,im.width,h,0,0,1,1);var d=x.getImageData(0,0,1,1).data,t='rgb('+d[0]+','+d[1]+','+d[2]+')';
-x.clearRect(0,0,1,1);x.drawImage(im,0,im.height-h,im.width,h,0,0,1,1);d=x.getImageData(0,0,1,1).data;apply(t,'rgb('+d[0]+','+d[1]+','+d[2]+')')}catch(e){}};im.src=u[1];return}
+x.drawImage(im,0,0,im.width,h,0,0,1,1);var ov=/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/.exec(bi);function bl(d){if(!ov)return 'rgb('+d[0]+','+d[1]+','+d[2]+')';var al=+ov[4],o=[+ov[1],+ov[2],+ov[3]];return 'rgb('+[0,1,2].map(function(k){return Math.round(d[k]*(1-al)+o[k]*al)}).join(',')+')'}
+var d=x.getImageData(0,0,1,1).data,t=bl(d);
+x.clearRect(0,0,1,1);x.drawImage(im,0,im.height-h,im.width,h,0,0,1,1);d=x.getImageData(0,0,1,1).data;apply(t,bl(d))}catch(e){}};im.src=u[1];return}
 var mt=bi.match(/(rgba?\([^)]+\)|hsla?\([^)]+\)|#[0-9a-f]{3,8})/gi);if(mt&&mt.length)apply(mt[0],mt[mt.length-1]);else apply(cs.backgroundColor,cs.backgroundColor)}catch(e){}};
 })();
 </script>
@@ -200,7 +201,7 @@ label{font-family:var(--ff);font-weight:500}
 .pb{display:flex;gap:8px}.pb button{flex:1;padding:13px 6px;border-radius:14px;border:0;font:700 14px var(--ff);background:rgba(255,255,255,.14);color:#fff;touch-action:manipulation}
 .pb button.ok{background:linear-gradient(135deg,#ffe46b,#ff5fa2);color:#1b0a3c}
 .dot.win,.dot.num{will-change:auto}
-#hdr{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;gap:8px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 14px;pointer-events:none;background:linear-gradient(180deg,rgba(10,5,28,.5),rgba(10,5,28,0))}
+#hdr{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;gap:8px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 14px;pointer-events:none}
 #hdr>*{pointer-events:auto}
 #hdr #brand{position:static;height:46px;pointer-events:none;z-index:auto}
 #hdr #brand img{width:36px;height:36px}#hdr #brand span{font-size:19px}

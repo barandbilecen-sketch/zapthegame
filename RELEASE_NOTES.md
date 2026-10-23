@@ -65,3 +65,7 @@
 - İlk açılışta bilgilendirme kartı (✕, Anladım, Mods içinde ℹ️).
 
 ## v1.2:
+
+## v3.4
+- Yeni araçlar: Yazı Tura ve Sayı Seçici (21 mod)
+- Yeni diller: English, Deutsch, Español, Français (Ayarlar > Dil). 18+ modlar ve bazı içerikler yalnızca Türkçe.

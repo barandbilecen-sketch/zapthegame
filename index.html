@@ -159,6 +159,21 @@ label{font-family:var(--ff);font-weight:500}
 #card p{margin:0;font:600 19px/1.3 var(--ff)}
 #wheel{position:fixed;inset:0;z-index:70;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:70px 20px 130px;box-sizing:border-box;background:linear-gradient(160deg,var(--bg1),var(--bg2));touch-action:manipulation;-webkit-user-select:auto;user-select:auto}
 #wheel.show{display:flex}
+#tool{position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;padding:70px 20px 130px;box-sizing:border-box;background:linear-gradient(160deg,var(--bg1),var(--bg2));touch-action:manipulation;-webkit-user-select:auto;user-select:auto}
+#tool.show{display:flex}
+#tc,#tn{display:none;flex-direction:column;align-items:center;gap:20px;width:100%}
+#tool h2{font:900 20px var(--ffd);margin:0}
+.coinw{perspective:900px;width:200px;height:200px;margin:30px 0 10px}
+.coin{width:200px;height:200px;position:relative;transform-style:preserve-3d}
+.cf{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:radial-gradient(circle at 32% 28%,#fff6b0,#ffc107 55%,#b8860b);box-shadow:inset 0 0 0 8px rgba(255,255,255,.35),inset 0 0 0 14px rgba(120,70,0,.25),0 0 40px var(--glow);color:#5a3a00}
+.cf span{font-size:64px;line-height:1}.cf b{font:900 24px var(--ffd);letter-spacing:2px}
+.f2{transform:rotateY(180deg)}
+#tcr{font:900 30px var(--ffd);min-height:40px}#tch{opacity:.65;font:600 13px var(--ff)}
+.tbtn{padding:15px 40px;border-radius:999px;border:0;font:800 16px var(--ffd);background:linear-gradient(135deg,#ffe46b,#ff5fa2);color:#1b0a3c;touch-action:manipulation}
+.nbig{font:900 clamp(72px,26vw,130px)/1 var(--ffd);min-height:140px;display:flex;align-items:center;transition:transform .3s,text-shadow .3s}
+.nbig.lock{transform:scale(1.12);text-shadow:0 0 40px var(--glow)}
+.nr{display:flex;gap:14px;width:min(86vw,360px)}.nr label{flex:1;font:600 12px var(--ff);opacity:.9;display:flex;flex-direction:column;gap:6px;margin:0}
+.nr input{padding:13px;border-radius:14px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font:700 18px var(--ff);outline:none;-webkit-user-select:text;user-select:text;width:100%;box-sizing:border-box;text-align:center}
 #wheel h2{font:900 20px var(--ffd);margin:0}
 .wr{position:relative;width:min(76vw,320px);aspect-ratio:1}
 .wr canvas{width:100%;height:100%;border-radius:50%;box-shadow:0 0 40px var(--glow)}
@@ -1030,11 +1045,12 @@ var timer=null,phase='idle';
 var OL={on:false,host:false,seed:null,locked:false,q:[],ld:0,prevMode:null,dt:null};
 function mb(){var t=OL.seed=(OL.seed+0x6D2B79F5)|0;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return (t^t>>>14)>>>0}
 function rnd(n){if(OL.seed!==null)return mb()%n;try{var a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]%n}catch(e){return Math.floor(Math.random()*n)}}
+var TOOLM={cark:1,yazitura:1,sayi:1};
 function setHint(show){
-  if(firstDone){hint.style.opacity=0;brand.classList.add('show');idleEl.classList.toggle('show',show&&mode!=='cark')}
+  if(firstDone){hint.style.opacity=0;brand.classList.add('show');idleEl.classList.toggle('show',show&&!TOOLM[mode])}
   else hint.style.opacity=show?1:0;
   gear.classList[show?'remove':'add']('hide');
-  if(typeof mbar!=='undefined'){var hd=!show&&mode!=='cark';mbar.classList.toggle('hide',hd);mh.classList.toggle('hide',hd)}}
+  if(typeof mbar!=='undefined'){var hd=!show&&!TOOLM[mode];mbar.classList.toggle('hide',hd);mh.classList.toggle('hide',hd)}}
 function clearTimer(){stopTick();if(timer){clearTimeout(timer);timer=null}}
 function pos(f,t){f.x=t.clientX;f.y=t.clientY;f.el.style.translate=t.clientX+'px '+t.clientY+'px'}
 /* Parmak sayısı arttıkça küreler küçülür, hepsi ekrana sığar (10 parmağa kadar) */
@@ -1061,8 +1077,8 @@ function startBlink(){
 
 /* ===== OYUN MODLARI ===== */
 var mode='tek',KN=2,TN=2,mt=[],dayT=null,dayStart=0;
-var MODES=[['tek','⚡','Seçim'],['ters','🥲','Kaybeden'],['coklu','👥','Çoklu'],['duello','⚔️','Düello'],['sira','🔢','Sıralama'],['tac','👑','Taç & Son'],['takim','🎨','Takım'],['ele','🏁','Elemeli'],['bomba','💣','Bomba'],['zar','🎲','Zar'],['dc','🎭','Doğruluk/Cesaret'],['ceza','😈','Ceza'],['hedef','🎯','Hedef Süre'],['sise','🍾','Şişe Çevirme'],['cark','🎡','Çark'],['sohbet','💬','Muhabbet'],['sevgilisor','💞','Sevgiline Sor'],['isin','🌶️','Ateşle 🔞'],['tutku','💋','Tutku 🔞']];
-var HOW={sohbet:'Sevgililer için. Seçilen kişi, yakınlaştıran bir sohbet sorusunu cevaplar. Aynı soru bir daha çıkmaz.',sevgilisor:'Seçilen kişi sevgilisine sorar. Birbirinizi daha iyi tanımak için özel sorular. Tekrar yok.',isin:'18+ çiftler için. Ortamı ısıtan flörtöz sorular. Rahat değilsen Pas geç. Tekrar yok.',tutku:'18+ çiftler için. Romantik ve tutkulu cesaret görevleri. Rahat değilsen Pas geç. Tekrar yok.',tek:'Herkes parmağını koyar. Küreler yanıp söner, şans bir kişiyi seçer.',ters:'Seçim gibi çalışır ama seçilen kişi kaybeder. Hesap, bulaşık, ceza için.',coklu:'Aynı anda birden fazla kişi seçilir. Kaç kişi seçileceğini aşağıdan ayarla.',duello:'Rastgele iki kişi düelloya çıkar, diğerleri izler.',sira:'Herkesin küresine 1, 2, 3... diye sıra numarası yazılır.',tac:'Sıralama yapılır: birinci 👑 olur, sonuncu 🐢 olur.',takim:'Parmaklar rastgele takımlara bölünür. Her takımın rengi ve harfi olur.',ele:'Her adımda biri elenir, son kalan seçilir. Gerilimli bir mod.',bomba:'Gizli bir bomba birinde patlar. Kimde patlayacağı belli değil!',zar:'Herkes için bir zar atılır, en yüksek sayı kazanır.',cesaret:'Seçilen kişiye rastgele bir görev kartı çıkar.',dogruluk:'Seçilene rastgele bir doğruluk sorusu ya da cesaret görevi çıkar.',ceza:'Seçilen kişiye komik bir ceza kartı çıkar.',dayan:'Herkes parmağını basılı tutar, sayaç çalışır. İlk bırakan kaybeder.',ok:'Ortada bir ok döner, yavaşlayarak bir parmağı gösterir.',cark:'Parmak gerekmez. Seçeneklerini yaz, çarkı çevir.'};
+var MODES=[['tek','⚡','Seçim'],['ters','🥲','Kaybeden'],['coklu','👥','Çoklu'],['duello','⚔️','Düello'],['sira','🔢','Sıralama'],['tac','👑','Taç & Son'],['takim','🎨','Takım'],['ele','🏁','Elemeli'],['bomba','💣','Bomba'],['zar','🎲','Zar'],['dc','🎭','Doğruluk/Cesaret'],['ceza','😈','Ceza'],['hedef','🎯','Hedef Süre'],['sise','🍾','Şişe Çevirme'],['cark','🎡','Çark'],['yazitura','🪙','Yazı Tura'],['sayi','🎰','Sayı Seçici'],['sohbet','💬','Muhabbet'],['sevgilisor','💞','Sevgiline Sor'],['isin','🌶️','Ateşle 🔞'],['tutku','💋','Tutku 🔞']];
+var HOW={sohbet:'Sevgililer için. Seçilen kişi, yakınlaştıran bir sohbet sorusunu cevaplar. Aynı soru bir daha çıkmaz.',sevgilisor:'Seçilen kişi sevgilisine sorar. Birbirinizi daha iyi tanımak için özel sorular. Tekrar yok.',isin:'18+ çiftler için. Ortamı ısıtan flörtöz sorular. Rahat değilsen Pas geç. Tekrar yok.',tutku:'18+ çiftler için. Romantik ve tutkulu cesaret görevleri. Rahat değilsen Pas geç. Tekrar yok.',tek:'Herkes parmağını koyar. Küreler yanıp söner, şans bir kişiyi seçer.',ters:'Seçim gibi çalışır ama seçilen kişi kaybeder. Hesap, bulaşık, ceza için.',coklu:'Aynı anda birden fazla kişi seçilir. Kaç kişi seçileceğini aşağıdan ayarla.',duello:'Rastgele iki kişi düelloya çıkar, diğerleri izler.',sira:'Herkesin küresine 1, 2, 3... diye sıra numarası yazılır.',tac:'Sıralama yapılır: birinci 👑 olur, sonuncu 🐢 olur.',takim:'Parmaklar rastgele takımlara bölünür. Her takımın rengi ve harfi olur.',ele:'Her adımda biri elenir, son kalan seçilir. Gerilimli bir mod.',bomba:'Gizli bir bomba birinde patlar. Kimde patlayacağı belli değil!',zar:'Herkes için bir zar atılır, en yüksek sayı kazanır.',cesaret:'Seçilen kişiye rastgele bir görev kartı çıkar.',dogruluk:'Seçilene rastgele bir doğruluk sorusu ya da cesaret görevi çıkar.',ceza:'Seçilen kişiye komik bir ceza kartı çıkar.',dayan:'Herkes parmağını basılı tutar, sayaç çalışır. İlk bırakan kaybeder.',ok:'Ortada bir ok döner, yavaşlayarak bir parmağı gösterir.',cark:'Parmak gerekmez. Seçeneklerini yaz, çarkı çevir.',yazitura:'Parmak gerekmez. Parayı havaya at, yazı mı tura mı gelir?',sayi:'Parmak gerekmez. İki sayı yaz, aralarından rastgele biri seçilir.'};
 var TRUTH=['En büyük korkun ne?','Son ağladığın film hangisi?','Gizli bir yeteneğin var mı?','En utanç verici şarkın hangisi?','Bu gruptan biriyle takım olsan kim olurdu?','En sevmediğin yemek ne?','Hiç yalan söyleyip yakalandın mı? Anlat','Hayatındaki en komik anı anlat','Telefonundaki son fotoğraf ne?','Kendinde en sevdiğin ve en sevmediğin şey ne?'];
 var PUN=["20 şınav çek, sesli say.","1 dakika boyunca plank pozisyonunda dur.","Herkesin önünde en utandığın şarkıyı baştan sona söyle.","Bir sonraki turun içeceklerini sen ısmarla.","30 saniye boyunca tavuk gibi dolaş ve ses çıkar.","Son selfieni hikâyende 1 saat paylaş.","Gruptaki herkese komik bir lakap tak ve gerekçesini anlat.","Grubun seçtiği kıyafet parçasını 10 dakika giy.","Hesabı sen öde.","30 saniye hiç kıpırdamadan heykel gibi dur, grup güldürmeye çalışsın.","Sevdiğin birine Seni özledim yaz ve cevabını herkese göster.","Telefonunu 15 dakika grubun seçtiği birine teslim et.","3 dakika boyunca grubun seçtiği bir ünlü gibi konuş.","Zor bir tekerlemeyi hatasız 5 kez söyle, yanılırsan 10 şınav.","Bir arkadaşını sırtında 20 saniye taşı.","Duvara yaslanıp sandalye pozisyonunda 1 dakika dur.","1 dakika boyunca durmadan kahkaha at.","Herkese sırayla sarılıp bir iltifat et.","Bir dakika boyunca ağzında su tut, grup güldürsün, dökersen ceza tekrar.","Tüm grup için 1 dakikalık bir tanıtım şovu yap.","20 squat yap ve her birini komik bir ses çıkararak yap.","Ön kamerayla 30 saniyelik komik bir video çek ve gruba gönder.","Hikâyene grubun seçtiği bir cümleyi yaz ve 30 dakika sakla.","Gözlerin kapalı 20 saniye boyunca bir şarkıyı dudak senkronuyla söyle.","15 dakika boyunca sadece grubun seçtiği bir aksanla konuş.","Yakındaki bir yabancıya selam ver ve ona iltifat et.","Herkesin önünde 30 saniye boyunca akrobasi ya da dans şovu yap.","Bir sonraki 10 dakika boyunca cümlelerine Efendim diye başla.","Grubun seçtiği biriyle 1 dakika boyunca ayna gibi aynı hareketleri yap.","Sosyal medya biyografini 1 saatliğine grubun seçtiği cümleyle değiştir.","Grubun seçtiği biri için 20 saniyelik bir ödül konuşması yap.","Bir sonraki tura kadar herkesin çantasını ya da montunu sen taşı.","30 saniye boyunca bir bebek gibi konuş.","Gözlerini kapat ve grubun seçtiği biri için komik bir resim çiz.","Bir sonraki 5 dakika boyunca sadece soru cümleleriyle konuş.","Oyunun kalanında sadece üçüncü tekil şahıs olarak konuş (Ben yerine kendi adınla).","Herkese birer kahve ya da içecek getir ya da hazırla.","Telefonundaki son aranan kişiye komik bir ses çıkar ve kapat.","Bir dakika boyunca elini yüzüne sürüp mim yap, grup tahmin etsin.","10 sıçrama yap ve her sıçramada bir hayvan sesi çıkar.","Gruba komik bir doğaçlama şiir yaz ve oku.","Grubun seçtiği kelimeyi 1 dakika boyunca yasak say; söylersen 5 şınav.","Bir sonraki turda herkesin sözünü onaylamak zorundasın.","Odanın ortasında 20 saniye boyunca kaplumbağa gibi yürü.","Grup için kısa bir komedi gösterisi yap.","Bir ürünü komik bir sloganla 20 saniyede sat.","Bir şarkıyı sadece kendi öksürük ve nefes sesleriyle taklit et.","5 dakika boyunca ayakkabını ters giy.","Herkesin önünde 1 dakika boyunca dramatik bir ağlama sahnesi oyna.","Kendini bir yarışma sunucusu gibi tanıt ve gruba bir soru sor.","Sandalyede 30 saniye boyunca hayalî bir araba sür.","Bir sonraki 10 dakika boyunca cümlelerini şarkı gibi söyle.","Yaşadığın en komik anı abartılı bir şekilde anlat.","Ellerini kullanmadan bir bardaktan su içmeye çalış, grup sana yardım etmesin.","Gruba bir bilmece sor, bilemezlerse tüm gün ceza sende.","20 saniye boyunca hiç konuşmadan sadece jestlerle bir şarkı anlat.","Kendini sanki ilk kez gördüğün biriymiş gibi tanıt.","Sırayla herkesin adını yüksek sesle söyleyip ona selam ver.","Telefonunun ekran koruyucusunu 10 dakikalığına grubun seçtiği resimle değiştir.","Grubun seçtiği şarkıyı yüksek sesle ve yanlış sözlerle söyle.","3 farklı ses tonuyla Merhaba de: tok, ince ve fısıltı.","Biri sana bir kelime versin, ona anında bir slogan uydur.","Gruptan birine kısa ve komik bir şiir yaz.","Gülmeden bir dakika boyunca grubun suratına bak, gülersen ceza tekrar.","Oturduğun yerde 30 saniye boyunca hiç kıpırdama, grup sorular sorsun.","Ellerinle 20 saniye boyunca havada bir şey çiz, grup tahmin etsin.","Grubun en sevdiği şarkıyı 15 saniye boyunca sadece mırıldan.","En son yediğin yemeği abartılı şekilde övüp anlat.","Bir arkadaşının ismini bir şarkıya çevir ve söyle.","1 dakika boyunca bir mankenmiş gibi yürü, grup puan versin.","Elindeki bir nesneyi bir mikrofon gibi kullanıp haber sun.","Bir sonraki 3 dakika sadece fısıldayarak konuş.","Bir hikâye anlat ama her cümle farklı bir harfle başlasın.","Grubun seçtiği bir kelimeyi her cümlenin sonuna ekle, 2 dakika.","Elinle kendine yelpaze yap ve saray hanımı gibi 20 saniye konuş.","Birine el sallayıp kayboluyormuş gibi sahneden ayrıl ve geri dön.","Bir şarkıyı yavaş çekimde söyle.","Odanın etrafında 30 saniye boyunca tek ayak üstünde zıpla.","Gruptan biri için komik bir ödül töreni düzenle ve ödülü ver.","Gruba 3 komik gerçek ya da yalan söyle, hangisi yalan bulsunlar.","Telefonundan seçtiğin bir sesi 10 saniye boyunca tekrar et ve dans et.","Bir ünlünün sesiyle grup için bir uyarı anonsu yap.","Gözlerinde dramatik bir bakışla 30 saniye boyunca bir şiir oku.","Son güldüğün şeyi sahnele.","Bir sonraki 3 dakika boyunca ne söylersen söyle sonuna efendim ekle.","Grup için en komik yüz ifadeni yap ve 10 saniye tut.","Grubun seçtiği bir şarkıyı sadece tempo ile (ağzınla davul sesi) çal.","Sandalyenin üstünde 15 saniye boyunca bir heykel ol.","Bir bardak suyu başının üstünde 20 saniye dengede tutmaya çalış.","Sırayla herkesin eline bir komik lakap yaz ya da söyle.","Bir kelimeyi hiç gülmeden 10 kez arka arkaya söyle.","Kendi kendine en komik şekilde bir röportaj yap.","Grubun seçtiği bir müzik türünde 20 saniye şarkı söyle.","2 dakika boyunca her cümlenin sonuna kahkaha ekle.","Grubun seçtiği bir kelimeyi kullanmadan 2 dakika konuş.","Tek ayak üstünde bir cümleyi tersten söylemeye çalış.","Yüzüne grubun seçtiği ifadeyi takın ve 20 saniye öyle bak.","30 saniye boyunca bir kral ya da kraliçe gibi konuş ve emirler ver.","Bir sonraki tura kadar herkese Sayın demek zorundasın.","20 saniye boyunca bir elin cebinde, diğeriyle komik dans et.","Odadaki bir nesneye veda konuşması yap.","Grubun seçtiği bir hareketi 10 kez art arda yap.","Eliyle bir telefon yapıp sahte bir iş görüşmesi yap.","Grubun seçtiği biri için 20 saniyelik bir şarkı sözü uydur."];
 var BOMB=['💥 BOOM! Bomba sende patladı','💣 Bomba seni buldu','🔥 Sıcak patates sende!'];
@@ -1152,6 +1168,30 @@ bottle.innerHTML='<svg viewBox="0 0 200 56"><defs><linearGradient id="bgd" x1="0
 card.innerHTML='<h4>🔥 GÖREV</h4><p></p>';
 wheel.innerHTML='<h2>🎡 Karar Çarkı</h2><div class="wr"><div class="pt"></div><canvas id="wc" width="640" height="640"></canvas></div><input id="wi" value="Pizza, Burger, Sushi, Döner, Kebap" autocomplete="off" enterkeyhint="done"><button id="ws">ÇEVİR</button>';
 mbar.innerHTML='<button id="fm">🧩 Mods</button><span id="fl"></span>';
+var tool=mkEl('div','tool');
+tool.innerHTML='<div id="tc"><h2>🪙 Yazı Tura</h2><div class="coinw" id="coinw"><div class="coin" id="coin"><div class="cf f1"><span>⚡</span><b>YAZI</b></div><div class="cf f2"><span>🦊</span><b>TURA</b></div></div></div><div id="tcr">Dokun ve at</div><button class="tbtn" id="tcb">ATIŞ YAP</button><small id="tch"></small></div><div id="tn"><h2>🎰 Sayı Seçici</h2><div class="nbig" id="nbig">?</div><div class="nr"><label>En az<input id="nmin" type="number" inputmode="numeric" value="1"></label><label>En çok<input id="nmax" type="number" inputmode="numeric" value="100"></label></div><button class="tbtn" id="nb">SAYI SEÇ</button></div>';
+var tcEl=document.getElementById('tc'),tnEl=document.getElementById('tn');
+(function(){
+  var coin=document.getElementById('coin'),cw=document.getElementById('coinw'),cr=document.getElementById('tcr'),ch=document.getElementById('tch'),rot=0,busy=false,H=0,T=0;
+  function flip(){
+    if(busy)return;busy=true;var r=rnd(2);cr.textContent='…';
+    rot=Math.ceil(rot/360)*360+360*(5+rnd(3))+(r?180:0);
+    coin.style.transition='transform 2.4s cubic-bezier(.15,.7,.15,1)';coin.style.transform='rotateY('+rot+'deg)';
+    cw.animate([{transform:'translateY(0) scale(1)'},{transform:'translateY(-150px) scale(1.25)',offset:.45},{transform:'translateY(0) scale(1)'}],{duration:2400,easing:'ease-in-out'});
+    for(var k=1;k<=14;k++)(function(k){later(function(){play('pop1','A')},2200*Math.pow(k/14,1.6))})(k);
+    later(function(){busy=false;if(r)T++;else H++;cr.textContent=r?'TURA!':'YAZI!';ch.textContent='Yazı '+H+' · Tura '+T;sndWin();flash()},2500);
+  }
+  document.getElementById('tcb').addEventListener('click',flip);cw.addEventListener('click',flip);
+  var nb=document.getElementById('nb'),nbig=document.getElementById('nbig'),nbusy=false;
+  nb.addEventListener('click',function(){
+    if(nbusy)return;var a=parseInt(document.getElementById('nmin').value,10),b=parseInt(document.getElementById('nmax').value,10);
+    if(isNaN(a)||isNaN(b)){say('İki sayı yaz');return}
+    if(a>b){var t=a;a=b;b=t}if(b-a>1e9){say('Aralık çok geniş');return}
+    document.getElementById('nmin').blur();document.getElementById('nmax').blur();nbusy=true;var n=b-a+1,fin=a+rnd(n),N=22;
+    for(var k=1;k<=N;k++)(function(k){later(function(){nbig.textContent=k===N?fin:a+Math.floor(Math.random()*n);nbig.classList.toggle('lock',k===N);play('pop1','A')},1700*Math.pow(k/N,1.7))})(k);
+    later(function(){nbusy=false;sndWin();flash()},1800);nbig.classList.remove('lock');
+  });
+})();
 var menu=mkEl('div','mods');
 menu.innerHTML='<div class="mhd"><b>🧩 Mods</b><span><button id="mo" aria-label="Online">🌐</button><button id="mi">ℹ️</button><button id="mx">✕</button></span></div><div class="mbd"><div id="ml"></div><div id="mr"><div id="demo"></div><h3 id="dT"></h3><p id="dD"></p><div id="ms"></div><button id="mp"></button></div></div>';
 var fl=document.getElementById('fl'),ml=document.getElementById('ml'),dT=document.getElementById('dT'),dD=document.getElementById('dD'),ms=document.getElementById('ms'),mp=document.getElementById('mp'),pv='tek';
@@ -1173,9 +1213,9 @@ function closeMenu(){menu.classList.remove('show');dt.forEach(clearTimeout);dt=[
 document.getElementById('mx').addEventListener('click',closeMenu);
 document.getElementById('fm').addEventListener('click',function(){pv=mode;buildMenu();showDetail();menu.classList.add('show');var on=ml.querySelector('.on');ml.scrollTop=on?Math.max(0,on.offsetTop-90):0});
 function setMode(m){
-  mode=m;var i=mInfo(m);fl.textContent=i[1];window.dkSet&&dkSet(i);idleEl.querySelector('small').textContent=i[1]+' '+i[2]+' modu';idleEl.classList.toggle('show',firstDone&&m!=='cark');
+  mode=m;var i=mInfo(m);fl.textContent=i[1];window.dkSet&&dkSet(i);idleEl.querySelector('small').textContent=i[1]+' '+i[2]+' modu';idleEl.classList.toggle('show',firstDone&&!TOOLM[m]);
   if(ready){say(i[1]+' '+i[2]+' modu');setTimeout(function(){if(phase==='idle')document.getElementById('toast').classList.remove('show')},1600)}
-  wheel.classList.toggle('show',m==='cark');mbar.classList.remove('hide');if(m==='cark')drawWheel();
+  wheel.classList.toggle('show',m==='cark');tool.classList.toggle('show',m==='yazitura'||m==='sayi');tcEl.style.display=m==='yazitura'?'flex':'none';tnEl.style.display=m==='sayi'?'flex':'none';mbar.classList.remove('hide');if(m==='cark')drawWheel();
   if(OL.on&&OL.host)OL.bcast({t:'mode',m:m,KN:KN,TN:TN});
 }
 var ready=false;
@@ -1223,10 +1263,14 @@ function runDemo(m){
       sevgilisor:function(){set(1,'w');all('l',[1]);ex.textContent='💞 Seçilen, sevgilisine sorar'},
       isin:function(){set(1,'w');all('l',[1]);ex.textContent='🌶️ Flörtöz bir soru gelir'},
       tutku:function(){set(1,'w');all('l',[1]);ex.textContent='💋 Romantik bir görev gelir'},
+      yazitura:function(){ds.forEach(function(d){d.style.display='none'});var w=document.createElement('div');w.style.cssText='position:absolute;left:50%;top:50%;margin:-40px 0 0 -40px;width:80px;height:80px;display:flex;align-items:center;justify-content:center;font-size:62px';w.textContent='🪙';box.appendChild(w);
+        w.animate([{transform:'rotateY(0deg) translateY(0)'},{transform:'rotateY(630deg) translateY(-30px)',offset:.5},{transform:'rotateY(1260deg) translateY(0)'}],{duration:2200,easing:'cubic-bezier(.1,.7,.1,1)',fill:'forwards'});ex.textContent='Havaya at: Yazı mı Tura mı?'},
+      sayi:function(){ds.forEach(function(d){d.style.display='none'});var w=document.createElement('div');w.style.cssText='position:absolute;left:50%;top:50%;margin:-40px 0 0 -60px;width:120px;height:80px;display:flex;align-items:center;justify-content:center;font:900 54px var(--ffd)';box.appendChild(w);
+        var k=0,t=setInterval(function(){w.textContent=1+Math.floor(Math.random()*99);if(++k>18){clearInterval(t);w.textContent='42'}},90);dt.push(t);ex.textContent='İki sayı arasından rastgele seçer'},
       cark:function(){ds.forEach(function(d){d.style.display='none'});var w=document.createElement('div');w.className='mw';var p=document.createElement('div');p.className='mpt';box.appendChild(w);box.appendChild(p);
         w.animate([{transform:'rotate(0deg)'},{transform:'rotate(1500deg)'}],{duration:3200,easing:'cubic-bezier(.1,.7,.1,1)',fill:'forwards'});ex.textContent='Seçeneklerin arasından çevir'}
     };
-    var quick=(m==='hedef'||m==='cark');
+    var quick=(m==='hedef'||m==='cark'||m==='yazitura'||m==='sayi');
     if(!quick)dl(function(){all('b',[])},900);
     dl(R[m],quick?400:(m==='bomba'?3200:2400));
     dl(cycle,7500);
@@ -1327,7 +1371,7 @@ function hedefFinish(){
   later(reset,6000);
 }
 /* ===== ONLINE: uzaktan çok oyunculu (PeerJS / WebRTC, sunucusuz) ===== */
-var OLBLOCK={hedef:1,cark:1,sise:1};
+var OLBLOCK={hedef:1,cark:1,sise:1,yazitura:1,sayi:1};
 var PEER_SRC=['https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js','https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js'];
 var ICE=[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun1.l.google.com:19302'}];
 var OLP=null,OLC=null;
@@ -1847,7 +1891,7 @@ function reset(){
   document.querySelectorAll('.dot,.ring,.nm').forEach(function(e){e.remove()});
   fingers.clear();updateSize();var __t2=document.getElementById('toast');if(__t2)__t2.classList.remove('show');document.body.style.removeProperty('--dot');colorIdx=rnd(8);setHint(true);if(OL.on)OL.flush();
 }
-function inUI(e){return e.target.closest&&(e.target.closest('#panel')||e.target.closest('#gear')||e.target.closest('#gate')||e.target.closest('#info')||e.target.closest('#pop')||e.target.closest('#foot')||e.target.closest('#dock')||e.target.closest('#mp2')||e.target.closest('#mpb')||e.target.closest('.hb')||e.target.closest('#zs')||e.target.closest('#mods')||e.target.closest('#wheel')||e.target.closest('#online')||e.target.closest('#oc'))}
+function inUI(e){return e.target.closest&&(e.target.closest('#panel')||e.target.closest('#gear')||e.target.closest('#gate')||e.target.closest('#info')||e.target.closest('#pop')||e.target.closest('#foot')||e.target.closest('#dock')||e.target.closest('#mp2')||e.target.closest('#mpb')||e.target.closest('.hb')||e.target.closest('#zs')||e.target.closest('#mods')||e.target.closest('#wheel')||e.target.closest('#tool')||e.target.closest('#online')||e.target.closest('#oc'))}
 
 document.addEventListener('touchstart',function(e){
   if(inUI(e))return;

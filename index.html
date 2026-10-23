@@ -27,8 +27,10 @@ return o})();</script>
 <meta name="theme-color" content="#12082e">
 <script>
 (function(){var KEY='zapTC',m=document.querySelector('meta[name=theme-color]'),H=document.documentElement;
-function apply(t,b){m.content=t;try{localStorage.setItem(KEY,t+'|'+b)}catch(e){}}
-try{var v=localStorage.getItem(KEY);if(v){m.content=v.split('|')[0]}}catch(e){}
+function strip(id,top){var e=document.getElementById(id);if(!e){e=document.createElement('div');e.id=id;e.style.cssText='position:fixed;left:0;right:0;height:70px;pointer-events:none;z-index:0;'+(top?'top:0':'bottom:0');(document.body||H).appendChild(e)}return e}
+function paint(t,b){H.style.background='linear-gradient(to bottom,'+t+','+b+')';if(!document.body)return;var T=strip('edgeT',1),B=strip('edgeB',0);T.style.background='linear-gradient(to bottom,'+t+',rgba(0,0,0,0))';B.style.background='linear-gradient(to top,'+b+',rgba(0,0,0,0))'}
+function apply(t,b){m.content=t;paint(t,b);try{localStorage.setItem(KEY,t+'|'+b)}catch(e){}}
+try{var v=localStorage.getItem(KEY);if(v){m.content=v.split('|')[0];H.style.background='linear-gradient(to bottom,'+v.split('|')[0]+','+(v.split('|')[1]||v.split('|')[0])+')'}}catch(e){}
 window.tcolor=function(){try{var cs=getComputedStyle(document.body),bi=cs.backgroundImage,u=/url\(["']?([^"')]+)["']?\)/.exec(bi);
 if(u){var im=new Image();im.onload=function(){try{var c=document.createElement('canvas');c.width=c.height=1;var x=c.getContext('2d'),h=Math.max(1,im.height*.06);
 x.drawImage(im,0,0,im.width,h,0,0,1,1);var d=x.getImageData(0,0,1,1).data,t='rgb('+d[0]+','+d[1]+','+d[2]+')';
@@ -42,7 +44,7 @@ var mt=bi.match(/(rgba?\([^)]+\)|hsla?\([^)]+\)|#[0-9a-f]{3,8})/gi);if(mt&&mt.le
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--panel:rgba(20,16,40,.92)}}
 :root[data-theme="dark"]{--panel:rgba(20,16,40,.92)}
 html,body{height:100%;min-height:100vh;min-height:100dvh;margin:0;overflow:hidden;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;touch-action:none;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-html{background:none}body{background:#12082e linear-gradient(160deg,var(--bg1),var(--bg2));color:var(--fg)}
+html,body{min-height:100vh;min-height:100lvh}body{background:#12082e linear-gradient(160deg,var(--bg1),var(--bg2));color:var(--fg)}
 #hint{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none;transition:opacity .4s;padding:24px}
 #hint img{width:112px;height:112px;margin-bottom:8px;filter:drop-shadow(0 0 16px rgba(255,255,255,.75))}
 #hint h1{font-size:34px;margin:0 0 10px;letter-spacing:-.5px}

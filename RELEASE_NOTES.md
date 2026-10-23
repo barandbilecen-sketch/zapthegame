@@ -1,5 +1,13 @@
 # ⚡ Zap! The Game Sürüm Notları
 
+## v3.3: Temalar, avatarlar, yeni menü
+- **44 tema:** Kuzey Işıkları, Cyberpunk Yağmur, Vaporwave, Coquette Sakura, Y2K Şeker, Volkan, Nebula ve daha fazlası. Hepsinin kendi sesi var.
+- **Yeni arka plan sahneleri, küre dokuları ve hareketli efektler** (yıldız, kar, yağmur, sakura, kor, baloncuk, kıvılcım, ateş böceği).
+- **Profil:** 26 tasarım avatar ya da kendi fotoğrafın. Ayarlar ve profil sayfaları.
+- **Alt menü:** Online, Tema, mod seçimi, Nasıl?, Ayarlar. Mod düğmesine dokunup kaydırarak mod seç.
+- **Tema menüsü** açılır bölümlerle kısaldı, kategori filtreleri var.
+- iPhone'da üst/alt çubuk rengi temaya uyuyor.
+
 ## v3.2: Daha çok soru, adil online onay
 - **Her soru/görev modunda 100'den fazla içerik:** Muhabbet, Sevgiline Sor, Ateşle, Tutku, Doğruluk, Cesaret ve Ceza. Aynı kart bir daha çıkmaz, hepsi bitince baştan karışır.
 - **Online onay:** Görevi yapan oyuncu soruyu değiştiremez, pas geçemez ve görevini kendi onaylayamaz. Diğer oyuncular oy verir, çoğunluk karar verir.

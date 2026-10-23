@@ -358,9 +358,9 @@ footer small{display:block;margin-top:26px;color:rgba(255,255,255,.4);font-size:
 <!-- TEMALAR -->
 <section id="temalar">
   <div class="wrap">
-    <span class="tag rv">12 tema</span>
+    <span class="tag rv">44 tema</span>
     <h2 class="big"><span class="mk"><span>Kendi tarzını</span></span><span class="mk" style="--d:.1s"><span class="grad">seç.</span></span></h2>
-    <p class="lead rv">Her temanın kendi ses paketi var. Renk ve gradyan seç, Galaksi, Şehir Gecesi, Dağ Günbatımı gibi resimli temalar kullan ya da galerinden bir fotoğraf koy. Aşağıdan birine dokun, bu sayfa da renk değiştirsin.</p>
+    <p class="lead rv">44 hazır tema: Kuzey Işıkları, Cyberpunk Yağmur, Vaporwave, Coquette Sakura, Volkan ve daha fazlası. Her temanın kendi sesi, resimli arka planı, küre dokusu ve kar, yağmur, yıldız gibi hareketli efektleri var. Temana uygun profil avatarını seç ya da kendi fotoğrafını koy. Aşağıdan birine dokun, bu sayfa da renk değiştirsin.</p>
     <div class="th" id="th"></div>
     <p class="sub" id="ts">Seçili tema: Klasik</p>
   </div>
@@ -489,7 +489,7 @@ function room(){
 if(!RM){room();room();room();setInterval(room,1500)}else{for(var k=0;k<3;k++)room()}
 
 /* ---- temalar (sayfayı da boyar) ---- */
-var TH=[['Klasik','⚪',[0,0,100],[265,70,14]],['Neon Gece','🌃',[180,100,55],[275,80,10]],['Gün Batımı','🌅',[38,100,62],[335,70,20]],['Okyanus','🌊',[190,100,72],[215,85,15]],['Orman','🌿',[125,85,58],[155,60,9]],['Şeker','🍬',[330,100,78],[290,55,24]],['Lav','🌋',[14,100,55],[0,0,6]],['Buz','🧊',[195,70,92],[210,45,22]],['Sibernetik','👾',[85,100,55],[285,85,9]],['Gökkuşağı','🌈',[0,100,55],[240,35,8]],['Gün Işığı','☀️',[255,100,60],[48,100,70]],['Mor Rüya','🔮',[290,100,72],[255,70,16]]];
+var TH=[['Klasik','⚪',[0,0,100],[265,70,14]],['Neon Gece','🌃',[180,100,55],[275,80,10]],['Gün Batımı','🌅',[38,100,62],[335,70,20]],['Okyanus','🌊',[190,100,72],[215,85,15]],['Orman','🌿',[125,85,58],[155,60,9]],['Şeker','🍬',[330,100,78],[290,55,24]],['Lav','🌋',[14,100,55],[0,0,6]],['Buz','🧊',[195,70,92],[210,45,22]],['Sibernetik','👾',[85,100,55],[285,85,9]],['Gökkuşağı','🌈',[0,100,55],[240,35,8]],['Gün Işığı','☀️',[255,100,60],[48,100,70]],['Mor Rüya','🔮',[290,100,72],[255,70,16]],['Galaksi','🌌',[210,40,92],[260,70,10]],['Şehir Gecesi','🏙️',[45,100,70],[270,70,14]],['Dağ Günbatımı','🏔️',[40,100,60],[340,60,22]],['Derin Okyanus','🐬',[190,80,80],[210,85,12]],['Orman Sisi','🌲',[140,60,75],[160,50,14]],['Neon Izgara','🕹️',[320,100,65],[285,90,10]],['Kuzey Işıkları','🌌',[170,80,85],[200,80,8]],['Çöl Günbatımı','🏜️',[35,100,70],[330,50,20]],['Kar Tanesi','❄️',[200,60,95],[215,60,14]],['Buzul','🧊',[190,80,90],[200,80,20]],['Volkan','🌋',[20,100,60],[5,70,10]],['Ateş Böceği','🪲',[130,70,70],[165,60,8]],['Mercan Resif','🪸',[180,80,80],[205,85,12]],['Nebula','🪐',[30,90,75],[265,80,6]],['Süpernova','💥',[45,100,70],[260,70,10]],['Karanlık Madde','🕳️',[270,60,75],[260,40,4]],['Cyberpunk Yağmur','🌧️',[185,100,65],[270,70,8]],['Vaporwave','📼',[320,100,70],[280,90,10]],['Lo-fi Gece','🎧',[30,80,75],[255,50,10]],['Altın Saat','🌅',[40,100,70],[340,60,22]],['Y2K Şeker','🍭',[330,100,75],[330,90,70]],['Coquette Sakura','🌸',[340,90,85],[320,50,20]],['Pamuk Bulut','☁️',[330,80,92],[320,70,82]],['Karpuz','🍉',[350,90,65],[145,55,12]],['Nar','🍎',[350,85,55],[350,60,10]],['Frutiger Aero','🫧',[170,90,80],[165,85,40]],['Elmas','💎',[190,90,85],[205,60,9]],['Zümrüt','💚',[150,90,65],[160,70,8]],['Mermer Saray','🏛️',[40,60,60],[40,20,88]],['Karbon Yarış','🏁',[0,90,55],[220,10,7]],['Basketbol','🏀',[25,95,55],[20,60,12]],['Güneş Patlaması','☀️',[40,100,65],[10,90,40]]];
 var thEl=$('#th'),DOT='#fff';
 function hs(a,l){return 'hsl('+a[0]+' '+a[1]+'% '+(l||a[2])+'%)'}
 TH.forEach(function(t,i){

@@ -69,3 +69,4 @@
 ## v3.4
 - Yeni araçlar: Yazı Tura ve Sayı Seçici (21 mod)
 - Yeni diller: English, Deutsch, Español, Français (Ayarlar > Dil). 18+ modlar ve bazı içerikler yalnızca Türkçe.
+- 18+ modlar (Ateşle, Tutku) kaldırıldı; mod sayısı 19.

@@ -1994,7 +1994,7 @@ function reset(){
   document.querySelectorAll('.dot,.ring,.nm').forEach(function(e){e.remove()});
   fingers.clear();updateSize();var __t2=document.getElementById('toast');if(__t2)__t2.classList.remove('show');document.body.style.removeProperty('--dot');colorIdx=rnd(8);setHint(true);if(OL.on)OL.flush();
 }
-function inUI(e){return e.target.closest&&(e.target.closest('#panel')||e.target.closest('#gear')||e.target.closest('#gate')||e.target.closest('#info')||e.target.closest('#pop')||e.target.closest('#foot')||e.target.closest('#dock')||e.target.closest('#mp2')||e.target.closest('#mpb')||e.target.closest('.hb')||e.target.closest('#zs')||e.target.closest('#mods')||e.target.closest('#wheel')||e.target.closest('#tool')||e.target.closest('#online')||e.target.closest('#oc'))}
+function inUI(e){return e.target.closest&&(e.target.closest('#panel')||e.target.closest('#gear')||e.target.closest('#gate')||e.target.closest('#cnt')||e.target.closest('#info')||e.target.closest('#pop')||e.target.closest('#foot')||e.target.closest('#dock')||e.target.closest('#mp2')||e.target.closest('#mpb')||e.target.closest('.hb')||e.target.closest('#zs')||e.target.closest('#mods')||e.target.closest('#wheel')||e.target.closest('#tool')||e.target.closest('#online')||e.target.closest('#oc'))}
 
 document.addEventListener('touchstart',function(e){
   if(inUI(e))return;

@@ -2237,7 +2237,7 @@ function vpRoleList(n){var c=vpComp(n),a=[];VPK.forEach(function(k){for(var i=0;
 function vpStopSpeech(){try{if(VP.aud){VP.aud.onended=null;VP.aud.onerror=null;VP.aud.pause()}}catch(e){}try{if(window.ZapTTS)ZapTTS.stop()}catch(e){}try{if(window.speechSynthesis)speechSynthesis.cancel()}catch(e){}}
 function vpVoice(lang){try{var vs=speechSynthesis.getVoices(),k=lang.slice(0,2),best=null;for(var i=0;i<vs.length;i++){if(vs[i].lang&&vs[i].lang.slice(0,2)===k){if(!best||/google|enhanced|premium|natural/i.test(vs[i].name))best=vs[i]}}return best}catch(e){return null}}
 /* kayıtlı ses (voice/<dil>/<anahtar>.mp3); yoksa telefon sesi */
-function vpDbg(m){try{var e=document.getElementById('vpdbg');if(!e&&vpEl){e=document.createElement('div');e.id='vpdbg';e.style.cssText='position:absolute;left:8px;bottom:6px;z-index:9;font:10px monospace;color:#9fe;opacity:.7;pointer-events:none';vpEl.appendChild(e)}if(e)e.textContent=m}catch(x){}}
+function vpDbg(){}
 function vpSayK(key,cb){
   var text=V(key),lg=window.ZLANG==='tr'?'tr':'en',a=VP.aud;
   if(!VP.voice||!a){vpSay(text,cb);return}

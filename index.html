@@ -2236,10 +2236,14 @@ function vpRoleList(n){var c=vpComp(n),a=[];VPK.forEach(function(k){for(var i=0;
 /* --- sesli anlatıcı --- */
 function vpStopSpeech(){try{if(window.ZapTTS)ZapTTS.stop()}catch(e){}try{if(window.speechSynthesis)speechSynthesis.cancel()}catch(e){}}
 function vpVoice(lang){try{var vs=speechSynthesis.getVoices(),k=lang.slice(0,2),best=null;for(var i=0;i<vs.length;i++){if(vs[i].lang&&vs[i].lang.slice(0,2)===k){if(!best||/google|enhanced|premium|natural/i.test(vs[i].name))best=vs[i]}}return best}catch(e){return null}}
+function vpRoute(){
+  try{if(navigator.audioSession){navigator.audioSession.type='playback'}}catch(e){}
+  try{if(!window.__vpKeep){var a=mk();a.loop=true;a.volume=.01;a.src=snd('silent');window.__vpKeep=a}var pr=window.__vpKeep.play();if(pr&&pr.catch)pr.catch(function(){})}catch(e){}
+}
 function vpSay(t,cb){
   var id=++VP.say,done=false,lang=window.ZLANG==='tr'?'tr-TR':'en-US',est=Math.max(1400,t.length*85+500),tm;
   function fin(){if(done||id!==VP.say)return;done=true;clearTimeout(tm);if(cb)cb()}
-  vpStopSpeech();
+  vpStopSpeech();vpRoute();
   if(!VP.voice){tm=setTimeout(fin,Math.max(1200,t.length*48));return}
   tm=setTimeout(fin,est+5000);
   if(window.ZapTTS){window.__ttsDone=fin;try{ZapTTS.speak(t,lang);return}catch(e){}}
@@ -2273,7 +2277,7 @@ function vpOrbs(ts,f){
   vpEl.appendChild(box);var tk=VP.tok;
   setTimeout(function(){if(box.parentNode)box.parentNode.removeChild(box);if(VP.on&&VP.tok===tk)f()},950);
 }
-function vpClose(){VP.on=false;VP.tok++;VP.say++;vpClearT();VP.need2=null;vpStopSpeech();vpSave();if(vpEl)vpEl.classList.remove('show')}
+function vpClose(){try{if(window.__vpKeep)window.__vpKeep.pause()}catch(e){}VP.on=false;VP.tok++;VP.say++;vpClearT();VP.need2=null;vpStopSpeech();vpSave();if(vpEl)vpEl.classList.remove('show')}
 function vpHow(){
   var l=V('howL');vpMod.innerHTML='<div class="mb"><h3>🧛 '+V('howT')+'</h3><ul class="how">'+l.map(function(s,i){return'<li><b>'+(i+1)+'</b><span>'+vpEsc(s)+'</span></li>'}).join('')+'</ul><button class="btn" data-a="howok">'+V('howOk')+'</button></div>';vpMod.classList.add('show');
 }

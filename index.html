@@ -2237,6 +2237,7 @@ function vpRoleList(n){var c=vpComp(n),a=[];VPK.forEach(function(k){for(var i=0;
 function vpStopSpeech(){try{if(VP.aud){VP.aud.onended=null;VP.aud.onerror=null;VP.aud.pause()}}catch(e){}try{if(window.ZapTTS)ZapTTS.stop()}catch(e){}try{if(window.speechSynthesis)speechSynthesis.cancel()}catch(e){}}
 function vpVoice(lang){try{var vs=speechSynthesis.getVoices(),k=lang.slice(0,2),best=null;for(var i=0;i<vs.length;i++){if(vs[i].lang&&vs[i].lang.slice(0,2)===k){if(!best||/google|enhanced|premium|natural/i.test(vs[i].name))best=vs[i]}}return best}catch(e){return null}}
 /* kayıtlı ses (voice/<dil>/<anahtar>.mp3); yoksa telefon sesi */
+function vpDbg(m){try{var e=document.getElementById('vpdbg');if(!e&&vpEl){e=document.createElement('div');e.id='vpdbg';e.style.cssText='position:absolute;left:8px;bottom:6px;z-index:9;font:10px monospace;color:#9fe;opacity:.7;pointer-events:none';vpEl.appendChild(e)}if(e)e.textContent=m}catch(x){}}
 function vpSayK(key,cb){
   var text=V(key),lg=window.ZLANG==='tr'?'tr':'en',a=VP.aud;
   if(!VP.voice||!a){vpSay(text,cb);return}
@@ -2245,9 +2246,9 @@ function vpSayK(key,cb){
   function fb(){if(done||id!==VP.say)return;done=true;clearTimeout(tm);vpSay(text,cb)}
   vpStopSpeech();
   tm=setTimeout(fb,4000);
-  a.onended=fin;a.onerror=fb;
-  a.onplaying=function(){clearTimeout(tm);tm=setTimeout(fin,Math.max(3000,text.length*140+3000))};
-  try{a.src='voice/'+lg+'/'+key+'.mp3';var pr=a.play();if(pr&&pr.catch)pr.catch(fb)}catch(e){fb()}
+  a.onended=function(){vpDbg(key+' bitti');fin()};a.onerror=function(){vpDbg(key+' HATA '+(a.error?a.error.code:'?'));fb()};
+  a.onplaying=function(){vpDbg(key+' çalıyor');clearTimeout(tm);tm=setTimeout(fin,Math.max(3000,text.length*140+3000))};
+  try{a.src='voice/'+lg+'/'+key+'.mp3';var pr=a.play();if(pr&&pr.catch)pr.catch(function(er){vpDbg(key+' red:'+(er&&er.name));fb()})}catch(e){vpDbg('ex '+e);fb()}
 }
 function vpRoute(){
   try{if(navigator.audioSession){navigator.audioSession.type='playback'}}catch(e){}
@@ -2312,7 +2313,7 @@ function vpSetup(){
 function vpDots(i){var s='';for(var k=0;k<VP.n;k++)s+='<u class="'+(k<=i?'on':'')+'"></u>';return'<div class="dots">'+s+'</div>'}
 function vpNames(i){
   VP.phase='names';vpPhase(V('pOf',i+1,VP.n));
-  vpRender(vpDots(i)+'<div class="vbig">'+V('pOf',i+1,VP.n)+'</div><div class="hand"><i></i><i></i></div><h3>'+V('hold')+'</h3><p class="sm">'+V('two')+'</p><button class="lnk" data-a="skip2">'+V('skip')+'</button>');
+  vpRender(vpDots(i)+'<div class="vbig">'+V('pOf',i+1,VP.n)+'</div><h3>'+V('hold')+'</h3><p class="sm">'+V('two')+'</p><button class="lnk" data-a="skip2">'+V('skip')+'</button>');
   VP.need2=function(){vpNameIn(i)};VP.cur=i;
 }
 function vpNameIn(i){
@@ -2334,7 +2335,7 @@ function vpDealStart(){
 }
 function vpDeal(i,first){
   VP.phase='deal';var p=VP.players[i];vpPhase(V('pOf',i+1,VP.n));
-  vpRender(vpDots(i)+'<div class="vbig">'+vpEsc(p.name)+'</div><p class="sm">'+V('turn')+'</p><div class="hand"><i></i><i></i></div><h3>'+V('onlyU')+'</h3><p class="sm">'+V('two')+'</p><button class="lnk" data-a="skip2">'+V('skip')+'</button>');
+  vpRender(vpDots(i)+'<div class="vbig">'+vpEsc(p.name)+'</div><p class="sm">'+V('turn')+'</p><h3>'+V('onlyU')+'</h3><p class="sm">'+V('two')+'</p><button class="lnk" data-a="skip2">'+V('skip')+'</button>');
   if(!first)vpSayK('sTurn');
   VP.need2=function(){vpSpin(i)};VP.cur=i;
 }

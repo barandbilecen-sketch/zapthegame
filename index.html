@@ -2207,7 +2207,7 @@ tr:{title:'Vampir Köylü',sub:'Telefon anlatıcı olur.\nGizli roller, gece ve 
  players_:'Oyuncular',winK:'Köy kazandı!',winV:'Vampirler kazandı!',winKs:'Tüm vampirler yakalandı.',winVs:'Vampirler köyü ele geçirdi.',alive:'Hayatta',dead:'Öldü',again:'Tekrar oyna',newg:'Yeni kurulum',exit:'Çık',exitQ:'Oyundan çıkılsın mı?',yes:'Evet',no:'Hayır',
  howT:'Nasıl oynanır?',howOk:'Tamam, başlayalım',
  howL:['Herkes telefonu sırayla alır, adını yazar ve 2 parmağıyla dokunup gizli rolünü öğrenir.','Roller: Vampir, Köylü, Şerif, Doktor ve Gözcü. Rolünü kimseye gösterme.','Gece: telefon sesli olarak yönlendirir. Herkes gözünü kapatır. Vampirler uyanıp bir kurban seçer, Doktor korur, Gözcü araştırır.','Gündüz: kimin öldüğü açıklanır. Tartışın, sonra oylayıp bir kişiyi köyden sürün.','Şerif, oyun boyunca bir kez köşedeki butonla birini vurabilir. Masumu vurursa o da ölür.','Tüm vampirler ölürse köy, vampirler köylülere yetişirse vampirler kazanır.'],
- sIntro:'Oyun başlıyor. Telefonu elden ele verin. Herkes rolünü gizlice öğrensin.',sTurn:function(n){return 'Sıradaki oyuncu: '+n+'.'},sClose:'Gece oldu. Köy uykuya dalıyor. Herkes gözlerini kapatsın.',sVamp1:'Vampirler gözlerini açsın. Birbirinizi tanıyın ve kurbanınızı seçin.',sVamp:'Vampirler gözlerini açsın ve kurbanlarını seçsin.',sVampC:'Vampirler gözlerini kapatsın.',sDoc:'Doktor gözlerini açsın. Bu gece kimi korumak istiyorsun?',sDocC:'Doktor gözlerini kapatsın.',sSeer:'Gözcü gözlerini açsın. Kimin vampir olduğunu öğrenmek istiyorsun?',sSeerC:'Gözcü gözlerini kapatsın.',sDawn:'Sabah oluyor. Herkes gözlerini açsın.',sKilled:function(n,r){return 'Bu gece '+n+' öldürüldü. Rolü: '+r+'.'},sNobody:'Bu gece kimse ölmedi.',sDisc:'Tartışma başlasın. Şüphelendiğiniz kişiyi ikna edin.',sTen:'Son on saniye.',sVote:'Süre doldu. Oylama zamanı. Kim köyden sürülsün?',sHang:function(n,r,v){return n+' köyden sürüldü. '+(v?'O bir vampirdi!':'Rolü: '+r+'. Vampir değildi.')},sNoOne:'Bu tur kimse sürülmedi.',sShotV:function(n){return 'Şerif ateş etti! '+n+' bir vampirdi.'},sShotI:function(n,s){return 'Şerif ateş etti ama '+n+' masumdu. '+s+' de pişmanlıktan öldü.'},sWinK:'Oyun bitti. Köylüler kazandı!',sWinV:'Oyun bitti. Vampirler kazandı!'},
+ sIntro:'Oyun başlıyor. Telefonu elden ele verin. Herkes rolünü gizlice öğrensin.',sTurn:'Sıradaki oyuncu, telefonu al.',sClose:'Gece oldu. Köy uykuya dalıyor. Herkes gözlerini kapatsın.',sVamp1:'Vampirler gözlerini açsın. Birbirinizi tanıyın ve kurbanınızı seçin.',sVamp:'Vampirler gözlerini açsın ve kurbanlarını seçsin.',sVampC:'Vampirler gözlerini kapatsın.',sDoc:'Doktor gözlerini açsın. Bu gece kimi korumak istiyorsun?',sDocC:'Doktor gözlerini kapatsın.',sSeer:'Gözcü gözlerini açsın. Kimin vampir olduğunu öğrenmek istiyorsun?',sSeerC:'Gözcü gözlerini kapatsın.',sDawn:'Sabah oluyor. Herkes gözlerini açsın.',sKilled:'Bu gece biri öldürüldü.',sNobody:'Bu gece kimse ölmedi.',sDisc:'Tartışma başlasın. Şüphelendiğiniz kişiyi ikna edin.',sTen:'Son on saniye.',sVote:'Süre doldu. Oylama zamanı. Kim köyden sürülsün?',sHangV:'Köyden sürülen kişi bir vampirdi!',sHangI:'Köyden sürülen kişi vampir değildi.',sNoOne:'Bu tur kimse sürülmedi.',sShotV:'Şerif ateş etti! Vurulan kişi bir vampirdi.',sShotI:'Şerif ateş etti ama vurulan kişi masumdu. Şerif de pişmanlıktan öldü.',sWinK:'Oyun bitti. Köylüler kazandı!',sWinV:'Oyun bitti. Vampirler kazandı!'},
 en:{title:'Vampire Village',sub:'The phone becomes your narrator.\nSecret roles, night and day.',players:'Players',disc:'Discussion time',voice:'Voice narrator',on:'On',off:'Off',unl:'No limit',min:'min',go:'Set up game',how:'How to play',
  r:{vampir:'Vampire',koylu:'Villager',serif:'Sheriff',doktor:'Doctor',gozcu:'Seer'},team:{vampir:'Vampire team',koylu:'Village team'},
  d:{vampir:['Wake up every night and pick a victim.','Look innocent by day and turn suspicion elsewhere.','Win when vampires equal the villagers.'],koylu:['No special power, but your voice matters.','Talk, observe and find the vampire in the vote.','The village wins when every vampire is dead.'],serif:['Once per game, by day, use the Sheriff button to shoot someone.','Shoot a vampire and they die. Shoot an innocent and you die too.'],doktor:['Each night you protect one person from the vampires.','You may protect yourself.','You cannot protect the same person two nights in a row.'],gozcu:['Each night you learn whether one person is a vampire.','Your knowledge is valuable. Reveal it and you may become a target.']},
@@ -2221,7 +2221,7 @@ en:{title:'Vampire Village',sub:'The phone becomes your narrator.\nSecret roles,
  players_:'Players',winK:'The village wins!',winV:'The vampires win!',winKs:'Every vampire has been caught.',winVs:'The vampires took over the village.',alive:'Alive',dead:'Dead',again:'Play again',newg:'New setup',exit:'Exit',exitQ:'Leave the game?',yes:'Yes',no:'No',
  howT:'How to play',howOk:'OK, let\'s start',
  howL:['Everyone takes the phone in turn, types a name, and touches with two fingers to learn a secret role.','Roles: Vampire, Villager, Sheriff, Doctor and Seer. Never show your role.','Night: the phone narrates. Everyone closes their eyes. Vampires wake and choose a victim, the Doctor protects, the Seer investigates.','Day: the victim is revealed. Discuss, then vote to banish one person.','Once per game the Sheriff can shoot someone with the corner button. Shoot an innocent and the Sheriff dies too.','The village wins when all vampires are dead. The vampires win when they equal the villagers.'],
- sIntro:'The game begins. Pass the phone from hand to hand. Everyone learns their role in secret.',sTurn:function(n){return 'Next player: '+n+'.'},sClose:'Night falls. The village goes to sleep. Everyone, close your eyes.',sVamp1:'Vampires, open your eyes. Get to know each other and choose your victim.',sVamp:'Vampires, open your eyes and choose your victim.',sVampC:'Vampires, close your eyes.',sDoc:'Doctor, open your eyes. Who do you want to protect tonight?',sDocC:'Doctor, close your eyes.',sSeer:'Seer, open your eyes. Who do you want to inspect?',sSeerC:'Seer, close your eyes.',sDawn:'Morning comes. Everyone, open your eyes.',sKilled:function(n,r){return n+' was killed tonight. Role: '+r+'.'},sNobody:'Nobody died tonight.',sDisc:'Let the discussion begin. Convince the one you suspect.',sTen:'Ten seconds left.',sVote:'Time is up. Vote now. Who is banished from the village?',sHang:function(n,r,v){return n+' was banished. '+(v?'They were a vampire!':'Role: '+r+'. Not a vampire.')},sNoOne:'Nobody was banished.',sShotV:function(n){return 'The Sheriff fires! '+n+' was a vampire.'},sShotI:function(n,s){return 'The Sheriff fires, but '+n+' was innocent. '+s+' dies of guilt.'},sWinK:'Game over. The villagers win!',sWinV:'Game over. The vampires win!'}
+ sIntro:'The game begins. Pass the phone from hand to hand. Everyone learns their role in secret.',sTurn:'Next player, take the phone.',sClose:'Night falls. The village goes to sleep. Everyone, close your eyes.',sVamp1:'Vampires, open your eyes. Get to know each other and choose your victim.',sVamp:'Vampires, open your eyes and choose your victim.',sVampC:'Vampires, close your eyes.',sDoc:'Doctor, open your eyes. Who do you want to protect tonight?',sDocC:'Doctor, close your eyes.',sSeer:'Seer, open your eyes. Who do you want to inspect?',sSeerC:'Seer, close your eyes.',sDawn:'Morning comes. Everyone, open your eyes.',sKilled:'Someone was killed tonight.',sNobody:'Nobody died tonight.',sDisc:'Let the discussion begin. Convince the one you suspect.',sTen:'Ten seconds left.',sVote:'Time is up. Vote now. Who is banished from the village?',sHangV:'The banished player was a vampire!',sHangI:'The banished player was not a vampire.',sNoOne:'Nobody was banished.',sShotV:'The Sheriff fires! The target was a vampire.',sShotI:'The Sheriff fires, but the target was innocent. The Sheriff dies of guilt.',sWinK:'Game over. The villagers win!',sWinV:'Game over. The vampires win!'}
 };
 var VP={on:false,tok:0,n:6,voice:true,disc:120,names:[],players:[],night:0,lastSave:-1,sherUsed:false,phase:'',need2:null,say:0,t:null,rem:0,paused:false,sel:-1,resume:''};
 try{var vps=JSON.parse(localStorage.getItem('zap-vp')||'null');if(vps){VP.n=Math.max(4,Math.min(15,vps.n|0||6));VP.voice=vps.voice!==false;if([0,60,120,180].indexOf(vps.disc)>-1)VP.disc=vps.disc}}catch(e){}
@@ -2234,8 +2234,21 @@ var VPCOL=['#ff7a90','#6aa6ff','#5eeab0','#ffe46b','#c9bcff','#ffb066','#7fe3ff'
 function vpComp(n){var v=[1,1,2,2,2,3,3,3,4,4,4,5][Math.max(4,Math.min(15,n))-4],c={vampir:v,serif:1,doktor:n>=5?1:0,gozcu:n>=7?1:0};c.koylu=n-v-1-c.doktor-c.gozcu;return c}
 function vpRoleList(n){var c=vpComp(n),a=[];VPK.forEach(function(k){for(var i=0;i<c[k];i++)a.push(k)});for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
 /* --- sesli anlatıcı --- */
-function vpStopSpeech(){try{if(window.ZapTTS)ZapTTS.stop()}catch(e){}try{if(window.speechSynthesis)speechSynthesis.cancel()}catch(e){}}
+function vpStopSpeech(){try{if(VP.aud){VP.aud.onended=null;VP.aud.onerror=null;VP.aud.pause()}}catch(e){}try{if(window.ZapTTS)ZapTTS.stop()}catch(e){}try{if(window.speechSynthesis)speechSynthesis.cancel()}catch(e){}}
 function vpVoice(lang){try{var vs=speechSynthesis.getVoices(),k=lang.slice(0,2),best=null;for(var i=0;i<vs.length;i++){if(vs[i].lang&&vs[i].lang.slice(0,2)===k){if(!best||/google|enhanced|premium|natural/i.test(vs[i].name))best=vs[i]}}return best}catch(e){return null}}
+/* kayıtlı ses (voice/<dil>/<anahtar>.mp3); yoksa telefon sesi */
+function vpSayK(key,cb){
+  var text=V(key),lg=window.ZLANG==='tr'?'tr':'en',a=VP.aud;
+  if(!VP.voice||!a){vpSay(text,cb);return}
+  var id=++VP.say,done=false,tm;
+  function fin(){if(done||id!==VP.say)return;done=true;clearTimeout(tm);if(cb)cb()}
+  function fb(){if(done||id!==VP.say)return;done=true;clearTimeout(tm);vpSay(text,cb)}
+  vpStopSpeech();
+  tm=setTimeout(fb,4000);
+  a.onended=fin;a.onerror=fb;
+  a.onplaying=function(){clearTimeout(tm);tm=setTimeout(fin,Math.max(3000,text.length*140+3000))};
+  try{a.src='voice/'+lg+'/'+key+'.mp3';var pr=a.play();if(pr&&pr.catch)pr.catch(fb)}catch(e){fb()}
+}
 function vpRoute(){
   try{if(navigator.audioSession){navigator.audioSession.type='playback'}}catch(e){}
   try{if(!window.__vpKeep){var a=mk();a.loop=true;a.volume=.01;a.src=snd('silent');window.__vpKeep=a}var pr=window.__vpKeep.play();if(pr&&pr.catch)pr.catch(function(){})}catch(e){}
@@ -2266,7 +2279,7 @@ function vpBg(k){vpEl.classList.toggle('day',k==='d')}
 function vpPhase(t){vpPh.textContent=t||''}
 function vpClearT(){if(VP.t){clearInterval(VP.t);VP.t=null}}
 function vpOpen(){
-  vpBuild();VP.on=true;VP.tok++;vpEl.classList.add('show');vpVo.textContent=VP.voice?'🔊':'🔇';vpSher.classList.remove('on');vpMod.classList.remove('show');
+  vpBuild();try{if(!VP.aud){VP.aud=mk();VP.aud.src=snd('silent');var up=VP.aud.play();if(up&&up.catch)up.catch(function(){})}}catch(e){}VP.on=true;VP.tok++;vpEl.classList.add('show');vpVo.textContent=VP.voice?'🔊':'🔇';vpSher.classList.remove('on');vpMod.classList.remove('show');
   vpSetup();
   var seen=false;try{seen=localStorage.getItem('zap-vp-how')==='1'}catch(e){}
   if(!seen)setTimeout(vpHow,350);
@@ -2317,12 +2330,12 @@ function vpNameOk(){
 function vpDealStart(){
   var roles=vpRoleList(VP.n);VP.players=VP.names.slice(0,VP.n).map(function(nm,i){return{name:nm,role:roles[i],alive:true,col:VPCOL[i%VPCOL.length]}});
   VP.night=0;VP.lastSave=-1;VP.sherUsed=false;try{localStorage.setItem('zap-vp-names',JSON.stringify(VP.names))}catch(e){}
-  vpSay(V('sIntro'));vpDeal(0,true);
+  vpSayK('sIntro');vpDeal(0,true);
 }
 function vpDeal(i,first){
   VP.phase='deal';var p=VP.players[i];vpPhase(V('pOf',i+1,VP.n));
   vpRender(vpDots(i)+'<div class="vbig">'+vpEsc(p.name)+'</div><p class="sm">'+V('turn')+'</p><div class="hand"><i></i><i></i></div><h3>'+V('onlyU')+'</h3><p class="sm">'+V('two')+'</p><button class="lnk" data-a="skip2">'+V('skip')+'</button>');
-  if(!first)vpSay(V('sTurn',p.name));
+  if(!first)vpSayK('sTurn');
   VP.need2=function(){vpSpin(i)};VP.cur=i;
 }
 function vpCard(k){var r=VPR[k];return'<div class="rc" data-r="'+k+'" style="--b:'+r.b+';--c1:'+r.c1+';--c2:'+r.c2+'">'+vpArt(k)+'</div>'}
@@ -2379,8 +2392,8 @@ function vpNight(){
     if(!vpHas('gozcu'))return dawn();
     var i=vpIdx('gozcu');
     vpScene(vpEye(),V('seerUp'),'',i>=0?['seerpick',V('seerBtn')]:null);
-    vpSay(V('sSeer'));
-    var closeSeer=function(){vpScene(vpEye(),V('closeEyes'),V('asleep'));vpSay(V('sSeerC'),g(function(){wait(1800,dawn)}))};
+    vpSayK('sSeer');
+    var closeSeer=function(){vpScene(vpEye(),V('closeEyes'),V('asleep'));vpSayK('sSeerC',g(function(){wait(1800,dawn)}))};
     if(i>=0){VP.nightCb=function(){var tg=VP.players.map(function(p,k){return k}).filter(function(k){return k!==i&&VP.players[k].alive});vpPick(V('seerWho'),tg,V('confirm'),function(x){VP.nightCb=null;var p=VP.players[x],isV=p.role==='vampir';vpScene(vpEye(),isV?V('isV',vpEsc(p.name)):V('notV',vpEsc(p.name)),'',['seerok',V('ok')]);VP.nightCb=closeSeer})}}
     else wait(6500+Math.random()*3000,closeSeer);
   }
@@ -2388,25 +2401,25 @@ function vpNight(){
     if(!vpHas('doktor'))return stepSeer();
     var i=vpIdx('doktor');
     vpScene(vpEye(),V('docUp'),'',i>=0?['docpick',V('docBtn')]:null);
-    vpSay(V('sDoc'));
-    var closeDoc=function(){vpScene(vpEye(),V('closeEyes'),V('asleep'));vpSay(V('sDocC'),g(function(){wait(1800,stepSeer)}))};
+    vpSayK('sDoc');
+    var closeDoc=function(){vpScene(vpEye(),V('closeEyes'),V('asleep'));vpSayK('sDocC',g(function(){wait(1800,stepSeer)}))};
     if(i>=0){VP.nightCb=function(){var tg=vpAlive().filter(function(k){return k!==VP.lastSave});vpPick(V('docWho'),tg,V('confirm'),function(x){VP.nightCb=null;VP.saved=x;closeDoc()})}}
     else wait(6500+Math.random()*3000,closeDoc);
   }
   function stepVamp(){
     vpScene(vpMoon(),V('vampUp'),vpEsc(V('vampTeam',vamps)),['vamppick',V('vampBtn')]);
-    vpSay(V(VP.night===1?'sVamp1':'sVamp'));
-    VP.nightCb=function(){var tg=vpAlive().filter(function(k){return VP.players[k].role!=='vampir'});vpPick(V('vampWho'),tg,V('confirm'),function(x){VP.nightCb=null;VP.victim=x;vpScene(vpMoon(),V('closeEyes'),V('asleep'));vpSay(V('sVampC'),g(function(){wait(1800,stepDoc)}))})};
+    vpSayK(VP.night===1?'sVamp1':'sVamp');
+    VP.nightCb=function(){var tg=vpAlive().filter(function(k){return VP.players[k].role!=='vampir'});vpPick(V('vampWho'),tg,V('confirm'),function(x){VP.nightCb=null;VP.victim=x;vpScene(vpMoon(),V('closeEyes'),V('asleep'));vpSayK('sVampC',g(function(){wait(1800,stepDoc)}))})};
   }
   function dawn(){
     vpScene(vpSun(),V('dawn'),'');
-    vpSay(V('sDawn'),g(function(){
+    vpSayK('sDawn',g(function(){
       var died=[];if(VP.victim>=0&&VP.victim!==VP.saved){VP.players[VP.victim].alive=false;died.push(VP.victim)}
       VP.lastSave=VP.saved;vpDay(died);
     }));
   }
   vpScene(vpMoon(),V('closeEyes'),V('asleep'));
-  vpSay(V('sClose'),g(function(){wait(3500,stepVamp)}));
+  vpSayK('sClose',g(function(){wait(3500,stepVamp)}));
 }
 /* --- gündüz --- */
 function vpDeathCard(p,line,sub,mt){var r=VPR[p.role];return'<div class="vc" style="'+(mt?'margin-top:12px;':'')+'--b:'+r.b+';--c1:'+r.c1+';--c2:'+r.c2+'"><div class="pic">'+vpArt(p.role)+'</div><h3 style="margin:6px 0 0">'+vpEsc(p.name)+'</h3><p class="sm" style="margin:0">'+vpEsc(line)+'</p><span class="tag" style="margin-top:6px">'+vRole(p.role)+'</span>'+(sub?'<p class="sm" style="margin:6px 0 0">'+vpEsc(sub)+'</p>':'')+'</div>'}
@@ -2414,8 +2427,8 @@ function vpSherUpdate(){var ok=VP.on&&(VP.phase==='day'||VP.phase==='disc'||VP.p
 function vpDay(died){
   VP.phase='day';VP.need2=null;vpClearT();vpBg('d');vpPhase(V('day',VP.night));
   var w=vpWin(),nx=w?['end',V('toEnd')]:['disc',V('toDisc')],h;
-  if(died.length){var p=VP.players[died[0]];h=vpDeathCard(p,V('killedT',p.name),'')+'<button class="btn gold" style="margin-top:18px" data-a="'+nx[0]+'">'+nx[1]+'</button>';vpSay(V('sKilled',p.name,vRole(p.role)))}
-  else{h='<div class="orb glow">'+vpSun()+'</div><div class="vbig">'+V('nobody')+'</div><button class="btn gold" style="margin-top:22px" data-a="'+nx[0]+'">'+nx[1]+'</button>';vpSay(V('sNobody'))}
+  if(died.length){var p=VP.players[died[0]];h=vpDeathCard(p,V('killedT',p.name),'')+'<button class="btn gold" style="margin-top:18px" data-a="'+nx[0]+'">'+nx[1]+'</button>';vpSayK('sKilled')}
+  else{h='<div class="orb glow">'+vpSun()+'</div><div class="vbig">'+V('nobody')+'</div><button class="btn gold" style="margin-top:22px" data-a="'+nx[0]+'">'+nx[1]+'</button>';vpSayK('sNobody')}
   vpRender(h+vpPlayersRow());vpSherUpdate();
 }
 function vpDisc(resume){
@@ -2423,20 +2436,20 @@ function vpDisc(resume){
   if(!resume)VP.rem=VP.disc;
   function draw(){var m=Math.floor(VP.rem/60),s=VP.rem%60;return(m<10?'0':'')+m+':'+(s<10?'0':'')+s}
   vpRender('<div class="orb glow">'+vpSun()+'</div><div class="vbig">'+V('discT')+'</div><p class="sm">'+V('discHint')+'</p>'+(VP.disc?'<div class="timer" id="vpt">'+draw()+'</div>':'')+'<button class="btn gold" data-a="vote">'+V('toVote')+'</button>'+vpPlayersRow());
-  vpSherUpdate();if(!resume)vpSay(V('sDisc'));
-  if(VP.disc){var tok=VP.tok;VP.t=setInterval(function(){if(tok!==VP.tok||VP.paused)return;VP.rem--;var e=document.getElementById('vpt');if(e)e.textContent=draw();if(VP.rem===10)vpSay(V('sTen'));if(VP.rem<=0){vpClearT();vpVote()}},1000)}
+  vpSherUpdate();if(!resume)vpSayK('sDisc');
+  if(VP.disc){var tok=VP.tok;VP.t=setInterval(function(){if(tok!==VP.tok||VP.paused)return;VP.rem--;var e=document.getElementById('vpt');if(e)e.textContent=draw();if(VP.rem===10)vpSayK('sTen');if(VP.rem<=0){vpClearT();vpVote()}},1000)}
 }
 function vpVote(){
   VP.phase='vote';VP.need2=null;vpClearT();vpBg('d');vpPhase(V('day',VP.night));VP.sel=-1;
   vpRender('<div class="vbig">'+V('voteT')+'</div><p class="sm">'+V('voteHint')+'</p><div class="grid">'+vpAlive().map(function(i){var p=VP.players[i];return'<button class="pk" data-a="vsel" data-i="'+i+'">'+vpAv(p)+'<span>'+vpEsc(p.name)+'</span></button>'}).join('')+'</div><button class="btn" id="vpex" data-a="expel" disabled>'+V('expel')+'</button><button class="lnk" data-a="noone">'+V('noOne')+'</button>');
-  vpSherUpdate();vpSay(V('sVote'));
+  vpSherUpdate();vpSayK('sVote');
 }
 function vpAfterDeath(){var w=vpWin();return w?['end',V('toEnd')]:['night',V('toNight')]}
 function vpExpel(i){
   var p=VP.players[i];p.alive=false;VP.phase='result';vpSherUpdate();
   var isV=p.role==='vampir',nx=vpAfterDeath();
   vpRender(vpDeathCard(p,V('hanged',p.name),isV?V('wasV'):V('wasNot'))+'<button class="btn gold" style="margin-top:18px" data-a="'+nx[0]+'">'+nx[1]+'</button>'+vpPlayersRow());
-  vpSay(V('sHang',p.name,vRole(p.role),isV));
+  vpSayK(isV?'sHangV':'sHangI');
 }
 function vpShoot(t){
   var si=vpIdx('serif'),sp=VP.players[si],tp=VP.players[t];VP.sherUsed=true;
@@ -2444,14 +2457,14 @@ function vpShoot(t){
   var prev=VP.phase;VP.phase='result';vpSherUpdate();vpClearT();
   var w=vpWin(),nx=w?['end',V('toEnd')]:['shotcont',V('cont')];VP.resume=prev;
   vpRender(vpDeathCard(tp,good?V('shotV',tp.name):V('shotI',tp.name,sp.name),'')+(good?'':vpDeathCard(sp,V('hanged',sp.name),'',1))+'<button class="btn gold" style="margin-top:18px" data-a="'+nx[0]+'">'+nx[1]+'</button>'+vpPlayersRow());
-  vpSay(good?V('sShotV',tp.name):V('sShotI',tp.name,sp.name));
+  vpSayK(good?'sShotV':'sShotI');
 }
 /* --- bitiş --- */
 function vpEnd(){
   var w=vpWin()||'k';VP.phase='end';VP.need2=null;vpClearT();vpSher.classList.remove('on');vpBg(w==='k'?'d':'n');vpPhase('');
   var rows=VP.players.map(function(p){var r=VPR[p.role];return'<div class="row" style="padding:8px 12px;margin-bottom:8px;opacity:'+(p.alive?1:.65)+'"><div style="display:flex;align-items:center;gap:10px"><span class="vav" style="width:42px;height:42px;background:linear-gradient(160deg,'+r.c1+','+r.c2+');box-shadow:0 0 0 2px '+r.b+'">'+vpArt(p.role)+'</span><span style="text-align:left"><b style="font:700 15px var(--ff);display:block">'+vpEsc(p.name)+'</b><span class="sm">'+vRole(p.role)+'</span></span></div><span class="sm">'+(p.alive?V('alive'):V('dead'))+'</span></div>'}).join('');
   vpRender('<div class="orb glow">'+(w==='k'?vpSun():vpMoon())+'</div><h2>'+(w==='k'?V('winK'):V('winV'))+'</h2><p class="vsub">'+(w==='k'?V('winKs'):V('winVs'))+'</p>'+rows+'<button class="btn" style="margin-top:8px" data-a="again">'+V('again')+'</button><button class="btn alt" data-a="newg">'+V('newg')+'</button><button class="lnk" data-a="close">'+V('exit')+'</button>');
-  vpSay(w==='k'?V('sWinK'):V('sWinV'));
+  vpSayK(w==='k'?'sWinK':'sWinV');
 }
 /* --- tıklamalar --- */
 function vpAct(a,b){
@@ -2479,7 +2492,7 @@ function vpAct(a,b){
   case 'vote':vpVote();break;
   case 'vsel':VP.sel=+b.dataset.i;[].forEach.call(vpSt.querySelectorAll('.pk'),function(x){x.classList.toggle('sel',x===b)});var ex=document.getElementById('vpex');if(ex)ex.disabled=false;break;
   case 'expel':if(VP.sel>=0)vpExpel(VP.sel);break;
-  case 'noone':VP.phase='result';vpSherUpdate();var nx=vpAfterDeath();vpRender('<div class="orb glow">'+vpSun()+'</div><div class="vbig">'+V('nooneOut')+'</div><button class="btn gold" style="margin-top:22px" data-a="'+nx[0]+'">'+nx[1]+'</button>'+vpPlayersRow());vpSay(V('sNoOne'));break;
+  case 'noone':VP.phase='result';vpSherUpdate();var nx=vpAfterDeath();vpRender('<div class="orb glow">'+vpSun()+'</div><div class="vbig">'+V('nooneOut')+'</div><button class="btn gold" style="margin-top:22px" data-a="'+nx[0]+'">'+nx[1]+'</button>'+vpPlayersRow());vpSayK('sNoOne');break;
   case 'end':vpEnd();break;
   case 'sher':VP.paused=true;var si=vpIdx('serif');vpPick(V('sherT'),vpAlive().filter(function(k){return k!==si}),V('fire'),vpShoot,V('sherW'));break;
   case 'shotcont':if(VP.resume==='vote')vpVote();else vpDisc(VP.resume==='disc');break;

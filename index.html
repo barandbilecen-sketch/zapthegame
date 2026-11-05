@@ -597,6 +597,10 @@ html.droid #hint .chips span{background:linear-gradient(180deg,rgba(255,255,255,
 #vp .how li b{flex:none;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#ff3b5c,#b0123f);display:flex;align-items:center;justify-content:center;font:800 12px var(--ff)}
 #vp svg filter{}
 #vp .in.top{margin:0 0 auto}
+#vp .vporbs{position:absolute;inset:0;z-index:5;pointer-events:none}
+#vp .vporbs i{position:absolute;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,hsl(var(--h),100%,62%) 70%);box-shadow:0 0 34px 8px hsla(var(--h),100%,60%,.7);animation:vpblink .28s ease-in-out 3 alternate}
+@keyframes vpblink{from{transform:scale(.85);opacity:.55}to{transform:scale(1.18);opacity:1}}
+
 .md.vpd{width:50px;height:50px;margin:-25px 0 0 -25px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;border:2px solid var(--b);box-shadow:0 4px 14px rgba(0,0,0,.4);transition:transform .35s,opacity .35s,box-shadow .35s}
 .md.vpd svg{height:112%;width:auto;margin-bottom:-2px;flex:none}
 </style>
@@ -2246,7 +2250,7 @@ function vpBuild(){
   document.body.appendChild(vpEl);
   vpSt=vpEl.querySelector('#vpst');vpMod=vpEl.querySelector('#vpmod');vpSher=vpEl.querySelector('#vpsher');vpPh=vpEl.querySelector('#vpph');vpVo=vpEl.querySelector('#vpvo');
   vpEl.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-a]');if(b)vpAct(b.dataset.a,b)});
-  vpEl.addEventListener('touchstart',function(e){if(VP.need2&&e.touches.length>=2&&!vpMod.classList.contains('show')){e.preventDefault();var f=VP.need2;VP.need2=null;f()}},{passive:false});
+  vpEl.addEventListener('touchstart',function(e){if(VP.need2&&e.touches.length>=2&&!vpMod.classList.contains('show')){e.preventDefault();e.stopPropagation();var f=VP.need2;VP.need2=null;vpOrbs(e.touches,f)}},{passive:false});
 }
 function vpRender(h,top){vpSt.innerHTML='<div class="in'+(top?' top':'')+'">'+h+'</div>';vpSt.scrollTop=0}
 function vpBg(k){vpEl.classList.toggle('day',k==='d')}
@@ -2257,6 +2261,12 @@ function vpOpen(){
   vpSetup();
   var seen=false;try{seen=localStorage.getItem('zap-vp-how')==='1'}catch(e){}
   if(!seen)setTimeout(vpHow,350);
+}
+function vpOrbs(ts,f){
+  var box=document.createElement('div');box.className='vporbs';
+  for(var i=0;i<ts.length&&i<5;i++){var o=document.createElement('i');o.style.left=ts[i].clientX+'px';o.style.top=ts[i].clientY+'px';o.style.setProperty('--h',[330,48,205,150,265][i]);box.appendChild(o)}
+  vpEl.appendChild(box);var tk=VP.tok;
+  setTimeout(function(){if(box.parentNode)box.parentNode.removeChild(box);if(VP.on&&VP.tok===tk)f()},950);
 }
 function vpClose(){VP.on=false;VP.tok++;VP.say++;vpClearT();VP.need2=null;vpStopSpeech();vpSave();if(vpEl)vpEl.classList.remove('show')}
 function vpHow(){

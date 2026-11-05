@@ -1,5 +1,15 @@
 # ⚡ Zap! The Game Sürüm Notları
 
+## v3.9: Vampir Köylü 🧛
+- **Yeni mod: Vampir Köylü.** Telefon anlatıcı olur, sesli olarak "gözlerinizi kapatın" der ve geceyi yönetir. 4-15 oyuncu.
+- **Gizli roller:** Vampir, Köylü, Şerif, Doktor ve Gözcü. Telefon elden ele gezer, herkes adını yazar, 2 parmağıyla dokunup rolünü gizlice öğrenir. Karakterler slot gibi kayar, rol açıklamasıyla ortaya çıkar.
+- **Gece:** Vampirler kurbanı seçer, Doktor korur, Gözcü araştırır. **Gündüz:** kimin öldüğü açıklanır, tartışma sayacı ve oylamayla biri köyden sürülür.
+- **Şerif:** Oyun boyunca bir kez, köşedeki butonla birini vurabilir. Masumu vurursa o da ölür.
+- İlk girişte nasıl oynanır penceresi açılır. Anlatıcı sesi her cihazda aynıdır (Türkçe ve İngilizce kayıtlı ses).
+- 20 mod oldu.
+- **Android:** Animasyonlar daha akıcı. Tablet ve katlanabilir ekran desteği, ekran döndürme. Anlatıcı sesi hoparlörden çalar.
+- Yenilenen ZAP! yazısı ve çeşitli düzeltmeler.
+
 ## v3.3: Temalar, avatarlar, yeni menü
 - **44 tema:** Kuzey Işıkları, Cyberpunk Yağmur, Vaporwave, Coquette Sakura, Y2K Şeker, Volkan, Nebula ve daha fazlası. Hepsinin kendi sesi var.
 - **Yeni arka plan sahneleri, küre dokuları ve hareketli efektler** (yıldız, kar, yağmur, sakura, kor, baloncuk, kıvılcım, ateş böceği).

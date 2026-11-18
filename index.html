@@ -349,6 +349,8 @@ body.ph::before{opacity:0}
 .sw button.sel{transform:scale(1.1);box-shadow:0 0 0 2px #fff,0 0 20px 6px rgba(255,228,107,.9);animation:selp 2s ease-in-out infinite}
 .sw button.sel::after{content:'✓';position:absolute;right:-5px;top:-5px;width:18px;height:18px;border-radius:50%;background:#ffe46b;color:#1b0a3c;font:900 11px/18px var(--ff);text-align:center}
 @keyframes selp{50%{box-shadow:0 0 0 2px #fff,0 0 30px 10px rgba(255,228,107,.95)}}
+.fb label.sel{border-color:#ffe46b;box-shadow:0 0 18px 3px rgba(255,228,107,.7);background:rgba(255,228,107,.18)}
+.fb label.gl{flex:1;display:flex;align-items:center;justify-content:center;padding:12px 6px;border-radius:14px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:#fff;font:600 13px var(--ff);text-align:center;touch-action:manipulation}
 .fb button.sel{border-color:#ffe46b;box-shadow:0 0 18px 3px rgba(255,228,107,.7);background:rgba(255,228,107,.18)}
 .dot.num.lab{font-size:calc(var(--sz)*.19);letter-spacing:-.3px}
 .dot .tl{position:absolute;left:50%;bottom:calc(100% + 12px);transform:translateX(-50%);font:900 calc(var(--sz)*.23) var(--ffd);font-style:normal;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.7),0 0 14px rgba(0,0,0,.5);white-space:nowrap;pointer-events:none}
@@ -1013,11 +1015,11 @@ function applyLook(){
   }
   if(d)root.style.setProperty('--dotbg',d);else root.style.removeProperty('--dotbg');
 }
-var fi=document.createElement('input');fi.type='file';fi.accept='image/*';fi.id='zapfi';fi.style.display='none';document.body.appendChild(fi);
+var fi=document.createElement('input');fi.type='file';fi.accept='image/*';fi.id='zapfi';fi.style.cssText='position:fixed;left:-9999px;top:0;width:1px;height:1px;opacity:0';document.body.appendChild(fi);
 var fiFor='bg';
-function pickPhoto(kind){fiFor=kind;fi.value='';fi.click()}
-fi.addEventListener('change',function(){
-  var f=fi.files&&fi.files[0];if(!f)return;
+function pickThemePhoto(kind){fiFor=kind;fi.value='';fi.click()}
+function onThemePhoto(f){
+  if(!f)return;
   var im=new Image(),u=URL.createObjectURL(f);
   im.onload=function(){
     var c=document.createElement('canvas'),x=c.getContext('2d'),url;
@@ -1028,20 +1030,21 @@ fi.addEventListener('change',function(){
     URL.revokeObjectURL(u);apply();save();
   };
   im.src=u;
-});
+}
+fi.addEventListener('change',function(){onThemePhoto(fi.files&&fi.files[0])});
 var lookBuilt=false;
 function buildLook(){
   if(lookBuilt)return;lookBuilt=true;
   function row(par,label,cls){var l=document.createElement('label');l.textContent=label;var d=document.createElement('div');d.className='sw '+cls;par.appendChild(l);par.appendChild(d);return d}
   function sw(d,bg,fn,t){var b=document.createElement('button');b.style.background=bg;b.addEventListener('click',fn);d.appendChild(b);if(t)SEL.push({el:b,t:t});return b}
-  function btns(par,pick,clear,t){var fb=document.createElement('div');fb.className='fb';fb.innerHTML='<button>📷 Galeriden seç</button><button>✕ Kaldır</button>';par.appendChild(fb);SEL.push({el:fb.children[0],t:t});fb.children[0].addEventListener('click',pick);fb.children[1].addEventListener('click',clear)}
+  function btns(par,pick,clear,t){var fb=document.createElement('div');fb.className='fb';fb.innerHTML='<label class="gl"><input type="file" accept="image/*" hidden>📷 Galeriden seç</label><button>✕ Kaldır</button>';par.appendChild(fb);SEL.push({el:fb.children[0],t:t});var gi=fb.querySelector('input');gi.addEventListener('click',function(){fiFor=pick});gi.addEventListener('change',function(){onThemePhoto(gi.files&&gi.files[0]);gi.value=''});fb.children[1].addEventListener('click',clear)}
   var sb=ui.bg,sd=ui.dot;
   var r1=row(sb,'Gradyanlar','bigrow');GRADS.forEach(function(g,i){sw(r1,g,function(){cfg.bm='grad';cfg.bv=i;apply();save()},function(){return cfg.bm==='grad'&&cfg.bv===i})});
   var r2=row(sb,'Resimli arka planlar','bigrow');SCENES.forEach(function(id){sw(r2,'url('+sceneURL(id,90,190)+') center/cover',function(){cfg.bm='scene';cfg.bv=id;apply();save()},function(){return cfg.bm==='scene'&&cfg.bv===id})});
-  btns(sb,function(){pickPhoto('bg')},function(){photoBG=null;try{localStorage.removeItem('zap-bgphoto')}catch(e){}if(cfg.bm==='photo')cfg.bm=null;apply();save()},function(){return cfg.bm==='photo'});
+  btns(sb,'bg',function(){photoBG=null;try{localStorage.removeItem('zap-bgphoto')}catch(e){}if(cfg.bm==='photo')cfg.bm=null;apply();save()},function(){return cfg.bm==='photo'});
   var r3=row(sd,'Gradyan küreler','round');DGR.forEach(function(g,i){sw(r3,dotGrad(i),function(){cfg.multi=null;cfg.dm='grad';cfg.dv=i;apply();save()},function(){return !cfg.multi&&cfg.dm==='grad'&&cfg.dv===i})});
   var r4=row(sd,'Resimli küreler','round');TEXS.forEach(function(id){sw(r4,'url('+texURL(id)+') center/cover',function(){cfg.multi=null;cfg.dm='tex';cfg.dv=id;apply();save()},function(){return !cfg.multi&&cfg.dm==='tex'&&cfg.dv===id})});
-  btns(sd,function(){pickPhoto('dot')},function(){photoDOT=null;try{localStorage.removeItem('zap-dotphoto')}catch(e){}if(cfg.dm==='photo'){cfg.dm=null;cfg.dv=null}apply();save()},function(){return cfg.dm==='photo'&&!cfg.multi});
+  btns(sd,'dot',function(){photoDOT=null;try{localStorage.removeItem('zap-dotphoto')}catch(e){}if(cfg.dm==='photo'){cfg.dm=null;cfg.dv=null}apply();save()},function(){return cfg.dm==='photo'&&!cfg.multi});
   var r5=row(sb,'Hareketli efekt','round');
   sw(r5,'rgba(255,255,255,.12)',function(){cfg.fx=null;apply();save()},function(){return !cfg.fx}).textContent='✕';
   FXL.forEach(function(f){var b=document.createElement('button');b.style.background='rgba(255,255,255,.14)';b.style.fontSize='22px';b.textContent=f[1];b.title=f[2];b.addEventListener('click',function(){cfg.fx=f[0];apply();save()});r5.appendChild(b);SEL.push({el:b,t:function(){return cfg.fx===f[0]}})});

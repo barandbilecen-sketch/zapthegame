@@ -477,16 +477,16 @@ body:has(.dot) #hdr .hb,body:has(.ring) #hdr .hb{opacity:0;pointer-events:none}
 #zs .av .up small{font:600 9px var(--ff);opacity:.85;line-height:1.1;padding:0 6px}
 
 /* mod seçici (basılı tut + kaydır) */
-#mpb{position:fixed;inset:0;z-index:86;display:none;background:radial-gradient(120% 60% at 50% 100%,rgba(58,134,255,.28),rgba(8,4,28,.72));-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);opacity:0;transition:opacity .25s}
+#mpb{position:fixed;inset:0;z-index:86;display:none;background:radial-gradient(120% 60% at 50% 100%,rgba(58,134,255,.3),rgba(8,4,28,.9));opacity:0;transition:opacity .25s}
 #mpb.show{display:block;opacity:1}
 #mp2{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 92px);z-index:87;display:none;flex-direction:column;align-items:center;opacity:0;transform:translateY(18px) scale(.97);transition:opacity .22s,transform .22s;touch-action:pan-x}
 #mp2.show{display:flex;opacity:1;transform:none}
 #mp2 .mpx{display:flex;align-items:center;gap:12px;margin-bottom:34px;height:26px;white-space:nowrap;position:relative;z-index:2;font:700 11px var(--ff);letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.75)}
 #mp2 .mpx button{pointer-events:auto;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;border-radius:99px;padding:5px 12px;font:700 11px var(--ff);letter-spacing:.06em}
-#mpc{width:100%;display:flex;gap:10px;overflow-x:auto;padding:60px calc(50% - 56px) 60px;margin:-46px 0 -34px;box-sizing:border-box;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;perspective:700px}
+#mpc{width:100%;display:flex;gap:10px;overflow-x:auto;padding:60px calc(50% - 56px) 60px;margin:-46px 0 -34px;box-sizing:border-box;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 #mpc::-webkit-scrollbar{display:none}
 #mpc .mq{box-shadow:none;position:relative;flex:none;backface-visibility:hidden;width:112px;height:150px;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border-radius:26px;background:linear-gradient(160deg,rgba(255,255,255,.2),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.28);box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.35);color:#fff;transition:border-color .2s;will-change:transform,opacity}
-#mpc .mq i{font-style:normal;font-size:46px;line-height:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,.4))}
+#mpc .mq i{font-style:normal;font-size:46px;line-height:1}
 #mpc .mq b{font:900 12.5px var(--ffd);letter-spacing:-.3px;text-align:center;padding:0 6px;line-height:1.15;max-width:100%;box-sizing:border-box}
 #mpc .mq.c{border-color:#fff;background:linear-gradient(160deg,rgba(255,255,255,.3),rgba(255,255,255,.08))}
 #mpc .mq.cur::after{content:"SEÇİLİ";position:absolute;top:10px;left:0;right:0;text-align:center;font:800 8.5px var(--ff);letter-spacing:.16em;color:#ffe46b}
@@ -629,17 +629,16 @@ html.droid #hint .chips span{background:linear-gradient(180deg,rgba(255,255,255,
 button{transition:transform .12s ease,box-shadow .2s ease,background-color .2s ease,opacity .2s ease}
 button:active{transform:scale(.965)}
 #ml,#mr,#pg .in,#vp .in{scrollbar-width:none}#ml::-webkit-scrollbar,#mr::-webkit-scrollbar,#pg .in::-webkit-scrollbar,#vp .in::-webkit-scrollbar{display:none}
-.mi{position:relative;box-shadow:0 2px 10px rgba(0,0,0,.12);transition:transform .12s,background-color .2s,box-shadow .2s}
+.mi{position:relative;transition:transform .12s,background-color .2s}
 .mi span{font-size:17px;width:22px;text-align:center;flex:none}
-.mi.on{background:linear-gradient(135deg,#fff,#efe7ff);box-shadow:0 6px 22px rgba(185,168,255,.45),0 0 0 1px rgba(255,255,255,.6)}
+.mi.on{background:linear-gradient(135deg,#fff,#efe7ff);box-shadow:0 0 0 2px rgba(185,168,255,.55)}
 .mi .nw{position:absolute;top:-6px;right:10px;font-style:normal;font:800 8px var(--ff);letter-spacing:.08em;padding:2px 6px;box-shadow:0 2px 8px rgba(255,95,162,.5);border-radius:999px;background:linear-gradient(135deg,#ff5fa2,#ffa14d);color:#fff}
 .mi.on .nw{color:#fff}.mi.cur .nw+*{}.mi.cur::after{margin-left:auto}
 .mgl{font:800 10.5px var(--ff);letter-spacing:.16em;text-transform:uppercase;opacity:.55;padding:10px 4px 2px;display:flex;align-items:center;gap:8px}
 .mgl::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.35),transparent)}
 #demo{box-shadow:inset 0 0 40px rgba(185,168,255,.12),0 10px 30px rgba(0,0,0,.25);background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.1),rgba(255,255,255,.03) 70%)}
 #mp{box-shadow:0 8px 26px rgba(255,95,162,.4),inset 0 1px 0 rgba(255,255,255,.5);position:relative;overflow:hidden}
-#mp::after{content:'';position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-18deg);animation:zshine 3.4s ease-in-out infinite}
-@keyframes zshine{0%,55%{left:-60%}100%{left:130%}}
+#mp::after{content:'';position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-18deg);}
 @keyframes pgIn{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
 #pg .in>*,#vp .in>*{animation:pgIn .42s cubic-bezier(.2,.8,.2,1) both}
 #pg .in>*:nth-child(2),#vp .in>*:nth-child(2){animation-delay:.05s}
@@ -660,6 +659,15 @@ button:active{transform:scale(.965)}
 @keyframes zcf{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(105vh) translateX(var(--dx)) rotate(var(--r))}}
 #dock button:active,.dk:active{transform:scale(.94)}
 @media (prefers-reduced-motion:reduce){#pg .in>*,#vp .in>*,#mp::after,.zcf i{animation:none!important}}
+
+/* v4.2 menü düzeltme */
+#ml,#mr{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.mi{contain:layout;min-width:0}
+.mi .mn{font-style:normal;flex:1;min-width:0;line-height:1.15;overflow-wrap:break-word;font-size:13.5px}
+#dT{overflow-wrap:break-word;max-width:100%;padding:0 2px;line-height:1.2}
+#mp::after{animation:zshine 1.4s ease-out .5s 1 both!important;transform:skewX(-18deg) translateX(0);left:-60%}
+@keyframes zshine{from{transform:skewX(-18deg) translateX(0)}to{transform:skewX(-18deg) translateX(520%)}}
+#mpc .mq{will-change:transform;box-shadow:0 6px 16px rgba(0,0,0,.3)}
 </style>
 </head>
 <body>
@@ -1476,11 +1484,11 @@ function mInfo(id){return MODES.filter(function(x){return x[0]===id})[0]}
 function buildMenu(){
   var st=ml.scrollTop;ml.innerHTML='';
   var GL={tr:['Klasik','Parti oyunları','Eğlence'],en:['Classic','Party games','Fun'],de:['Klassiker','Partyspiele','Spaß'],es:['Clásicos','Juegos de fiesta','Diversión'],fr:['Classiques','Jeux de soirée','Fun']},gl=GL[window.ZLANG]||GL.en,GS={tek:0,vampir:1,yazitura:2},NEWM={casus:1,sahte:1,hic:1,kelime:1,benkimim:1};
-  MODES.forEach(function(m){if(GS[m[0]]!=null){var g=document.createElement('div');g.className='mgl';g.textContent=gl[GS[m[0]]];ml.appendChild(g)}var b=document.createElement('button');b.className='mi'+(m[0]===pv?' on':'')+(m[0]===mode?' cur':'')+(NEWM[m[0]]?' nw-c':'');b.innerHTML='<span>'+m[1]+'</span>'+m[2]+(NEWM[m[0]]?'<i class="nw">'+(window.ZLANG==='tr'||!window.ZLANG?'YENİ':'NEW')+'</i>':'');b.addEventListener('click',function(){pv=m[0];buildMenu();showDetail()});ml.appendChild(b)});
+  MODES.forEach(function(m){if(GS[m[0]]!=null){var g=document.createElement('div');g.className='mgl';g.textContent=gl[GS[m[0]]];ml.appendChild(g)}var b=document.createElement('button');b.className='mi'+(m[0]===pv?' on':'')+(m[0]===mode?' cur':'')+(NEWM[m[0]]?' nw-c':'');b.innerHTML='<span>'+m[1]+'</span><em class="mn">'+m[2].replace('/','/<wbr>')+'</em>'+(NEWM[m[0]]?'<i class="nw">'+(window.ZLANG==='tr'||!window.ZLANG?'YENİ':'NEW')+'</i>':'');b.addEventListener('click',function(){pv=m[0];buildMenu();showDetail()});ml.appendChild(b)});
   ml.scrollTop=st;
 }
 function showDetail(){
-  var m=mInfo(pv);dT.textContent=m[1]+' '+m[2];dD.textContent=HOW[pv];
+  var m=mInfo(pv);dT.innerHTML=m[1]+' '+m[2].replace('/','/<wbr>');dD.textContent=HOW[pv];
   ms.innerHTML=pv==='coklu'?'<b class="st">Kişi <button data-d="-1">−</button>'+KN+'<button data-d="1">+</button></b>':pv==='takim'?'<b class="st">Takım <button data-d="-1">−</button>'+TN+'<button data-d="1">+</button></b>':'';
   mp.textContent=pv===mode?'Seçili ✓':'Bu modu seç';runDemo(pv);
 }
@@ -1544,7 +1552,7 @@ function runDemo(m){
         dl(function(){ds.forEach(function(d,i){if(i!==3)d.style.opacity='.3'});ds[3].style.transform='scale(1.4)';ds[3].style.boxShadow='0 0 26px 6px rgba(255,59,92,.8)';ex.textContent='Sorularla casusu bul!'},1900)},
       sahte:function(){box.style.background='linear-gradient(180deg,#0b0b2e,#2a1060)';['☕','☕','☕','🍵'].forEach(function(v,i){set(i,'n',v)});ex.textContent='🥸 Birinin kelimesi farklı';
         dl(function(){ds.forEach(function(d,i){if(i!==3)d.style.opacity='.3'});ds[3].style.transform='scale(1.4)';ds[3].style.boxShadow='0 0 26px 6px rgba(255,228,107,.8)';ex.textContent='İpuçlarıyla sahtekârı bul!'},1900)},
-      hic:function(){ds.forEach(function(d){d.style.display='none'});var w=document.createElement('div');w.style.cssText='position:absolute;box-sizing:border-box;left:50%;top:48%;width:78%;margin:-34px 0 0 -39%;padding:14px 10px;border-radius:16px;background:linear-gradient(165deg,#2a1666,#150a38);border:1.5px solid #ffe46b;text-align:center;font:800 15px/1.25 var(--ffd);color:#fff';w.innerHTML='<div style="font:800 9px var(--ff);letter-spacing:.16em;color:#ffe46b;margin-bottom:6px">KİM DAHA OLASI?</div>En çok geç kalan kim?';box.appendChild(w);
+      hic:function(){ds.forEach(function(d){d.style.display='none'});var w=document.createElement('div');w.style.cssText='position:absolute;box-sizing:border-box;left:50%;top:40%;width:78%;margin:-34px 0 0 -39%;padding:12px 10px;border-radius:16px;background:linear-gradient(165deg,#2a1666,#150a38);border:1.5px solid #ffe46b;text-align:center;font:800 13px/1.25 var(--ffd);color:#fff';w.innerHTML='<div style="font:800 9px var(--ff);letter-spacing:.16em;color:#ffe46b;margin-bottom:6px">KİM DAHA OLASI?</div>En çok geç kalan kim?';box.appendChild(w);
         w.animate([{transform:'translateY(16px) scale(.9)',opacity:0},{transform:'none',opacity:1}],{duration:500,fill:'forwards'});ex.textContent='🙋 Hepsi aynı anda parmakla gösterir'},
       benkimim:function(){ds.forEach(function(d){d.style.display='none'});var w=document.createElement('div');w.style.cssText='position:absolute;box-sizing:border-box;left:50%;top:46%;width:74%;margin:-34px 0 0 -37%;padding:20px 8px;border-radius:16px;background:linear-gradient(165deg,#2a1666,#0b3a5c);border:1.5px solid #2ee59d;text-align:center;font:900 19px var(--ffd);color:#fff;transform:rotate(-4deg)';w.textContent='PENGUEN';box.appendChild(w);ex.textContent='🤳 Alnına koy, tahmin et'},
       kelime:function(){ds.forEach(function(d){d.style.display='none'});var w=document.createElement('div');w.style.cssText='position:absolute;box-sizing:border-box;left:50%;top:46%;width:74%;margin:-30px 0 0 -37%;padding:16px 8px;border-radius:16px;background:linear-gradient(165deg,#2a1666,#150a38);border:1.5px solid #ffe46b;text-align:center;font:900 19px var(--ffd);color:#fff';w.textContent='ZÜRAFA';box.appendChild(w);
@@ -2027,14 +2035,14 @@ document.getElementById('dk5').addEventListener('click',showInfo);
   function paint(){
     var sl=mpc.scrollLeft,ci=cur();
     for(var i=0;i<cards.length;i++){var o=(i*STEP-sl)/STEP,a=Math.min(Math.abs(o),2.5);
-      cards[i].style.transform='translateZ('+(-a*34)+'px) rotateY('+(-o*20)+'deg) scale('+(1-a*.09)+')';
+      cards[i].style.transform='scale('+(1-a*.1)+')';
       cards[i].style.opacity=String(Math.max(.28,1-a*.3));
       cards[i].classList.toggle('c',i===ci)}
     if(ci!==lastI){lastI=ci;var m=MODES[ci];var hw=T(HOW[m[0]]||'');mpd.textContent=hw.slice(0,110)+(hw.length>110?'…':'');
       document.getElementById('mpn').textContent=m[1]+'  '+m[2];
       try{if(ZS.vib)navigator.vibrate(7)}catch(e){}}
   }
-  mpc.addEventListener('scroll',function(){requestAnimationFrame(paint)},{passive:true});
+  var pq=0;mpc.addEventListener('scroll',function(){if(pq)return;pq=1;requestAnimationFrame(function(){pq=0;paint()})},{passive:true});
   function mark(){cards.forEach(function(c){c.classList.toggle('cur',c.dataset.id===mode);c.classList.toggle('off',!!(OL.on&&OLBLOCK[c.dataset.id]))})}
   function openP(){
     if(open)return;open=true;mark();lastI=-1;
@@ -2826,6 +2834,13 @@ function pgWH(e){
   if(PG.set.tb==='1'&&f.length)h+='<div style="font-size:13px;letter-spacing:2px;color:#ff5fa2;margin:14px 0 6px;font-weight:700">'+G('forb')+'</div><div style="font-size:19px;line-height:1.5;font-weight:600;color:#ffd6e8">'+f.map(vpEsc).join('<br>')+'</div>';
   return h;
 }
+function pgFitW(){
+  var e=document.getElementById('pgw');if(!e)return;
+  var bk=PG.g==='benkimim',t=bk?e:e.firstElementChild;if(!t)return;
+  var fs=bk?Math.round(Math.min(innerWidth,innerHeight)*.18):44,av=e.parentNode.clientWidth*(bk?.86:.84);
+  t.style.whiteSpace='nowrap';t.style.width='max-content';t.style.maxWidth='none';t.style.padding='0';t.style.margin='0 auto';t.style.fontSize=fs+'px';
+  while(t.offsetWidth>av&&fs>13){fs-=2;t.style.fontSize=fs+'px'}
+}
 function pgBkOff(){
   if(PG.mh){window.removeEventListener('devicemotion',PG.mh);PG.mh=null}
   var o=document.getElementById('pgk');if(o)o.remove();
@@ -2899,7 +2914,7 @@ function pgKelimeRound(){
   var draw=function(){
     if(PG.g==='benkimim'){pgBkDraw();return}
     pgRender('<div style="display:flex;justify-content:space-between;width:100%;align-items:center"><span class="timer" id="pgt" style="font-size:40px;margin:0">'+pgFmt(PG.rem)+'</span><span class="pc" style="font-size:15px">'+G('score')+': <b id="pgsc">'+PG.ok.length+'</b></span></div><div class="vc" style="--c1:#2a1666;--c2:#150a38;--b:#ffe46b;margin:14px 0;min-height:220px;justify-content:center"><div class="vbig" id="pgw" style="font-size:44px;word-break:break-word">'+pgWH(PG.words[PG.wi%PG.words.length])+'</div></div><div style="display:flex;gap:10px;width:100%"><button class="btn alt" style="margin:0;flex:1" data-g="kskip">'+G('pass')+' ➜</button><button class="btn" style="margin:0;flex:1;background:linear-gradient(135deg,#2ee59d,#119b6a)" data-g="kok">✓ '+G('got')+'</button></div>',true);
-  };draw();
+  };draw();pgFitW();
   pgClearT();PG.t=setInterval(function(){
     if(tk!==PG.tok||PG.phase!=='kplay'||pgMod.classList.contains('show'))return;
     PG.rem--;var e=document.getElementById('pgt');if(e)e.textContent=pgFmt(Math.max(0,PG.rem));
@@ -2911,7 +2926,7 @@ function pgKelimeWord(ok){
   var w=PG.words[PG.wi%PG.words.length].split(':')[0];(ok?PG.ok:PG.sk).push(w);PG.wi++;
   try{if(navigator.vibrate)navigator.vibrate(ok?30:10)}catch(e){}
   var e=document.getElementById('pgw'),s=document.getElementById('pgsc');if(s)s.textContent=PG.ok.length;
-  if(e){e.innerHTML=pgWH(PG.words[PG.wi%PG.words.length]);e.style.color=ok?'#6fe3a1':'#fff';setTimeout(function(){if(e)e.style.color=''},180)}
+  if(e){e.innerHTML=pgWH(PG.words[PG.wi%PG.words.length]);pgFitW();e.style.color=ok?'#6fe3a1':'#fff';setTimeout(function(){if(e)e.style.color=''},180)}
 }
 function pgKelimeEnd(){
   pgBkOff();PG.phase='kend';vpSayK('gEnd');

@@ -2602,10 +2602,12 @@ Object.assign(GT.en,{benkimim:'Who Am I?',benkimimSub:'The word is on your foreh
  bReadySub:'Hold the phone to your forehead, screen facing your friends. They explain, you guess.',bTilt:'Tilt down = Got it · Tilt up = Pass',bStart:'I am ready',bPlace:'Put the phone on your forehead!',bTap:'If tilting does not work, tap the screen: right Got it, left Pass',
  hHowB:['Hold the phone to your forehead, screen facing your friends.','Your friends explain the word on screen without saying it, you guess.','When you get it, tilt the phone down (✓). To skip, tilt up (Pass). If tilting fails, the screen can be tapped.','When time is up, the words you got are listed.'],
  hHowK2:['One person looks at the phone and explains the word, the others guess.','Do not say the word or the TABOO words below it.','Tap ✓ when guessed, Pass when stuck. Keep going until time is up.']});
+Object.assign(GT.tr,{teams:'Takım modu',rnds:'Tur sayısı',teamN:'Takım',nextTeam:'Sıradaki takım',final:'Sonuç',winner:'Kazanan',tie:'Berabere!',pts:'puan',again2:'Tekrar oyna',teamOff:'Kapalı'});
+Object.assign(GT.en,{teams:'Team mode',rnds:'Rounds',teamN:'Team',nextTeam:'Next team',final:'Results',winner:'Winner',tie:'It is a tie!',pts:'pts',again2:'Play again',teamOff:'Off'});
 function pgL(){return window.ZLANG==='tr'?'tr':'en'}
 function G(k,a,b){var v=GT[pgL()][k];if(v===undefined)v=GT.en[k];return typeof v==='function'?v(a,b):v}
 function pgLoad(){try{var o=JSON.parse(localStorage.getItem('zap-pg')||'{}');PG.set=o||{}}catch(e){PG.set={}}
-  var d={n:5,t:6,v:'sim',m:'kdo',c:'0,1,2,3',kt:90,tb:'1',bc:'0,2,4'};for(var k in d)if(PG.set[k]===undefined)PG.set[k]=d[k]}
+  var d={n:5,t:6,v:'sim',m:'kdo',c:'0,1,2,3',kt:90,tb:'1',bc:'0,2,4',tm:'0',rn:'2'};for(var k in d)if(PG.set[k]===undefined)PG.set[k]=d[k]}
 function pgSave(){try{localStorage.setItem('zap-pg',JSON.stringify(PG.set))}catch(e){}}
 function pgShuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
 function pgBuild(){
@@ -2659,6 +2661,7 @@ function pgSetup(){
     for(var i=0;i<cn.length;i++)ch+='<button data-g="cat" data-k="'+ck+'" data-v="'+i+'" class="'+(sel.indexOf(String(i))>-1?'on':'')+'">'+cn[i]+'</button>';
     ch+='</div>';h+='<div class="row" style="flex-direction:column;align-items:flex-start;gap:8px"><b>'+G('cats')+'</b>'+ch+'</div>';
     if(g==='kelime')h+='<div class="row"><b>'+G('tb')+'</b>'+pgChips('tb',[['1',G('on')],['0',G('off')]],S.tb)+'</div>';
+    if(g==='kelime'){h+='<div class="row"><b>'+G('teams')+'</b>'+pgChips('tm',[['0',G('teamOff')],['2','2'],['3','3'],['4','4']],S.tm)+'</div>';h+='<div class="row"><b>'+G('rnds')+'</b>'+pgChips('rn',[['1','1'],['2','2'],['3','3']],S.rn)+'</div>'}
     h+='<div class="row"><b>'+G('time')+'</b>'+pgChips('kt',[[60,'60 '+G('sec')],[90,'90 '+G('sec')],[120,'120 '+G('sec')]],S.kt)+'</div>';
   }
   h+='<button class="btn" data-g="go">'+(g==='hic'||g==='kelime'||g==='benkimim'?G('start'):G('go'))+'</button><button class="lnk" data-g="how">'+G('how')+'</button>';
@@ -2835,9 +2838,14 @@ function pgBkDraw(){
 
   window.addEventListener('devicemotion',PG.mh);
 }
+var PGTC=['#ff5fa2','#3a86ff','#2ee59d','#ffe46b'],PGTE=['🟣','🔵','🟢','🟡'];
+function pgTeams(){return PG.g==='kelime'?(+PG.set.tm||0):0}
+function pgTName(i){return PGTE[i]+' '+G('teamN')+' '+(i+1)}
+function pgKTInit(){var n=pgTeams();PG.ts=[];for(var i=0;i<n;i++)PG.ts.push(0);PG.tn=0}
 function pgKelimeReady(){
   pgClearT();PG.phase='kready';pgPhase('');
-  pgRender('<div style="font-size:68px;line-height:1.1">🗣️</div><h2>'+G('kReady')+'</h2><p class="vsub">'+G('kReadySub')+'</p><button class="btn gold" data-g="kgo">'+G('kGo')+'</button><button class="lnk" data-g="ksettings">'+G('settings')+'</button>');
+  var tt=pgTeams(),hd=tt?'<div class="tag" style="background:'+PGTC[PG.tn%tt]+';color:#150a38">'+pgTName(PG.tn%tt)+'</div>':'';
+  pgRender(hd+'<div style="font-size:68px;line-height:1.1">🗣️</div><h2>'+G('kReady')+'</h2><p class="vsub">'+G('kReadySub')+'</p><button class="btn gold" data-g="kgo">'+G('kGo')+'</button><button class="lnk" data-g="ksettings">'+G('settings')+'</button>');
 }
 function pgKelimeStart(){
   var L=pgL(),cn=Object.keys(PGW[L]),sel=String(PG.set.c).split(','),w=[];
@@ -2868,8 +2876,18 @@ function pgKelimeWord(ok){
 }
 function pgKelimeEnd(){
   pgBkOff();PG.phase='kend';vpSayK('gEnd');
+  var tt=pgTeams(),ti=tt?PG.tn%tt:0;if(tt)PG.ts[ti]+=PG.ok.length;
   var ls=function(a,c){return a.length?'<div class="pl">'+a.map(function(w){return '<span class="pc" style="border-color:'+c+'">'+vpEsc(w)+'</span>'}).join('')+'</div>':''};
-  pgRender('<div style="font-size:60px;line-height:1.1">⏱️</div><h2>'+G('kEnd')+'</h2><div class="vbig" style="font-size:54px;margin:4px 0">'+PG.ok.length+'</div><p class="sm">'+G('kRight')+'</p>'+ls(PG.ok,'#6fe3a1')+(PG.sk.length?'<p class="sm" style="margin-top:10px">'+G('kSkip')+'</p>'+ls(PG.sk,'rgba(255,255,255,.3)'):'')+'<button class="btn gold" style="margin-top:14px" data-g="knext">'+G('nextRound')+'</button><button class="btn alt" data-g="ksettings">'+G('settings')+'</button><button class="lnk" data-g="quit">'+G('exit')+'</button>');
+  var sb='',last=false;
+  if(tt){
+    last=PG.tn+1>=tt*(+PG.set.rn||1);
+    sb='<div class="pl" style="margin:8px 0">'+PG.ts.map(function(v,i){return '<span class="pc" style="border-color:'+PGTC[i]+'">'+PGTE[i]+' '+v+'</span>'}).join('')+'</div>';
+  }
+  pgRender('<div style="font-size:60px;line-height:1.1">⏱️</div><h2>'+(tt?pgTName(ti)+': ':'')+G('kEnd')+'</h2><div class="vbig" style="font-size:54px;margin:4px 0">'+PG.ok.length+'</div>'+sb+'<p class="sm">'+G('kRight')+'</p>'+ls(PG.ok,'#6fe3a1')+(PG.sk.length?'<p class="sm" style="margin-top:10px">'+G('kSkip')+'</p>'+ls(PG.sk,'rgba(255,255,255,.3)'):'')+'<button class="btn gold" style="margin-top:14px" data-g="knext">'+G(tt?(last?'final':'nextTeam'):'nextRound')+'</button><button class="btn alt" data-g="ksettings">'+G('settings')+'</button><button class="lnk" data-g="quit">'+G('exit')+'</button>');
+}
+function pgKFinal(){
+  PG.phase='kfinal';var mx=Math.max.apply(null,PG.ts),w=[];PG.ts.forEach(function(v,i){if(v===mx)w.push(i)});
+  pgRender('<div style="font-size:64px;line-height:1.1">🏆</div><h2>'+(w.length>1?G('tie'):G('winner')+': '+pgTName(w[0]))+'</h2><div class="pl" style="margin:12px 0">'+PG.ts.map(function(v,i){return '<span class="pc" style="border-color:'+PGTC[i]+';font-size:17px">'+PGTE[i]+' '+v+' '+G('pts')+'</span>'}).join('')+'</div><button class="btn gold" data-g="kreset">'+G('again2')+'</button><button class="btn alt" data-g="ksettings">'+G('settings')+'</button><button class="lnk" data-g="quit">'+G('exit')+'</button>');
 }
 /* --- tıklamalar --- */
 function pgAct(a,el){
@@ -2884,7 +2902,7 @@ function pgAct(a,el){
   case 'inc':case 'dec':S.n=Math.max(3,Math.min(12,S.n+(a==='inc'?1:-1)));var e=document.getElementById('pgn');if(e)e.textContent=S.n;pgSave();break;
   case 'opt':var k=el.dataset.k,v=el.dataset.v;S[k]=(k==='t'||k==='kt')?+v:v;[].forEach.call(el.parentNode.children,function(b){b.classList.toggle('on',b===el)});pgSave();break;
   case 'cat':var ck2=el.dataset.k||'c',arr=String(S[ck2]).split(',').filter(Boolean),q=el.dataset.v,ix=arr.indexOf(q);if(ix>-1){if(arr.length>1)arr.splice(ix,1)}else arr.push(q);S[ck2]=arr.join(',');el.classList.toggle('on',arr.indexOf(q)>-1);pgSave();break;
-  case 'go':pgSave();if(g==='casus'||g==='sahte')pgNames();else if(g==='hic')pgHicStart();else if(g==='benkimim')pgBkReady();else pgKelimeReady();break;
+  case 'go':pgSave();if(g==='casus'||g==='sahte')pgNames();else if(g==='hic')pgHicStart();else if(g==='benkimim')pgBkReady();else{pgKTInit();pgKelimeReady()}break;
   case 'namesok':pgNamesOk();break;
   case 'skip2':if(PG.need2){var f=PG.need2;PG.need2=null;f()}break;
   case 'hide':pgAfterHide();break;
@@ -2908,7 +2926,9 @@ function pgAct(a,el){
   case 'count':pgCount();break;
   case 'hnext':pgHicNext();break;
   case 'bgo':pgBkStart();break;
-  case 'kgo':case 'knext':if(g==='benkimim')pgBkStart();else pgKelimeStart();break;
+  case 'kreset':pgKTInit();pgKelimeReady();break;
+  case 'kgo':pgKelimeStart();break;
+  case 'knext':if(g==='benkimim')pgBkStart();else if(pgTeams()){PG.tn++;if(PG.tn>=pgTeams()*(+S.rn||1))pgKFinal();else pgKelimeReady()}else pgKelimeStart();break;
   case 'ksettings':pgSetup();break;
   case 'kok':pgKelimeWord(true);break;
   case 'kskip':pgKelimeWord(false);break;

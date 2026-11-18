@@ -2808,22 +2808,27 @@ function pgBkDraw(){
   pgBkOff();
   var o=document.createElement('div');o.id='pgk';
   var port=innerHeight>innerWidth;
-  o.style.cssText='position:fixed;z-index:60;top:0;left:0;background:linear-gradient(135deg,#2a1666,#0b3a5c);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:inherit;transition:background .15s;'+(port?'width:100vh;height:100vw;transform:translateX(100vw) rotate(90deg);transform-origin:0 0;':'width:100vw;height:100vh;');
+  o.style.cssText='position:fixed;z-index:60;top:0;left:0;background:#1a0d45;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:inherit;transition:background .15s;'+(port?'width:100vh;height:100vw;transform:translateX(100vw) rotate(90deg);transform-origin:0 0;':'width:100vw;height:100vh;');
   o.innerHTML='<div style="position:absolute;top:10px;left:16px;right:16px;display:flex;justify-content:space-between;font-weight:800"><span id="pgt" style="font-size:26px">'+pgFmt(PG.rem)+'</span><span style="font-size:18px">'+G('score')+': <b id="pgsc">'+PG.ok.length+'</b></span></div>'+
    '<div id="pgw" style="font-size:18vmin;font-weight:900;line-height:1.05;padding:0 8%;word-break:break-word">'+pgWH(PG.words[PG.wi%PG.words.length])+'</div>'+
-   '<div style="position:absolute;bottom:0;left:0;right:0;height:22%;display:flex"><button data-g="kskip" style="flex:1;border:0;background:rgba(255,255,255,.08);color:#fff;font-size:5vmin;font-weight:700">➜ '+G('pass')+'</button><button data-g="kok" style="flex:1;border:0;background:rgba(46,229,157,.25);color:#fff;font-size:5vmin;font-weight:700">✓ '+G('got')+'</button></div>';
+   '<div style="position:absolute;bottom:0;left:0;right:0;height:30%;display:flex;gap:2%;padding:0 2% 2%;box-sizing:border-box"><button data-g="kskip" style="flex:1;border:2px solid rgba(255,255,255,.35);border-radius:18px;background:rgba(255,255,255,.1);color:#fff;font-size:6vmin;font-weight:800">➜ '+G('pass')+'</button><button data-g="kok" style="flex:1;border:2px solid #2ee59d;border-radius:18px;background:rgba(46,229,157,.25);color:#fff;font-size:6vmin;font-weight:800">✓ '+G('got')+'</button></div>';
   pgEl.appendChild(o);
-  var armed=true,tk=PG.tok,last=0;
+  var armed=false,tk=PG.tok,last=Date.now()+900,since=0,dir=0,BG0='#1a0d45';
   PG.mh=function(e){
     if(tk!==PG.tok||PG.phase!=='kplay'||pgMod.classList.contains('show'))return;
     var a=e.accelerationIncludingGravity;if(!a||a.z==null)return;
     var z=a.z;if(/iPhone|iPad|iPod/.test(navigator.userAgent))z=-z;
-    if(armed){
-      if(Date.now()-last<600)return;
-      if(z<-6.5){armed=false;last=Date.now();o.style.background='linear-gradient(135deg,#0f7a50,#0b3a5c)';pgKelimeWord(true)}
-      else if(z>6.5){armed=false;last=Date.now();o.style.background='linear-gradient(135deg,#6a2a2a,#0b3a5c)';pgKelimeWord(false)}
-    }else if(Math.abs(z)<3.5){armed=true;o.style.background=''}
+    var now=Date.now();
+    if(!armed){if(Math.abs(z)<2.5&&now>last){armed=true;o.style.background=BG0}return}
+    var d=z<-7?1:z>7?-1:0;
+    if(d===0){dir=0;return}
+    if(d!==dir){dir=d;since=now;return}
+    if(now-since<180)return;
+    armed=false;last=now+700;dir=0;
+    o.style.background=d===1?'#0f7a50':'#7a2a2a';
+    pgKelimeWord(d===1);
   };
+  var hint=document.createElement('div');hint.style.cssText='position:absolute;top:44px;left:0;right:0;font-size:3.2vmin;opacity:.6';hint.textContent=G('bTilt');o.appendChild(hint);
   window.addEventListener('devicemotion',PG.mh);
 }
 function pgKelimeReady(){

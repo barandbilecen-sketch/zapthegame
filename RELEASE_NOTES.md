@@ -1,30 +1,17 @@
 # ⚡ Zap! The Game Sürüm Notları
 
-## v4.1: Tabu ve Ben Kimim?
+## v4.2: Parti oyunları, Vampir Köylü ve yeni görünüm 🎉
 
-- **Kelime Anlat artık Tabu gibi:** her kelimenin altında söylenmesi yasak kelimeler çıkar. İstersen kapatabilirsin. Yeni kategori: Karakterler.
-- **Yeni oyun: 🤳 Ben Kimim?** Telefonu alnına yasla, arkadaşların kelimeyi anlatsın, sen tahmin et. Telefonu aşağı eğ = Bildi, yukarı eğ = Geç. Eğme çalışmazsa ekrana dokun.
-- **Kelime Anlat'ta takım modu:** 2-4 takım, 1-3 tur, takımlar sırayla anlatır, sonda kazanan takım çıkar.
-- **Görsel cila:** mod menüsünde gruplar ve YENİ rozetleri, ekran geçiş animasyonları, buton ışıltıları, kazanan ekranlarında konfeti, daha derin gölgeler.
-- Toplam 19 mod.
-
-## v4.0: Daha az mod, daha çok oyun 🎉
-- **Sadeleşme:** Az kullanılan modlar menüden kaldırıldı (Kaybeden, Çoklu, Düello, Sıralama, Taç & Son, Elemeli). Menü artık 18 mod.
-- **Yeni oyun: 🕵️ Casus.** Herkes aynı mekanı görür, biri hariç. Sorularla casusu bul, casus da mekanı tahmin etmeye çalışır.
-- **Yeni oyun: 🥸 Sahtekâr Kelime.** Herkes gizli bir kelime alır, sahtekârın kelimesi farklıdır. İpucu verin, oylayıp sahtekârı bulun.
-- **Yeni oyun: 🙋 Ben Hiç / Kim?** "Kim daha olası?" ve "Ben hiç…" kartları. Tekrar yok.
-- **Yeni oyun: 🗣️ Kelime Anlat.** Süreli kelime anlatma. Hayvanlar, yiyecek, meslekler, eşyalar.
-- Telefon elden ele gezen oyunlarda anlatıcı sesi ve ilk girişte nasıl oynanır penceresi.
-
-## v3.9: Vampir Köylü 🧛
-- **Yeni mod: Vampir Köylü.** Telefon anlatıcı olur, sesli olarak "gözlerinizi kapatın" der ve geceyi yönetir. 4-15 oyuncu.
-- **Gizli roller:** Vampir, Köylü, Şerif, Doktor ve Gözcü. Telefon elden ele gezer, herkes adını yazar, 2 parmağıyla dokunup rolünü gizlice öğrenir. Karakterler slot gibi kayar, rol açıklamasıyla ortaya çıkar.
-- **Gece:** Vampirler kurbanı seçer, Doktor korur, Gözcü araştırır. **Gündüz:** kimin öldüğü açıklanır, tartışma sayacı ve oylamayla biri köyden sürülür.
-- **Şerif:** Oyun boyunca bir kez, köşedeki butonla birini vurabilir. Masumu vurursa o da ölür.
-- İlk girişte nasıl oynanır penceresi açılır. Anlatıcı sesi her cihazda aynıdır (Türkçe ve İngilizce kayıtlı ses).
-- Yeni mod: Vampir Köylü.
-- **Android:** Animasyonlar daha akıcı. Tablet ve katlanabilir ekran desteği, ekran döndürme. Anlatıcı sesi hoparlörden çalar.
-- Yenilenen ZAP! yazısı ve çeşitli düzeltmeler.
+- **Vampir Köylü:** Telefon anlatıcı olur, sesli olarak geceyi yönetir. Gizli roller: Vampir, Köylü, Şerif, Doktor, Gözcü. 4-15 oyuncu.
+- **Yeni oyun: 🕵️ Casus.** Herkes aynı mekanı görür, biri hariç. Sorularla casusu bul.
+- **Yeni oyun: 🥸 Sahtekâr Kelime.** Herkes gizli bir kelime alır, sahtekârın kelimesi farklıdır.
+- **Yeni oyun: 🙋 Ben Hiç / Kim?** "Kim daha olası?" ve "Ben hiç…" kartları.
+- **Yeni oyun: 🗣️ Kelime Anlat.** Tabu gibi: yasaklı kelimeleri söylemeden anlat. 5 kategori, 2-4 takımlı oyun, tur sayısı ve kazanan ekranı.
+- **Yeni oyun: 🤳 Ben Kimim?** Telefonu alnına yasla, arkadaşların kelimeyi anlatsın. Telefonu eğerek Bildi ya da Geç.
+- **Sadeleşme:** Az kullanılan 6 mod kaldırıldı. Menüde toplam 19 mod.
+- **Görsel cila:** mod menüsünde gruplar ve YENİ rozetleri, ekran geçiş animasyonları, buton ışıltıları, kazanan ekranlarında konfeti.
+- **Ses:** Anlatıcı sesi her cihazda aynı (Türkçe ve İngilizce kayıtlı ses). Android'de hoparlörden çalar.
+- **Düzeltmeler:** Oyuncu adı girerken arka plandaki seçimin tetiklenmesi giderildi. ZAP! yazısı her yerde aynı. Tablet ve katlanabilir ekran desteği, ekran döndürme.
 
 ## v3.3: Temalar, avatarlar, yeni menü
 - **44 tema:** Kuzey Işıkları, Cyberpunk Yağmur, Vaporwave, Coquette Sakura, Y2K Şeker, Volkan, Nebula ve daha fazlası. Hepsinin kendi sesi var.

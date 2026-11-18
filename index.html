@@ -2149,14 +2149,14 @@ function zsDraw(){
      +'<h3>İSTATİSTİK</h3><div class="st"><div><b>'+ZS.n+'</b><small>oynanan tur</small></div><div><b style="font-size:15px;line-height:1.5">'+favMode()+'</b><small>favori mod</small></div></div>'
      +'<div class="ft2">Takma adın online odalarda görünür. Fotoğrafın sadece bu telefonda saklanır.</div>';
   }else{
-    h+='<h3>DİL / LANGUAGE</h3><div class="lg">'+LANGS.map(function(l){return'<button data-l="'+l[0]+'" class="'+(ZLANG===l[0]?'on':'')+'">'+l[1]+'</button>'}).join('')+'</div>'
+    h+=(window.ZPRO&&ZPRO.native?'<button class="rw" data-k="zpro"><span>⭐ Zap Pro<small>'+(ZPRO.on?'Aktif · teşekkürler':'Reklamsız + ek paketler')+'</small></span><span>›</span></button>':'')+'<h3>DİL / LANGUAGE</h3><div class="lg">'+LANGS.map(function(l){return'<button data-l="'+l[0]+'" class="'+(ZLANG===l[0]?'on':'')+'">'+l[1]+'</button>'}).join('')+'</div>'
      +'<button class="rw'+(ZS.snd?' on':'')+'" data-k="snd"><span>🔊 Ses<small>Oyun sesleri</small></span><i class="tgl"></i></button>'
      +'<button class="rw'+(ZS.vib?' on':'')+'" data-k="vib"><span>📳 Titreşim<small>Sonuç açıklanınca</small></span><i class="tgl"></i></button>'
      +'<button class="rw" data-k="theme"><span>🎨 Tema ve renkler<small>Arka plan, küre rengi, ses paketi</small></span><span>›</span></button>'
      +'<button class="rw" data-k="how"><span>ℹ️ Nasıl oynanır?</span><span>›</span></button>'
      +'<button class="rw" data-k="reset"><span>🔄 Soru geçmişini sıfırla<small>Kullanılan sorular yeniden gelir</small></span><span>›</span></button>'
      +'<a class="rw" href="https://instagram.com/zapthegame" target="_blank" rel="noopener"><span>📸 Instagram<small>@zapthegame</small></span><span>›</span></a>'
-     +'<div class="ft2">Zap! The Game · v3.2 · zapthegame.com</div>';
+     +'<div class="ft2">Zap! The Game · v4.3 · zapthegame.com</div>';
   }
   var sh=zs.querySelector('.sh');if(!sh){sh=document.createElement('div');sh.className='sh';zs.appendChild(sh)}
   sh.innerHTML=h;
@@ -2172,6 +2172,7 @@ zs.addEventListener('click',function(e){
   var k=b.dataset.k;
   if(k==='snd'||k==='vib'){ZS[k]=ZS[k]?0:1;ZS.save();zsDraw();if(k==='vib'&&ZS.vib)try{navigator.vibrate(30)}catch(e){}return}
   if(k==='rmphoto'){ZPH='';try{localStorage.removeItem('zap-photo')}catch(x){}ZS.av='a0';ZS.save();zsDraw();hpDraw();return}
+  if(k==='zpro'){window.zproOpen&&zproOpen();return}
   if(k==='theme'){zsClose();gear.click()}
   else if(k==='how'){zsClose();showInfo()}
   else if(k==='reset'){try{Object.keys(localStorage).forEach(function(x){if(x.indexOf('zap-u-')===0)localStorage.removeItem(x)})}catch(e){}memU={};b.querySelector('small').textContent='Sıfırlandı ✓'}
@@ -2538,6 +2539,7 @@ function vpShoot(t){
 }
 /* --- bitiş --- */
 function vpEnd(){
+  window.zapAdRound&&zapAdRound();
   var w=vpWin()||'k';VP.phase='end';VP.need2=null;vpClearT();vpSher.classList.remove('on');vpBg(w==='k'?'d':'n');vpPhase('');
   var rows=VP.players.map(function(p){var r=VPR[p.role];return'<div class="row" style="padding:8px 12px;margin-bottom:8px;opacity:'+(p.alive?1:.65)+'"><div style="display:flex;align-items:center;gap:10px"><span class="vav" style="width:42px;height:42px;background:linear-gradient(160deg,'+r.c1+','+r.c2+');box-shadow:0 0 0 2px '+r.b+'">'+vpArt(p.role)+'</span><span style="text-align:left"><b style="font:700 15px var(--ff);display:block">'+vpEsc(p.name)+'</b><span class="sm">'+vRole(p.role)+'</span></span></div><span class="sm">'+(p.alive?V('alive'):V('dead'))+'</span></div>'}).join('');
   vpRender('<div class="orb glow">'+(w==='k'?vpSun():vpMoon())+'</div><h2>'+(w==='k'?V('winK'):V('winV'))+'</h2><p class="vsub">'+(w==='k'?V('winKs'):V('winVs'))+'</p>'+rows+'<button class="btn" style="margin-top:8px" data-a="again">'+V('again')+'</button><button class="btn alt" data-a="newg">'+V('newg')+'</button><button class="lnk" data-a="close">'+V('exit')+'</button>');
@@ -2579,7 +2581,7 @@ function vpAct(a,b){
 }
 
 /* ===== PARTİ OYUNLARI: Casus, Sahtekâr Kelime, Ben Hiç / Kim, Kelime Anlat ===== */
-var PGG={casus:1,sahte:1,hic:1,kelime:1,benkimim:1};
+var PGG={casus:1,sahte:1,hic:1,kelime:1,benkimim:1},PGFREE=5;
 var PGLOC=[['✈️','Uçak','Airplane'],['🚢','Gemi','Ship'],['🏨','Otel','Hotel'],['🏥','Hastane','Hospital'],['🏫','Okul','School'],['🏦','Banka','Bank'],['🎬','Sinema','Cinema'],['🍽️','Restoran','Restaurant'],['🛒','Süpermarket','Supermarket'],['🏖️','Plaj','Beach'],['🏔️','Dağ evi','Mountain cabin'],['🚆','Tren','Train'],['🏟️','Stadyum','Stadium'],['🎡','Lunapark','Amusement park'],['🕌','Cami','Temple'],['🏛️','Müze','Museum'],['🚓','Karakol','Police station'],['🚒','İtfaiye','Fire station'],['🏋️','Spor salonu','Gym'],['💈','Kuaför','Hair salon'],['⛽','Benzinlik','Gas station'],['📚','Kütüphane','Library'],['🎪','Sirk','Circus'],['🏕️','Kamp alanı','Campsite'],['🛫','Havalimanı','Airport'],['🏰','Kale','Castle'],['🛁','Hamam','Spa'],['☕','Kafe','Cafe'],['🎤','Konser','Concert'],['🚀','Uzay istasyonu','Space station']];
 var PGPAIR=[['Çay','Kahve','Tea','Coffee'],['Deniz','Göl','Sea','Lake'],['Kedi','Aslan','Cat','Lion'],['Pizza','Lahmacun','Pizza','Flatbread'],['Araba','Otobüs','Car','Bus'],['Gömlek','Tişört','Shirt','T-shirt'],['Elma','Armut','Apple','Pear'],['Okul','Üniversite','School','University'],['Sinema','Tiyatro','Cinema','Theater'],['Futbol','Basketbol','Football','Basketball'],['Doktor','Hemşire','Doctor','Nurse'],['Kar','Yağmur','Snow','Rain'],['Ev','Apartman','House','Apartment'],['Telefon','Tablet','Phone','Tablet'],['Gitar','Keman','Guitar','Violin'],['Çikolata','Kek','Chocolate','Cake'],['Bisiklet','Motosiklet','Bicycle','Motorcycle'],['Kral','Prens','King','Prince'],['Köpek','Kurt','Dog','Wolf'],['Yastık','Yorgan','Pillow','Blanket'],['Havuz','Küvet','Pool','Bathtub'],['Saat','Takvim','Watch','Calendar'],['Ayna','Cam','Mirror','Window'],['Mum','Lamba','Candle','Lamp'],['Dondurma','Buz','Ice cream','Ice'],['Pasta','Börek','Cake','Pastry'],['Uçak','Helikopter','Plane','Helicopter'],['Kitap','Dergi','Book','Magazine'],['Şemsiye','Yağmurluk','Umbrella','Raincoat'],['Kebap','Köfte','Kebab','Meatball']];
 var PGKDO={tr:'En çok geç kalan kim?|Piyangoyu kazansa ilk ortadan kaybolan kim?|Kim ünlü olurdu?|Kim en çok yemek yer?|Kim filmde ilk ağlar?|Kim ıssız adada ilk pes eder?|Kim en iyi yalan söyler?|Kim kendi doğum gününü unutur?|Kim en çok alışveriş yapar?|Kim trafikte en çok sinirlenir?|Kim telefonunu en çok kaybeder?|Kim ilk evlenir?|Kim zombi kıyametinde ilk yakalanır?|Kim en iyi şef olurdu?|Kim en çok selfie çeker?|Kim sır saklayamaz?|Kim milyoner olurdu?|Kim en çok mesaj yazar?|Kim en dağınık?|Kim sınava hiç çalışmadan girer?|Kim en çok dedikodu yapar?|Kim sabah ilk uyanır?|Kim aşık olunca dünyayı unutur?|Kim yurt dışına taşınır?|Kim en iyi hediye alır?|Kim en çok espri yapar?|Kim komik bir şekilde yakalanırdı?|Kim tatilde en çok kaybolur?|Kim en korkak?|Kim çok pahalı bir şeyi kırar?|Kim sosyal medya fenomeni olur?|Kim en çok para biriktirir?|Kim sahnede şarkı söylemeye cesaret eder?|Kim en çabuk alınır?|Kim herkesi toplayıp organize eder?|Kim bir gecede 10 saat uyur?|Kim en iyi sürpriz yapar?|Kim yanlış kişiye mesaj atar?|Kim en çok kahve içer?|Kim bir şeyi hep son dakikaya bırakır?',
@@ -2591,12 +2593,16 @@ tr:{'Hayvanlar':'Kedi:miyav,evcil,tüy,fare|Fil:hortum,büyük,gri,Afrika|Züraf
 'Yiyecek':'Pizza:İtalyan,peynir,hamur,dilim|Baklava:tatlı,fıstık,şerbet,Antep|Lahmacun:ince,kıyma,Türk,limon|Çikolata:tatlı,kakao,kahverengi,sütlü|Dondurma:soğuk,külah,yaz,tat|Mantı:yoğurt,hamur,Kayseri,kıyma|Kebap:et,ızgara,Adana,şiş|Simit:susam,halka,fırın,sokak|Karpuz:yaz,kırmızı,çekirdek,meyve|Hamburger:ekmek,köfte,fast food,peynir|Makarna:spagetti,İtalyan,sos,haşlamak|Sushi:Japon,balık,pirinç,çubuk|Çorba:sıcak,kaşık,kış,mercimek|Börek:yufka,peynir,fırın,kat',
 'Meslekler':'Doktor:hastane,hasta,ilaç,beyaz|Pilot:uçak,havalimanı,kokpit,uçurmak|Aşçı:mutfak,yemek,şef,pişirmek|Polis:suç,hırsız,tutuklamak,karakol|İtfaiyeci:yangın,hortum,kırmızı,söndürmek|Öğretmen:okul,sınıf,öğrenci,ders|Berber:saç,makas,tıraş,sakal|Ressam:fırça,resim,boya,tablo|Şoför:araba,direksiyon,yol,kullanmak|Gazeteci:haber,gazete,röportaj,muhabir|Avukat:mahkeme,dava,hukuk,savunma|Çiftçi:tarla,tarım,toprak,hayvan|Garson:restoran,sipariş,tabak,bahşiş|Astronot:uzay,roket,ay,NASA',
 'Eşyalar':'Şemsiye:yağmur,açmak,ıslak,sap|Gözlük:göz,cam,görmek,numara|Anahtar:kilit,kapı,açmak,cep|Telefon:aramak,cep,mesaj,ekran|Ayna:yansıma,bakmak,cam,yüz|Saat:zaman,kol,akrep,yelkovan|Bisiklet:pedal,tekerlek,sürmek,iki|Gitar:tel,müzik,çalmak,akor|Çanta:taşımak,omuz,okul,fermuar|Televizyon:kumanda,kanal,izlemek,ekran|Buzdolabı:soğuk,mutfak,yiyecek,dondurucu|Makas:kesmek,kağıt,saç,iki|Merdiven:basamak,çıkmak,yukarı,kat|Balon:hava,şişirmek,patlamak,doğum günü',
-'Karakterler':'Keloğlan:kel,masal,Türk,saf|Nasreddin Hoca:fıkra,eşek,Akşehir,Timur|Karagöz:Hacivat,gölge,oyunu,perde|Hacivat:Karagöz,gölge,oyunu,perde|Pamuk Prenses:cüceler,elma,cadı,ayna|Batman:Gotham,yarasa,pelerin,Joker|Örümcek Adam:ağ,maske,Peter,kırmızı|Harry Potter:büyücü,Hogwarts,asa,yara|Miki Fare:Disney,Minnie,kulak,çizgi film|Sünger Bob:deniz,sarı,Patrick,ananas|Shrek:yeşil,ogre,Eşek,bataklık|Pikachu:Pokémon,sarı,elektrik,Ash|Süpermen:pelerin,uçmak,Clark,güçlü|Sindirella:balo,ayakkabı,cadı,kabak'},
+'Karakterler':'Keloğlan:kel,masal,Türk,saf|Nasreddin Hoca:fıkra,eşek,Akşehir,Timur|Karagöz:Hacivat,gölge,oyunu,perde|Hacivat:Karagöz,gölge,oyunu,perde|Pamuk Prenses:cüceler,elma,cadı,ayna|Batman:Gotham,yarasa,pelerin,Joker|Örümcek Adam:ağ,maske,Peter,kırmızı|Harry Potter:büyücü,Hogwarts,asa,yara|Miki Fare:Disney,Minnie,kulak,çizgi film|Sünger Bob:deniz,sarı,Patrick,ananas|Shrek:yeşil,ogre,Eşek,bataklık|Pikachu:Pokémon,sarı,elektrik,Ash|Süpermen:pelerin,uçmak,Clark,güçlü|Sindirella:balo,ayakkabı,cadı,kabak','Filmler & Diziler':'Titanic:gemi,buzdağı,Rose,Jack|Avatar:mavi,Pandora,gezegen,Na\'vi|Yüzüklerin Efendisi:yüzük,Frodo,Gandalf,Orta Dünya|Squid Game:oyun,yeşil,Kore,kırmızı ışık|Friends:Central Perk,altı,Ross,sitcom|Para Hırsızı:maske,soygun,Profesör,kırmızı|Kurtlar Vadisi:Polat,mafya,Memati,dizi|Esaretin Bedeli:hapishane,Andy,kaçış,Shawshank|Muhteşem Yüzyıl:Hürrem,sultan,saray,Kanuni|Matrix:Neo,hap,Morpheus,simülasyon|Jurassic Park:dinozor,park,DNA,ada|Aslan Kral:Simba,Mufasa,hayvan,Disney|Karlar Ülkesi:Elsa,Anna,buz,Olaf|Joker:palyaço,Batman,Gotham,gülmek'
+ ,'Ülkeler & Şehirler':'İstanbul:boğaz,köprü,iki kıta,Ayasofya|Paris:Eyfel,Fransa,aşk,kule|Roma:Kolezyum,İtalya,gladyatör,başkent|Japonya:Tokyo,sushi,samuray,Asya|Mısır:piramit,Nil,firavun,Kahire|Brezilya:futbol,karnaval,Rio,Amazon|New York:Özgürlük Anıtı,ABD,gökdelen,Manhattan|Kapadokya:peri bacası,balon,Nevşehir,mağara|Pamukkale:traverten,beyaz,Denizli,kaplıca|Venedik:kanal,gondol,İtalya,su|Londra:Big Ben,İngiltere,otobüs,Thames|Antalya:deniz,tatil,Akdeniz,turizm|Hindistan:Taj Mahal,baharat,Delhi,inek|Dubai:çöl,gökdelen,Burj Halife,petrol'
+ ,'Spor':'Futbol:top,kale,gol,hakem|Basketbol:pota,smaç,NBA,top|Yüzme:havuz,mayo,kulaç,su|Tenis:raket,kort,file,smaç|Voleybol:file,servis,smaç,top|Boks:ring,eldiven,yumruk,nakavt|Okçuluk:ok,yay,hedef,gergin|Kayak:kar,pist,dağ,kayak takımı|Güreş:minder,yağlı,pehlivan,Kırkpınar|Golf:çim,sopa,delik,top|Dalış:tüp,deniz,mavi,oksijen|Bisiklet:pedal,tekerlek,Tour,sürmek|Maraton:koşu,42 km,yarış,bitiş|Jimnastik:beam,yer,takla,puan'},
 en:{'Animals':'Cat:meow,pet,fur,mouse|Elephant:trunk,big,gray,Africa|Giraffe:neck,tall,spots,Africa|Penguin:Antarctica,ice,black,fly|Turtle:shell,slow,sea,rabbit|Eagle:bird,high,claw,fly|Dolphin:sea,fish,smart,aquarium|Monkey:banana,tree,tail,gorilla|Lion:jungle,king,mane,roar|Parrot:bird,talk,colorful,feather|Spider:web,eight,insect,legs|Dog:bark,bone,pet,loyal|Bear:honey,forest,winter,brown|Owl:night,bird,eyes,wise',
 'Food':'Pizza:Italian,cheese,dough,slice|Baklava:sweet,pistachio,syrup,Turkish|Chocolate:sweet,cocoa,brown,milk|Ice cream:cold,cone,summer,flavor|Dumplings:yogurt,dough,meat,steamed|Kebab:meat,grill,skewer,Turkish|Bagel:sesame,ring,bakery,street|Watermelon:summer,red,seeds,fruit|Hamburger:bun,patty,fast food,cheese|Pasta:spaghetti,Italian,sauce,boil|Sushi:Japanese,fish,rice,chopsticks|Soup:hot,spoon,winter,bowl|Pastry:dough,cheese,oven,layers|French fries:potato,fried,ketchup,fast food',
 'Jobs':'Doctor:hospital,patient,medicine,white coat|Pilot:plane,airport,cockpit,fly|Chef:kitchen,food,cook,restaurant|Police officer:crime,thief,arrest,station|Firefighter:fire,hose,red,truck|Teacher:school,class,student,lesson|Barber:hair,scissors,shave,beard|Painter:brush,picture,paint,canvas|Driver:car,wheel,road,drive|Journalist:news,newspaper,interview,reporter|Lawyer:court,law,case,defend|Farmer:field,crops,soil,animals|Waiter:restaurant,order,plate,tip|Astronaut:space,rocket,moon,NASA',
 'Objects':'Umbrella:rain,open,wet,handle|Glasses:eyes,lens,see,frame|Key:lock,door,open,pocket|Phone:call,mobile,message,screen|Mirror:reflection,look,glass,face|Clock:time,wall,hands,tick|Bicycle:pedal,wheel,ride,two|Guitar:strings,music,play,chord|Bag:carry,shoulder,school,zipper|Television:remote,channel,watch,screen|Fridge:cold,kitchen,food,freezer|Scissors:cut,paper,hair,two|Ladder:steps,climb,up,rung|Balloon:air,blow,pop,birthday',
-'Characters':'Keloğlan:bald,tale,Turkish,hero|Nasreddin Hodja:joke,donkey,Turkish,wise|Karagöz:shadow,puppet,Hacivat,show|Hacivat:shadow,puppet,Karagöz,show|Snow White:dwarfs,apple,witch,mirror|Batman:Gotham,bat,cape,Joker|Spider-Man:web,mask,Peter,red|Harry Potter:wizard,Hogwarts,wand,scar|Mickey Mouse:Disney,Minnie,ears,cartoon|SpongeBob:sea,yellow,Patrick,pineapple|Shrek:green,ogre,donkey,swamp|Pikachu:Pokémon,yellow,electric,Ash|Superman:cape,fly,Clark,strong|Cinderella:ball,shoe,witch,pumpkin'}};
+'Characters':'Keloğlan:bald,tale,Turkish,hero|Nasreddin Hodja:joke,donkey,Turkish,wise|Karagöz:shadow,puppet,Hacivat,show|Hacivat:shadow,puppet,Karagöz,show|Snow White:dwarfs,apple,witch,mirror|Batman:Gotham,bat,cape,Joker|Spider-Man:web,mask,Peter,red|Harry Potter:wizard,Hogwarts,wand,scar|Mickey Mouse:Disney,Minnie,ears,cartoon|SpongeBob:sea,yellow,Patrick,pineapple|Shrek:green,ogre,donkey,swamp|Pikachu:Pokémon,yellow,electric,Ash|Superman:cape,fly,Clark,strong|Cinderella:ball,shoe,witch,pumpkin','Movies & Series':'Titanic:ship,iceberg,Rose,Jack|Avatar:blue,Pandora,planet,Na\'vi|Lord of the Rings:ring,Frodo,Gandalf,Middle-earth|Squid Game:game,green,Korea,red light|Friends:Central Perk,six,Ross,sitcom|Money Heist:mask,robbery,Professor,red|The Godfather:mafia,Corleone,offer,Don|The Shawshank Redemption:prison,Andy,escape,Freedom|Game of Thrones:dragon,Westeros,winter,throne|Matrix:Neo,pill,Morpheus,simulation|Jurassic Park:dinosaur,park,DNA,island|The Lion King:Simba,Mufasa,animal,Disney|Frozen:Elsa,Anna,ice,Olaf|Joker:clown,Batman,Gotham,laugh'
+ ,'Countries & Cities':'Istanbul:Bosphorus,bridge,two continents,Hagia Sophia|Paris:Eiffel,France,love,tower|Rome:Colosseum,Italy,gladiator,capital|Japan:Tokyo,sushi,samurai,Asia|Egypt:pyramid,Nile,pharaoh,Cairo|Brazil:football,carnival,Rio,Amazon|New York:Statue of Liberty,USA,skyscraper,Manhattan|Cappadocia:fairy chimney,balloon,Turkey,cave|Venice:canal,gondola,Italy,water|London:Big Ben,England,bus,Thames|Antalya:sea,holiday,Mediterranean,tourism|India:Taj Mahal,spice,Delhi,cow|Dubai:desert,skyscraper,Burj Khalifa,oil|Sydney:Opera House,Australia,bridge,harbor'
+ ,'Sports':'Football:ball,goal,net,referee|Basketball:hoop,dunk,NBA,ball|Swimming:pool,swimsuit,stroke,water|Tennis:racket,court,net,serve|Volleyball:net,serve,spike,ball|Boxing:ring,gloves,punch,knockout|Archery:arrow,bow,target,aim|Skiing:snow,slope,mountain,poles|Wrestling:mat,pin,hold,match|Golf:grass,club,hole,ball|Diving:tank,sea,blue,oxygen|Cycling:pedal,wheel,Tour,ride|Marathon:run,42 km,race,finish|Gymnastics:beam,floor,flip,score'}};
 var PG={g:'',on:false,tok:0,t:null,need2:null,phase:'',set:{},names:[],rem:0,paused:false};
 var pgEl=null,pgSt=null,pgMod=null,pgPh=null,pgVo=null;
 var GT={
@@ -2669,7 +2675,7 @@ function pgBuild(){
   pgEl.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-g]');if(b)pgAct(b.dataset.g,b)});
   pgEl.addEventListener('touchstart',function(e){if(PG.need2&&e.touches.length>=2&&!pgMod.classList.contains('show')){e.preventDefault();e.stopPropagation();var f=PG.need2;PG.need2=null;pgOrbs(e.touches,f)}},{passive:false});
 }
-function pgRender(h,top){pgSt.innerHTML='<div class="in'+(top?' top':'')+'">'+h+'</div>';pgSt.scrollTop=0;if(h.indexOf('🏆')>-1||h.indexOf('🎉')>-1)zapConfetti(pgEl)}
+function pgRender(h,top){pgSt.innerHTML='<div class="in'+(top?' top':'')+'">'+h+'</div>';pgSt.scrollTop=0;if(PG.phase==='end'||PG.phase==='kend'||PG.phase==='kfinal')window.zapAdRound&&zapAdRound();if(h.indexOf('🏆')>-1||h.indexOf('🎉')>-1)zapConfetti(pgEl)}
 function zapConfetti(host){try{if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;var c=document.createElement('div');c.className='zcf';var cl=['#ff5fa2','#ffe46b','#3a86ff','#2ee59d','#b9a8ff','#fff'],h='';for(var i=0;i<40;i++){h+='<i style="left:'+(Math.random()*100)+'%;background:'+cl[i%6]+';--dx:'+(Math.random()*120-60)+'px;--r:'+(Math.random()*720-360)+'deg;animation-delay:'+(Math.random()*.7)+'s"></i>'}c.innerHTML=h;host.appendChild(c);setTimeout(function(){c.remove()},3800);if(navigator.vibrate)navigator.vibrate([20,40,20])}catch(e){}}
 function pgPhase(t){pgPh.textContent=t||''}
 function pgClearT(){if(PG.t){clearInterval(PG.t);PG.t=null}}
@@ -2709,7 +2715,7 @@ function pgSetup(){
   if(g==='hic')h+='<div class="row"><b>'+G('mode')+'</b>'+pgChips('m',[['kdo',G('modeKdo')],['hic',G('modeHic')]],S.m)+'</div>';
   if(g==='kelime'||g==='benkimim'){
     var ck=g==='kelime'?'c':'bc',cn=Object.keys(PGW[pgL()]),sel=String(S[ck]).split(','),ch='<div class="vch">';
-    for(var i=0;i<cn.length;i++)ch+='<button data-g="cat" data-k="'+ck+'" data-v="'+i+'" class="'+(sel.indexOf(String(i))>-1?'on':'')+'">'+cn[i]+'</button>';
+    for(var i=0;i<cn.length;i++){var lk=i>=PGFREE&&!(window.ZPRO&&ZPRO.on);ch+='<button data-g="cat" data-k="'+ck+'" data-v="'+i+'" class="'+(!lk&&sel.indexOf(String(i))>-1?'on':'')+(lk?' lk':'')+'">'+(lk?'🔒 ':'')+cn[i]+'</button>'}
     ch+='</div>';h+='<div class="row" style="flex-direction:column;align-items:flex-start;gap:8px"><b>'+G('cats')+'</b>'+ch+'</div>';
     if(g==='kelime')h+='<div class="row"><b>'+G('tb')+'</b>'+pgChips('tb',[['1',G('on')],['0',G('off')]],S.tb)+'</div>';
     if(g==='kelime'){h+='<div class="row"><b>'+G('teams')+'</b>'+pgChips('tm',[['0',G('teamOff')],['2','2'],['3','3'],['4','4']],S.tm)+'</div>';h+='<div class="row"><b>'+G('rnds')+'</b>'+pgChips('rn',[['1','1'],['2','2'],['3','3']],S.rn)+'</div>'}
@@ -2857,7 +2863,7 @@ function pgBkStart(){
   var DM=window.DeviceMotionEvent;
   if(DM&&typeof DM.requestPermission==='function'){try{DM.requestPermission().catch(function(){})}catch(e){}}
   var L=pgL(),cn=Object.keys(PGW[L]),sel=String(PG.set.bc).split(','),w=[];
-  sel.forEach(function(q){var c=cn[+q];if(c)w=w.concat(PGW[L][c].split('|'))});
+  sel.forEach(function(q){if(+q>=PGFREE&&!(window.ZPRO&&ZPRO.on))return;var c=cn[+q];if(c)w=w.concat(PGW[L][c].split('|'))});
   if(!w.length)w=PGW[L][cn[0]].split('|');
   PG.words=pgShuffle(w);PG.wi=0;PG.ok=[];PG.sk=[];PG.rem=PG.set.kt;PG.phase='kcount';
   var k=4,tk=PG.tok;pgPhase('');
@@ -2907,7 +2913,7 @@ function pgKelimeReady(){
 }
 function pgKelimeStart(){
   var L=pgL(),cn=Object.keys(PGW[L]),sel=String(PG.set.c).split(','),w=[];
-  sel.forEach(function(q){var c=cn[+q];if(c)w=w.concat(PGW[L][c].split('|'))});
+  sel.forEach(function(q){if(+q>=PGFREE&&!(window.ZPRO&&ZPRO.on))return;var c=cn[+q];if(c)w=w.concat(PGW[L][c].split('|'))});
   if(!w.length)w=PGW[L][cn[0]].split('|');
   PG.words=pgShuffle(w);PG.wi=0;PG.ok=[];PG.sk=[];PG.rem=PG.set.kt;PG.phase='kcount';
   var k=3,tk=PG.tok;pgPhase('');
@@ -2959,7 +2965,7 @@ function pgAct(a,el){
   case 'howok':try{localStorage.setItem('zap-pg-how-'+g,'1')}catch(e){}pgModClose();break;
   case 'inc':case 'dec':S.n=Math.max(3,Math.min(12,S.n+(a==='inc'?1:-1)));var e=document.getElementById('pgn');if(e)e.textContent=S.n;pgSave();break;
   case 'opt':var k=el.dataset.k,v=el.dataset.v;S[k]=(k==='t'||k==='kt')?+v:v;[].forEach.call(el.parentNode.children,function(b){b.classList.toggle('on',b===el)});pgSave();break;
-  case 'cat':var ck2=el.dataset.k||'c',arr=String(S[ck2]).split(',').filter(Boolean),q=el.dataset.v,ix=arr.indexOf(q);if(ix>-1){if(arr.length>1)arr.splice(ix,1)}else arr.push(q);S[ck2]=arr.join(',');el.classList.toggle('on',arr.indexOf(q)>-1);pgSave();break;
+  case 'cat':if(+el.dataset.v>=PGFREE&&!(window.ZPRO&&ZPRO.on)){window.zproOpen&&zproOpen();break}var ck2=el.dataset.k||'c',arr=String(S[ck2]).split(',').filter(Boolean),q=el.dataset.v,ix=arr.indexOf(q);if(ix>-1){if(arr.length>1)arr.splice(ix,1)}else arr.push(q);S[ck2]=arr.join(',');el.classList.toggle('on',arr.indexOf(q)>-1);pgSave();break;
   case 'go':pgSave();if(g==='casus'||g==='sahte')pgNames();else if(g==='hic')pgHicStart();else if(g==='benkimim')pgBkReady();else{pgKTInit();pgKelimeReady()}break;
   case 'namesok':pgNamesOk();break;
   case 'skip2':if(PG.need2){var f=PG.need2;PG.need2=null;f()}break;
@@ -3036,5 +3042,41 @@ document.addEventListener('contextmenu',function(e){e.preventDefault()});
 })();
 </script>
 <script>window.addEventListener('load',function(){window.tcolor&&tcolor()})</script>
+<script>
+/* ===== Zap Pro (yalnızca Android uygulaması): reklamsız + ek paketler ===== */
+window.ZPRO={on:true,native:false,price:''};
+(function(){
+  try{if(window.ZPLAY&&window.ZapPlay){ZPRO.native=true;ZPRO.on=!!ZapPlay.isPro();ZPRO.price=String(ZapPlay.price()||'')}}catch(e){}
+  var L=(window.ZLANG==='tr'||!window.ZLANG)?'tr':'en';
+  var S={tr:{t:'Zap Pro',sub:'Tek seferlik ödeme, abonelik yok.',b1:'Reklamsız oyun',b2:'3 ek paket: Filmler & Diziler, Ülkeler & Şehirler, Spor (Kelime Anlat ve Ben Kimim?)',b3:'Geliştirmeyi destekle',buy:'Pro\'yu aç',restore:'Satın almayı geri yükle',close:'Kapat',on:'Pro aktif ✓',thx:'Teşekkürler! Reklamlar kapalı, tüm paketler açık.',err:'Şu an satın alma kullanılamıyor. Biraz sonra tekrar dene.',nores:'Bu hesapta Pro satın alımı bulunamadı.'},
+    en:{t:'Zap Pro',sub:'One-time purchase, no subscription.',b1:'No ads',b2:'3 extra packs: Movies & Series, Countries & Cities, Sports (Word Guess and Who Am I?)',b3:'Support development',buy:'Get Pro',restore:'Restore purchase',close:'Close',on:'Pro active ✓',thx:'Thank you! Ads are off and all packs are unlocked.',err:'Purchases are unavailable right now. Try again later.',nores:'No Pro purchase found on this account.'}}[L];
+  var st=document.createElement('style');
+  st.textContent='#zpro{position:fixed;inset:0;z-index:170;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(6,3,20,.82)}#zpro.show{display:flex}#zpro .c{width:100%;max-width:360px;border-radius:26px;padding:24px 20px 18px;background:linear-gradient(160deg,#2a1666,#150a38);border:1px solid rgba(255,255,255,.2);box-shadow:0 20px 60px rgba(0,0,0,.6);text-align:center;color:#fff;font-family:var(--ff)}#zpro h3{margin:0 0 4px;font:900 22px var(--ffd)}#zpro p.s{margin:0 0 14px;font-size:13px;opacity:.7}#zpro ul{list-style:none;margin:0 0 16px;padding:0;text-align:left}#zpro li{padding:9px 12px;margin-bottom:7px;border-radius:14px;background:rgba(255,255,255,.08);font-size:14px;line-height:1.35}#zpro li:before{content:"✦ ";color:#ffe46b}#zpro button{width:100%;border:0;border-radius:999px;padding:14px;font:800 15px var(--ff);margin-top:8px}#zpro .buy{background:linear-gradient(135deg,#ffe46b,#ff5fa2);color:#1b0a3c;box-shadow:0 8px 24px rgba(255,95,162,.4)}#zpro .alt{background:rgba(255,255,255,.12);color:#fff;font-weight:700}#zpro .lnk{background:none;color:#fff;opacity:.7;font-weight:600;font-size:13px;text-decoration:underline}#zpro .msg{min-height:18px;margin-top:8px;font-size:13px;color:#ffd6e8}#pg .vch button.lk{opacity:.55}';
+  document.head.appendChild(st);
+  var m=document.createElement('div');m.id='zpro';document.body.appendChild(m);
+  function draw(msg){
+    m.innerHTML='<div class="c"><h3>⭐ '+S.t+'</h3><p class="s">'+(ZPRO.on?S.thx:S.sub)+'</p>'
+      +(ZPRO.on?'<ul><li>'+S.on+'</li></ul>':'<ul><li>'+S.b1+'</li><li>'+S.b2+'</li><li>'+S.b3+'</li></ul><button class="buy" data-z="buy">'+S.buy+(ZPRO.price?' · '+ZPRO.price:'')+'</button><button class="lnk" data-z="restore">'+S.restore+'</button>')
+      +'<div class="msg">'+(msg||'')+'</div><button class="alt" data-z="close">'+S.close+'</button></div>';
+  }
+  window.zproOpen=function(){draw('');m.classList.add('show')};
+  m.addEventListener('click',function(e){
+    var z=e.target.dataset&&e.target.dataset.z;
+    if(e.target===m||z==='close'){m.classList.remove('show');return}
+    try{if(z==='buy')ZapPlay.buyPro();else if(z==='restore')ZapPlay.restore()}catch(x){draw(S.err)}
+  });
+  window.zapPlay=function(t,v){
+    if(t==='pro'){ZPRO.on=!!v;if(m.classList.contains('show'))draw('');if(v&&window.pgRefresh)try{pgRefresh()}catch(e){}}
+    else if(t==='price'){ZPRO.price=String(v||'');if(m.classList.contains('show'))draw('')}
+    else if(t==='error'){if(m.classList.contains('show'))draw(v==='restore'?S.nores:S.err)}
+  };
+  var rounds=0;
+  window.zapAdRound=function(){
+    if(!ZPRO.native||ZPRO.on)return;
+    rounds++;if(rounds%2!==0)return;
+    setTimeout(function(){try{ZapPlay.showAd()}catch(e){}},1600);
+  };
+})();
+</script>
 </body>
 </html>

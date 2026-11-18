@@ -1,5 +1,10 @@
 # ⚡ Zap! The Game Sürüm Notları
 
+## v4.3 (Android): Zap Pro ⭐
+
+- **Zap Pro:** tek seferlik satın alma. Reklamları kaldırır ve 3 ek Kelime Anlat / Ben Kimim? paketi açar: Filmler & Diziler, Ülkeler & Şehirler, Spor.
+- Android uygulamasında oyun aralarında ara sıra tam ekran reklam gösterilir (oyun sırasında asla). Web ve iPhone sürümü reklamsız kalır.
+
 ## v4.2: Parti oyunları, Vampir Köylü ve yeni görünüm 🎉
 
 - **Vampir Köylü:** Telefon anlatıcı olur, sesli olarak geceyi yönetir. Gizli roller: Vampir, Köylü, Şerif, Doktor, Gözcü. 4-15 oyuncu.

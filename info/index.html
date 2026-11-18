@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <title>Zap! The Game: Parmağını koy, şans birini seçsin</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Zap! The Game: arkadaş grupları için parmakla karar oyunu. Hesabı kim ödeyecek, ilk kim başlayacak? 20 mod, online oda, iPhone, iPad ve Android.">
+<meta name="description" content="Zap! The Game: arkadaş grupları için parmakla karar oyunu. Hesabı kim ödeyecek, ilk kim başlayacak? 18 mod, online oda, iPhone, iPad ve Android.">
 <meta name="theme-color" content="#07031a">
 <meta property="og:title" content="Zap! The Game">
-<meta property="og:description" content="Parmağını koy, şans birini seçsin. 20 mod, online oda, ücretsiz.">
+<meta property="og:description" content="Parmağını koy, şans birini seçsin. 18 mod, online oda, ücretsiz.">
 <meta property="og:image" content="https://www.zapthegame.com/info/zap_fox.png">
 <link rel="icon" type="image/png" href="zap_fox.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -328,7 +328,7 @@ footer small{display:block;margin-top:26px;color:rgba(255,255,255,.4);font-size:
 <!-- MODLAR -->
 <section id="modlar">
   <div class="wrap">
-    <span class="tag rv">20 mod</span>
+    <span class="tag rv">18 mod</span>
     <h2 class="big"><span class="mk"><span>Her ortama</span></span><span class="mk" style="--d:.1s"><span class="grad">bir mod.</span></span></h2>
     <p class="lead rv">Arkadaşlarla, ailede ya da sevgiliyle. Sürükle, kaydır, kendi modunu bul.</p>
   </div>
@@ -439,13 +439,7 @@ addEventListener('pointermove',function(e){if(e.pointerType==='touch')return;if(
 /* ---- modlar ---- */
 var MODS=[
 ['⚡','Seçim','Herkes parmağını koyar. Küreler yanıp söner, şans bir kişiyi seçer.',330],
-['🥲','Kaybeden','Seçim gibi çalışır ama seçilen kişi kaybeder. Hesap, bulaşık, ceza için.',20],
-['👥','Çoklu','Aynı anda birden fazla kişi seçilir. Kaç kişi seçileceğini ayarlarsın.',170],
-['⚔️','Düello','Rastgele iki kişi düelloya çıkar, diğerleri izler.',4],
-['🔢','Sıralama','Herkesin küresine 1, 2, 3... diye sıra numarası yazılır.',205],
-['👑','Taç & Son','Birinci 👑 olur, sonuncu 🐢 olur.',48],
 ['🎨','Takım','Parmaklar rastgele takımlara bölünür. Her takımın rengi ve harfi olur.',280],
-['🏁','Elemeli','Her adımda biri elenir, son kalan seçilir. Gerilimli bir mod.',140],
 ['💣','Bomba','Gizli bir bomba birinde patlar. Kimde patlayacağı belli değil!',12],
 ['🎲','Zar','Herkes için bir zar atılır, en yüksek sayı kazanır.',250],
 ['🎭','Doğruluk / Cesaret','Seçilen kişi Doğruluk mu Cesaret mi seçer. 100\'den fazla kişisel soru, 100\'den fazla gerçek hareket isteyen görev. Pas ve Başka seçenekleri var.',310],
@@ -453,6 +447,11 @@ var MODS=[
 ['🎯','Hedef Süre','Hedef süre üstte yazar, herkes parmağını basılı tutar. Hedefe en yakın bırakan kazanır.',100],
 ['🍾','Şişe Çevirme','Herkes parmağını koyar, şişe döner. Ucu SOR, arkası CEVAPLA olur.',160],
 ['🎡','Çark','Parmak gerekmez. Seçeneklerini yaz, çarkı çevir.',30],
+['🧛','Vampir Köylü','Telefon anlatıcı olur. Gizli roller, gece ve gündüz. Vampirleri bul ya da köyü ele geçir.',350],
+['🕵️','Casus','Herkes aynı mekanı görür, biri hariç. Sorularla casusu bul.',215],
+['🥸','Sahtekâr Kelime','Herkes gizli bir kelime alır, birininki farklı. İpuçlarıyla sahtekârı yakala.',45],
+['🙋','Ben Hiç / Kim?','Kim daha olası? ve Ben hiç… kartları. Tüm gruba, tekrar yok.',325],
+['🗣️','Kelime Anlat','Süreli kelime anlatma. Anlat, arkadaşların tahmin etsin.',150],
 ['🪙','Yazı Tura','Parmak gerekmez. Parayı havaya at: yazı mı, tura mı?',50],
 ['🎰','Sayı Seçici','Parmak gerekmez. İki sayı yaz, aralarından rastgele biri seçilsin.',130],
 ['💬','Muhabbet','Sevgililer için. Seçilen kişi yakınlaştıran bir sohbet sorusunu cevaplar.',190],
@@ -461,7 +460,7 @@ var MODS=[
 var rail=$('#rail');
 MODS.forEach(function(m,i){
   var c=document.createElement('div');c.className='mc';c.style.setProperty('--hh',m[3]);
-  c.innerHTML=(m[4]?'<span class="b18">18+</span>':'')+'<div class="no">MOD '+String(i+1).padStart(2,'0')+' / 19</div><div class="orb"><em>'+m[0]+'</em></div><h3>'+m[1]+'</h3><p>'+m[2]+'</p>';
+  c.innerHTML=(m[4]?'<span class="b18">18+</span>':'')+'<div class="no">MOD '+String(i+1).padStart(2,'0')+' / '+MODS.length+'</div><div class="orb"><em>'+m[0]+'</em></div><h3>'+m[1]+'</h3><p>'+m[2]+'</p>';
   rail.appendChild(c);
 });
 var trk=$('#trk');

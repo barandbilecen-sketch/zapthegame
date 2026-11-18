@@ -1,12 +1,20 @@
 # ⚡ Zap! The Game Sürüm Notları
 
+## v4.0: Daha az mod, daha çok oyun 🎉
+- **Sadeleşme:** Az kullanılan modlar menüden kaldırıldı (Kaybeden, Çoklu, Düello, Sıralama, Taç & Son, Elemeli). Menü artık 18 mod.
+- **Yeni oyun: 🕵️ Casus.** Herkes aynı mekanı görür, biri hariç. Sorularla casusu bul, casus da mekanı tahmin etmeye çalışır.
+- **Yeni oyun: 🥸 Sahtekâr Kelime.** Herkes gizli bir kelime alır, sahtekârın kelimesi farklıdır. İpucu verin, oylayıp sahtekârı bulun.
+- **Yeni oyun: 🙋 Ben Hiç / Kim?** "Kim daha olası?" ve "Ben hiç…" kartları. Tekrar yok.
+- **Yeni oyun: 🗣️ Kelime Anlat.** Süreli kelime anlatma. Hayvanlar, yiyecek, meslekler, eşyalar.
+- Telefon elden ele gezen oyunlarda anlatıcı sesi ve ilk girişte nasıl oynanır penceresi.
+
 ## v3.9: Vampir Köylü 🧛
 - **Yeni mod: Vampir Köylü.** Telefon anlatıcı olur, sesli olarak "gözlerinizi kapatın" der ve geceyi yönetir. 4-15 oyuncu.
 - **Gizli roller:** Vampir, Köylü, Şerif, Doktor ve Gözcü. Telefon elden ele gezer, herkes adını yazar, 2 parmağıyla dokunup rolünü gizlice öğrenir. Karakterler slot gibi kayar, rol açıklamasıyla ortaya çıkar.
 - **Gece:** Vampirler kurbanı seçer, Doktor korur, Gözcü araştırır. **Gündüz:** kimin öldüğü açıklanır, tartışma sayacı ve oylamayla biri köyden sürülür.
 - **Şerif:** Oyun boyunca bir kez, köşedeki butonla birini vurabilir. Masumu vurursa o da ölür.
 - İlk girişte nasıl oynanır penceresi açılır. Anlatıcı sesi her cihazda aynıdır (Türkçe ve İngilizce kayıtlı ses).
-- 20 mod oldu.
+- Yeni mod: Vampir Köylü.
 - **Android:** Animasyonlar daha akıcı. Tablet ve katlanabilir ekran desteği, ekran döndürme. Anlatıcı sesi hoparlörden çalar.
 - Yenilenen ZAP! yazısı ve çeşitli düzeltmeler.
 

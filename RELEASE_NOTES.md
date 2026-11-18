@@ -5,6 +5,7 @@
 - **Kelime Anlat artık Tabu gibi:** her kelimenin altında söylenmesi yasak kelimeler çıkar. İstersen kapatabilirsin. Yeni kategori: Karakterler.
 - **Yeni oyun: 🤳 Ben Kimim?** Telefonu alnına yasla, arkadaşların kelimeyi anlatsın, sen tahmin et. Telefonu aşağı eğ = Bildi, yukarı eğ = Geç. Eğme çalışmazsa ekrana dokun.
 - **Kelime Anlat'ta takım modu:** 2-4 takım, 1-3 tur, takımlar sırayla anlatır, sonda kazanan takım çıkar.
+- **Görsel cila:** mod menüsünde gruplar ve YENİ rozetleri, ekran geçiş animasyonları, buton ışıltıları, kazanan ekranlarında konfeti, daha derin gölgeler.
 - Toplam 19 mod.
 
 ## v4.0: Daha az mod, daha çok oyun 🎉

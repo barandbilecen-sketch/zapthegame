@@ -1,5 +1,11 @@
 # ⚡ Zap! The Game Sürüm Notları
 
+## v4.1: Tabu ve Ben Kimim?
+
+- **Kelime Anlat artık Tabu gibi:** her kelimenin altında söylenmesi yasak kelimeler çıkar. İstersen kapatabilirsin. Yeni kategori: Karakterler.
+- **Yeni oyun: 🤳 Ben Kimim?** Telefonu alnına yasla, arkadaşların kelimeyi anlatsın, sen tahmin et. Telefonu aşağı eğ = Bildi, yukarı eğ = Geç. Eğme çalışmazsa ekrana dokun.
+- Toplam 19 mod.
+
 ## v4.0: Daha az mod, daha çok oyun 🎉
 - **Sadeleşme:** Az kullanılan modlar menüden kaldırıldı (Kaybeden, Çoklu, Düello, Sıralama, Taç & Son, Elemeli). Menü artık 18 mod.
 - **Yeni oyun: 🕵️ Casus.** Herkes aynı mekanı görür, biri hariç. Sorularla casusu bul, casus da mekanı tahmin etmeye çalışır.

@@ -21,13 +21,11 @@
 
 Oyun tam ekran, uygulama gibi açılır.
 
-### 🤖 Android (APK)
-1. [**Zap.apk'yı indir**](https://github.com/barandbilecen-sketch/zapthegame/raw/main/Zap.apk)
-2. İndirilen dosyaya dokun ve kur.
-3. Telefon izin isterse **"Bu kaynaktan yüklemeye izin ver"** seçeneğini aç. APK Google Play dışından geldiği için bu normaldir.
-4. "Google Play Protect" uyarısı çıkarsa **Yine de yükle**'yi seç.
+### 🤖 Android (Google Play)
+1. [**Google Play'den indir**](https://play.google.com/store/apps/details?id=com.zap.game)
+2. Uygulama ücretsizdir. Oyunlar arasında ara sıra reklam gösterilir. İstersen tek seferlik **Zap Pro** ile reklamları kaldırır ve ek kelime paketlerini açarsın.
 
-> Not: Android uygulamasındaki oyun, APK'yı güncelleyene kadar eski sürüm kalır. Online mod için güncel APK'yı indirin.
+> Web sitesi ve iPhone sürümü reklamsızdır.
 
 ## Zap! nedir?
 
@@ -113,7 +111,7 @@ Her temanın kendi **ses paketi** vardır. Neon Gece'de synthwave bas, Okyanus't
 
 ## Bilmen gerekenler
 
-- Zap! bir web uygulamasıdır. Tarayıcıdan açılır, iPhone'da **Paylaş > Ana Ekrana Ekle** ile uygulama gibi kurulur. Android için ayrıca APK dosyası vardır.
+- Zap! bir web uygulamasıdır. Tarayıcıdan açılır, iPhone'da **Paylaş > Ana Ekrana Ekle** ile uygulama gibi kurulur. Android için Google Play'de uygulaması vardır.
 - **Online mod** için internet gerekir. Tek telefonda oynarken internet gerekmez.
 - iPhone aynı anda en fazla **5 parmak** algılar. Daha fazla kişiyle oynamak için iPad gibi daha çok dokunuş algılayan cihazlar gerekir.
 - Sesler için telefonun sessiz modunun kapalı olması gerekir.

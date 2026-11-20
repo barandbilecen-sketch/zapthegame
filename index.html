@@ -290,7 +290,7 @@ label{font-family:var(--ff);font-weight:500}
 #card.show{opacity:1;transform:translate(-50%,0)}
 #card h4{margin:0 0 8px;font:900 12px var(--ffd);letter-spacing:1px;color:#ffe46b}
 #card p{margin:0;font:600 19px/1.3 var(--ff)}
-#wheel{position:fixed;inset:0;z-index:70;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:70px 20px 130px;box-sizing:border-box;background:linear-gradient(160deg,var(--bg1),var(--bg2));touch-action:manipulation;-webkit-user-select:auto;user-select:auto}
+#wheel{position:fixed;inset:0;z-index:70;display:none;flex-direction:column;align-items:center;justify-content:flex-start;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 92px) 20px 120px;box-sizing:border-box;background:linear-gradient(160deg,var(--bg1),var(--bg2));touch-action:manipulation;-webkit-user-select:auto;user-select:auto}
 #wheel.show{display:flex}
 #tool{position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;padding:70px 20px 130px;box-sizing:border-box;background:linear-gradient(160deg,var(--bg1),var(--bg2));touch-action:manipulation;-webkit-user-select:auto;user-select:auto}
 #tool.show{display:flex}
@@ -308,13 +308,16 @@ label{font-family:var(--ff);font-weight:500}
 .nr{display:flex;gap:14px;width:min(86vw,360px)}.nr label{flex:1;font:600 12px var(--ff);opacity:.9;display:flex;flex-direction:column;gap:6px;margin:0}
 .nr input{padding:13px;border-radius:14px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font:700 18px var(--ff);outline:none;-webkit-user-select:text;user-select:text;width:100%;box-sizing:border-box;text-align:center}
 #wheel h2{font:900 20px var(--ffd);margin:0}
-#wheel h2{font:900 20px var(--ffd);margin:0}
-#wres{display:none;flex-direction:column;align-items:center;gap:3px;max-width:88vw;padding:10px 32px 13px;border-radius:24px;background:linear-gradient(135deg,rgba(255,228,107,.22),rgba(255,95,162,.2)),rgba(20,12,45,.88);border:2px solid var(--c,#ffe46b);box-shadow:0 0 26px color-mix(in srgb,var(--c,#ffe46b) 55%,transparent),0 10px 30px rgba(0,0,0,.4);animation:wpop .55s cubic-bezier(.2,.9,.3,1.3)}
+#wheel h2{display:flex;align-items:center;justify-content:center;min-height:84px;gap:12px;margin:0;font:800 13px var(--ff);letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.9);white-space:nowrap}
+#wheel h2::before,#wheel h2::after{content:'';width:34px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,#ffe46b)}
+#wheel h2::after{background:linear-gradient(90deg,#ff5fa2,transparent)}
+#wheel h2 i{font-style:normal;font-size:18px;letter-spacing:0}
+#wres{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:84px;box-sizing:border-box;gap:2px;max-width:86vw;padding:8px 28px 10px;border-radius:24px;background:linear-gradient(135deg,rgba(255,228,107,.22),rgba(255,95,162,.2)),rgba(20,12,45,.88);border:2px solid var(--c,#ffe46b);box-shadow:0 0 26px color-mix(in srgb,var(--c,#ffe46b) 55%,transparent),0 10px 30px rgba(0,0,0,.4);animation:wpop .55s cubic-bezier(.2,.9,.3,1.3)}
 #wres small{font:800 11px var(--ff);letter-spacing:4px;color:#ffe46b}
-#wres b{font:900 clamp(26px,8vw,38px) var(--ffd);line-height:1.1;text-align:center;overflow-wrap:anywhere}
+#wres b{font:900 clamp(20px,6.4vw,30px) var(--ffd);line-height:1.15;text-align:center;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 #wheel.won h2{display:none}#wheel.won #wres{display:flex}
 @keyframes wpop{from{opacity:0;transform:translateY(-14px) scale(.8)}to{opacity:1;transform:none}}
-.wr{position:relative;width:min(84vw,360px);aspect-ratio:1;margin-top:24px}
+.wr{position:relative;width:min(74vw,290px);aspect-ratio:1;margin-top:6px}
 .wr canvas{width:100%;height:100%;border-radius:50%;box-shadow:0 14px 40px rgba(0,0,0,.5),0 0 46px var(--glow)}
 .pt{position:absolute;left:50%;top:-24px;width:38px;height:50px;margin-left:-19px;z-index:2;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 50'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23fff7c2'/%3E%3Cstop offset='1' stop-color='%23ffb81f'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M19 49 L4 25 A17 17 0 1 1 34 25 Z' fill='url(%23g)' stroke='%23fff' stroke-width='2'/%3E%3Ccircle cx='19' cy='17' r='6' fill='%23ff5fa2'/%3E%3C/svg%3E") center/contain no-repeat;filter:drop-shadow(0 4px 5px rgba(0,0,0,.55))}
 #wi{width:min(86vw,360px);padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font:500 16px var(--ff);outline:none;-webkit-user-select:text;user-select:text;box-sizing:border-box}
@@ -1545,7 +1548,7 @@ var idleEl=mkEl('div','idle');idleEl.innerHTML='<div>👆 Parmağını koy</div>
 var mbar=mkEl('div','foot'),mh=mbar,bottle=mkEl('div','bottle'),card=mkEl('div','card'),wheel=mkEl('div','wheel');
 bottle.innerHTML='<svg viewBox="0 0 200 56"><defs><linearGradient id="bgd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eafff2"/><stop offset="1" stop-color="#5fd39b"/></linearGradient></defs><path d="M6 14Q6 8 14 8L112 8Q132 8 140 22L182 24Q190 24 190 28Q190 32 182 32L140 34Q132 48 112 48L14 48Q6 48 6 42Z" fill="url(#bgd)" stroke="#fff" stroke-width="2"/><rect x="186" y="23" width="10" height="10" rx="3" fill="#ffe46b"/></svg>';
 card.innerHTML='<h4>🔥 GÖREV</h4><p></p>';
-wheel.innerHTML='<h2>🎡 Karar Çarkı</h2><div id="wres"><small>KAZANAN</small><b></b></div><div class="wr"><div class="pt"></div><canvas id="wc" width="640" height="640"></canvas></div><input id="wi" value="Pizza, Burger, Sushi, Döner, Kebap" autocomplete="off" enterkeyhint="done"><button id="ws">ÇEVİR</button>';
+wheel.innerHTML='<h2><i>🎡</i>Karar Çarkı</h2><div id="wres"><small>KAZANAN</small><b></b></div><div class="wr"><div class="pt"></div><canvas id="wc" width="640" height="640"></canvas></div><input id="wi" value="Pizza, Burger, Sushi, Döner, Kebap" autocomplete="off" enterkeyhint="done"><button id="ws">ÇEVİR</button>';
 mbar.innerHTML='<button id="fm">🧩 Mods</button><span id="fl"></span>';
 var tool=mkEl('div','tool');
 tool.innerHTML='<div id="tc"><h2>🪙 Yazı Tura</h2><div class="coinw" id="coinw"><div class="coin" id="coin"><div class="cf f1"><span>⚡</span><b>YAZI</b></div><div class="cf f2"><span>🦊</span><b>TURA</b></div></div></div><div id="tcr">Dokun ve at</div><button class="tbtn" id="tcb">ATIŞ YAP</button><small id="tch"></small></div><div id="tn"><h2>🎰 Sayı Seçici</h2><div class="nbig" id="nbig">?</div><div class="nr"><label>En az<input id="nmin" type="number" inputmode="numeric" value="1"></label><label>En çok<input id="nmax" type="number" inputmode="numeric" value="100"></label></div><button class="tbtn" id="nb">SAYI SEÇ</button></div>';

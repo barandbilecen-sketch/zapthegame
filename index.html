@@ -1457,7 +1457,7 @@ var DARES=["Grubun seçtiği birine 30 saniye boyunca dans şovu yap.","Telefonu
 var LOSE=['Kaybeden sensin 😅','Hesap sende!','Bu sefer sen yandın','Ceza senin','Şanssız kişi sensin','Bulaşıklar seni bekliyor','Kaçış yok, sensin!','Kaybettin! 😂','Yük sana kaldı','Zap seni yakaladı'];
 function later(fn,ms){mt.push(setTimeout(fn,ms))}
 function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(i+1),t=a[i];a[i]=a[j];a[j]=t}return a}
-var TST={tek:['#ff5fa2'],ters:['#3a86ff'],coklu:['#b9a8ff'],duello:['#ff9d4f','shake'],sira:['#2ee59d'],tac:['#ffe46b','drop'],takim:['#4d9fff'],ele:['#ff5470','shake'],bomba:['#ff7a1a','shake'],zar:['#2ec5ff','spin'],dc:['#e85dff'],ceza:['#ff3d5a','shake'],hedef:['#ffe46b'],sise:['#2ee59d','spin'],cark:['#ffb43b','spin'],yazitura:['#ffd84a','spin'],sayi:['#2ec5ff']};
+var TST={tek:['#ff5fa2'],ters:['#3a86ff'],coklu:['#b9a8ff'],duello:['#ff9d4f','shake'],sira:['#2ee59d'],tac:['#ffe46b','drop'],takim:['#4d9fff'],ele:['#ff5470','shake'],bomba:['#ff7a1a','shake'],zar:['#2ec5ff','spin'],dc:['#e85dff'],ceza:['#ff3d5a','shake'],hedef:['#ffe46b'],sise:['#2ee59d','spin'],cark:['#ffb43b','spin'],yazitura:['#ffd84a','spin'],sayi:['#2ec5ff','spin'],vampir:['#d1264b','drop'],casus:['#7c8cff'],sahte:['#ff8a3d','shake'],hic:['#34d6a0'],kelime:['#ffcf3f','drop'],benkimim:['#ff6ec7'],sohbet:['#4dd0e1'],sevgilisor:['#ff4f8b'],isin:['#ff6a1a','shake'],tutku:['#e0245e','shake']};
 function say(t,eb){
   var e=document.getElementById('toast');if(!e)return;
   var s=String(t==null?'':t);try{if(window.T)s=window.T(s)||s}catch(x){}

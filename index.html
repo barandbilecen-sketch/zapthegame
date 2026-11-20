@@ -347,8 +347,7 @@ label{font-family:var(--ff);font-weight:500}
 #htg.off{animation:htout .35s ease-in forwards}
 @keyframes htin{to{opacity:1;transform:translate(-50%,0) scale(1)}}
 @keyframes htout{from{opacity:1;transform:translate(-50%,0) scale(1)}to{opacity:0;transform:translate(-50%,-18px) scale(.9)}}
-.dot.hc{box-shadow:0 0 0 calc(var(--sz)*.045) rgba(12,6,32,.6),0 0 0 calc(var(--sz)*.105) var(--dot),0 6px calc(var(--sz)*.3) calc(var(--sz)*.06) rgba(0,0,0,.4)!important}
-.dot.hc.win{box-shadow:0 0 0 calc(var(--sz)*.045) rgba(12,6,32,.6),0 0 0 calc(var(--sz)*.105) #ffe46b,0 0 calc(var(--sz)*.5) calc(var(--sz)*.1) rgba(255,228,107,.5)!important}
+.dot.hc::after{content:'';position:absolute;inset:0;border-radius:50%;background:var(--dot);mix-blend-mode:color;opacity:.95;pointer-events:none}
 #hres{position:fixed;left:10px;right:10px;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);display:flex;flex-wrap:wrap;gap:8px;justify-content:center;z-index:60;pointer-events:none}
 #hres div{width:calc(25% - 8px);min-width:84px;max-width:130px;padding:9px 4px;border-radius:18px;background:rgba(20,12,45,.88);border:2px solid var(--c,#fff);text-align:center;color:#fff;opacity:0;transform:translateY(40px) scale(.8);animation:hrin .5s cubic-bezier(.2,.9,.3,1.3) forwards}
 #hres div::before{content:'';display:block;width:10px;height:10px;border-radius:50%;background:var(--c,#fff);margin:0 auto 4px}
@@ -1738,7 +1737,7 @@ function runBottle(ids){
 var hT=null,hStart=0,hTarget=0;
 function startHedef(){
   phase='hedef';hStart=Date.now();hTarget=(8+rnd(17))/2;
-  var ht=document.getElementById('htg');if(!ht){ht=document.createElement('div');ht.id='htg';document.body.appendChild(ht)}ht.className='';ht.innerHTML='<i>🎯</i><span>Hedef</span><b>'+hTarget.toFixed(2)+'</b>';
+  try{document.getElementById('toast').classList.remove('show')}catch(e){}var ht=document.getElementById('htg');if(!ht){ht=document.createElement('div');ht.id='htg';document.body.appendChild(ht)}ht.className='';ht.innerHTML='<i>🎯</i><span>Hedef</span><b>'+hTarget.toFixed(2)+'</b>';
   var HH=[330,215,150,270,28,50,190,0,100,300],hi=0;
   fingers.forEach(function(f){var h=HH[hi++%HH.length];f.col='hsl('+h+',100%,58%)';f.el.style.setProperty('--dot',f.col);f.el.classList.add('hc');var e=document.createElement('em');e.className='tl';e.textContent='';f.el.appendChild(e);f.tl=e;f.done=false});
 }

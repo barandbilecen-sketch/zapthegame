@@ -304,9 +304,15 @@ label{font-family:var(--ff);font-weight:500}
 .nr{display:flex;gap:14px;width:min(86vw,360px)}.nr label{flex:1;font:600 12px var(--ff);opacity:.9;display:flex;flex-direction:column;gap:6px;margin:0}
 .nr input{padding:13px;border-radius:14px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font:700 18px var(--ff);outline:none;-webkit-user-select:text;user-select:text;width:100%;box-sizing:border-box;text-align:center}
 #wheel h2{font:900 20px var(--ffd);margin:0}
-.wr{position:relative;width:min(76vw,320px);aspect-ratio:1}
-.wr canvas{width:100%;height:100%;border-radius:50%;box-shadow:0 0 40px var(--glow)}
-.pt{position:absolute;left:50%;top:-12px;margin-left:-14px;border:14px solid transparent;border-top:26px solid #fff;z-index:2}
+#wheel h2{font:900 20px var(--ffd);margin:0}
+#wres{display:none;flex-direction:column;align-items:center;gap:3px;max-width:88vw;padding:10px 32px 13px;border-radius:24px;background:linear-gradient(135deg,rgba(255,228,107,.22),rgba(255,95,162,.2)),rgba(20,12,45,.88);border:2px solid var(--c,#ffe46b);box-shadow:0 0 26px color-mix(in srgb,var(--c,#ffe46b) 55%,transparent),0 10px 30px rgba(0,0,0,.4);animation:wpop .55s cubic-bezier(.2,.9,.3,1.3)}
+#wres small{font:800 11px var(--ff);letter-spacing:4px;color:#ffe46b}
+#wres b{font:900 clamp(26px,8vw,38px) var(--ffd);line-height:1.1;text-align:center;overflow-wrap:anywhere}
+#wheel.won h2{display:none}#wheel.won #wres{display:flex}
+@keyframes wpop{from{opacity:0;transform:translateY(-14px) scale(.8)}to{opacity:1;transform:none}}
+.wr{position:relative;width:min(84vw,360px);aspect-ratio:1;margin-top:24px}
+.wr canvas{width:100%;height:100%;border-radius:50%;box-shadow:0 14px 40px rgba(0,0,0,.5),0 0 46px var(--glow)}
+.pt{position:absolute;left:50%;top:-24px;width:38px;height:50px;margin-left:-19px;z-index:2;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 50'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23fff7c2'/%3E%3Cstop offset='1' stop-color='%23ffb81f'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M19 49 L4 25 A17 17 0 1 1 34 25 Z' fill='url(%23g)' stroke='%23fff' stroke-width='2'/%3E%3Ccircle cx='19' cy='17' r='6' fill='%23ff5fa2'/%3E%3C/svg%3E") center/contain no-repeat;filter:drop-shadow(0 4px 5px rgba(0,0,0,.55))}
 #wi{width:min(86vw,360px);padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font:500 16px var(--ff);outline:none;-webkit-user-select:text;user-select:text;box-sizing:border-box}
 #ws{padding:15px 40px;border-radius:999px;border:0;font:800 16px var(--ffd);background:linear-gradient(135deg,#ffe46b,#ff5fa2);color:#1b0a3c;touch-action:manipulation}
 #gear{z-index:76}#brand{z-index:72}#panel{z-index:95}
@@ -1531,7 +1537,7 @@ var idleEl=mkEl('div','idle');idleEl.innerHTML='<div>👆 Parmağını koy</div>
 var mbar=mkEl('div','foot'),mh=mbar,bottle=mkEl('div','bottle'),card=mkEl('div','card'),wheel=mkEl('div','wheel');
 bottle.innerHTML='<svg viewBox="0 0 200 56"><defs><linearGradient id="bgd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eafff2"/><stop offset="1" stop-color="#5fd39b"/></linearGradient></defs><path d="M6 14Q6 8 14 8L112 8Q132 8 140 22L182 24Q190 24 190 28Q190 32 182 32L140 34Q132 48 112 48L14 48Q6 48 6 42Z" fill="url(#bgd)" stroke="#fff" stroke-width="2"/><rect x="186" y="23" width="10" height="10" rx="3" fill="#ffe46b"/></svg>';
 card.innerHTML='<h4>🔥 GÖREV</h4><p></p>';
-wheel.innerHTML='<h2>🎡 Karar Çarkı</h2><div class="wr"><div class="pt"></div><canvas id="wc" width="640" height="640"></canvas></div><input id="wi" value="Pizza, Burger, Sushi, Döner, Kebap" autocomplete="off" enterkeyhint="done"><button id="ws">ÇEVİR</button>';
+wheel.innerHTML='<h2>🎡 Karar Çarkı</h2><div id="wres"><small>KAZANAN</small><b></b></div><div class="wr"><div class="pt"></div><canvas id="wc" width="640" height="640"></canvas></div><input id="wi" value="Pizza, Burger, Sushi, Döner, Kebap" autocomplete="off" enterkeyhint="done"><button id="ws">ÇEVİR</button>';
 mbar.innerHTML='<button id="fm">🧩 Mods</button><span id="fl"></span>';
 var tool=mkEl('div','tool');
 tool.innerHTML='<div id="tc"><h2>🪙 Yazı Tura</h2><div class="coinw" id="coinw"><div class="coin" id="coin"><div class="cf f1"><span>⚡</span><b>YAZI</b></div><div class="cf f2"><span>🦊</span><b>TURA</b></div></div></div><div id="tcr">Dokun ve at</div><button class="tbtn" id="tcb">ATIŞ YAP</button><small id="tch"></small></div><div id="tn"><h2>🎰 Sayı Seçici</h2><div class="nbig" id="nbig">?</div><div class="nr"><label>En az<input id="nmin" type="number" inputmode="numeric" value="1"></label><label>En çok<input id="nmax" type="number" inputmode="numeric" value="100"></label></div><button class="tbtn" id="nb">SAYI SEÇ</button></div>';
@@ -1662,26 +1668,48 @@ function runDemo(m){
 /* çark */
 var wc=document.getElementById('wc'),wi=document.getElementById('wi'),wrot=0,spinning=false;
 function wopts(){return wi.value.split(',').map(function(x){return x.trim()}).filter(Boolean).slice(0,12)}
-function drawWheel(){
-  var o=wopts(),n=Math.max(o.length,2),c=wc.getContext('2d'),sg=2*Math.PI/n;
+var WPAL=['#ff5fa2','#3a86ff','#2ee59d','#ffb43b','#b9a8ff','#ff7a45','#2ec5ff','#e85dff','#7be04a','#ffd84a','#ff5470','#5b6bff'];
+function wcol(i,n){return WPAL[(n%2&&n<12&&i===n-1&&n>2)?(i+3)%WPAL.length:i%WPAL.length]}
+function drawWheel(hi){
+  var o=wopts(),n=Math.max(o.length,2),c=wc.getContext('2d'),sg=2*Math.PI/n,C=320,R=290,i,a0;
   c.clearRect(0,0,640,640);
-  for(var i=0;i<n;i++){
-    c.beginPath();c.moveTo(320,320);c.arc(320,320,316,-Math.PI/2+i*sg,-Math.PI/2+(i+1)*sg);c.closePath();
-    c.fillStyle='hsl('+(i*360/n+10)+',78%,56%)';c.fill();c.strokeStyle='rgba(255,255,255,.55)';c.lineWidth=4;c.stroke();
-    c.save();c.translate(320,320);c.rotate(-Math.PI/2+(i+.5)*sg);c.textAlign='right';c.fillStyle='#fff';
-    c.font='700 36px Outfit,sans-serif';c.shadowColor='rgba(0,0,0,.35)';c.shadowBlur=6;c.fillText((o[i]||'?').slice(0,13),290,12);c.restore();
+  /* dış çerçeve */
+  var rg=c.createRadialGradient(C,C,R-6,C,C,318);rg.addColorStop(0,'#2a1a58');rg.addColorStop(1,'#0e0828');
+  c.beginPath();c.arc(C,C,318,0,7);c.fillStyle=rg;c.fill();
+  c.lineWidth=5;var gg=c.createLinearGradient(0,0,640,640);gg.addColorStop(0,'#fff7c2');gg.addColorStop(.5,'#ffc83d');gg.addColorStop(1,'#fff0a0');c.strokeStyle=gg;c.beginPath();c.arc(C,C,314,0,7);c.stroke();
+  for(i=0;i<n;i++){
+    a0=-Math.PI/2+i*sg;
+    c.beginPath();c.moveTo(C,C);c.arc(C,C,R,a0,a0+sg);c.closePath();
+    var col=wcol(i,n),fg=c.createRadialGradient(C,C,30,C,C,R);fg.addColorStop(0,col);fg.addColorStop(1,col);
+    c.fillStyle=col;c.fill();
+    c.save();c.clip();var sh=c.createRadialGradient(C,C,10,C,C,R);sh.addColorStop(0,'rgba(255,255,255,.34)');sh.addColorStop(.55,'rgba(255,255,255,0)');sh.addColorStop(1,'rgba(0,0,0,.22)');c.fillStyle=sh;c.fillRect(0,0,640,640);c.restore();
+    c.strokeStyle='rgba(255,255,255,.6)';c.lineWidth=3;c.beginPath();c.moveTo(C,C);c.lineTo(C+R*Math.cos(a0),C+R*Math.sin(a0));c.stroke();
+    /* yazı */
+    c.save();c.translate(C,C);c.rotate(a0+sg/2);c.textAlign='right';c.textBaseline='middle';
+    var t=(o[i]||'?'),fs=n>8?30:36;c.font='800 '+fs+'px Outfit,sans-serif';
+    while(c.measureText(t).width>200&&fs>18){fs-=2;c.font='800 '+fs+'px Outfit,sans-serif'}
+    if(c.measureText(t).width>200){while(t.length>3&&c.measureText(t+'…').width>200)t=t.slice(0,-1);t+='…'}
+    c.shadowColor='rgba(0,0,0,.45)';c.shadowBlur=8;c.fillStyle='#fff';c.fillText(t,R-26,2);c.restore();
+    if(hi!=null&&hi!==i){c.beginPath();c.moveTo(C,C);c.arc(C,C,R,a0,a0+sg);c.closePath();c.fillStyle='rgba(12,6,32,.55)';c.fill()}
   }
-  c.beginPath();c.arc(320,320,34,0,7);c.fillStyle='#fff';c.fill();
+  /* kazanan parlaması */
+  if(hi!=null){a0=-Math.PI/2+hi*sg;c.save();c.beginPath();c.moveTo(C,C);c.arc(C,C,R,a0,a0+sg);c.closePath();c.lineWidth=7;c.strokeStyle='#fff';c.shadowColor='#ffe46b';c.shadowBlur=24;c.stroke();c.restore()}
+  /* çerçeve çivileri */
+  for(i=0;i<n;i++){a0=-Math.PI/2+i*sg;var px=C+304*Math.cos(a0),py=C+304*Math.sin(a0);c.beginPath();c.arc(px,py,8,0,7);var pg=c.createRadialGradient(px-2,py-2,1,px,py,8);pg.addColorStop(0,'#fff');pg.addColorStop(1,'#ffc83d');c.fillStyle=pg;c.shadowColor='rgba(0,0,0,.5)';c.shadowBlur=5;c.fill();c.shadowBlur=0}
+  /* merkez */
+  c.save();c.shadowColor='rgba(0,0,0,.5)';c.shadowBlur=14;c.beginPath();c.arc(C,C,46,0,7);var hg=c.createRadialGradient(C-12,C-12,4,C,C,46);hg.addColorStop(0,'#fff');hg.addColorStop(1,'#cfc6ff');c.fillStyle=hg;c.fill();c.restore();
+  c.lineWidth=6;c.strokeStyle='#ffc83d';c.beginPath();c.arc(C,C,46,0,7);c.stroke();
+  c.beginPath();c.arc(C,C,12,0,7);c.fillStyle='#ff5fa2';c.fill();
 }
-wi.addEventListener('input',function(){wc.style.transition='none';wrot=0;wc.style.transform='rotate(0deg)';drawWheel()});
+wi.addEventListener('input',function(){wc.style.transition='none';wrot=0;wc.style.transform='rotate(0deg)';wheel.classList.remove('won');drawWheel()});
 document.getElementById('ws').addEventListener('click',function(){
   if(spinning)return;var o=wopts();if(o.length<2){say('En az 2 seçenek yaz');return}
-  wi.blur();spinning=true;var n=o.length,sg=360/n,i=rnd(n),jit=(Math.random()-.5)*sg*.6;
+  wi.blur();spinning=true;wheel.classList.remove('won');drawWheel();var n=o.length,sg=360/n,i=rnd(n),jit=(Math.random()-.5)*sg*.6;
   wrot=Math.ceil(wrot/360)*360+1800-(i+.5)*sg+jit;
   wc.style.transition='transform 4.2s cubic-bezier(.12,.7,.1,1)';wc.style.transform='rotate('+wrot+'deg)';
   document.getElementById('toast').classList.remove('show');
   for(var k=1;k<=26;k++)(function(k){later(function(){play('pop1','A')},3900*Math.pow(k/26,1.7))})(k);
-  later(function(){spinning=false;sndWin();flash();say('🎡 '+o[i])},4300);
+  later(function(){spinning=false;sndWin();flash();drawWheel(i);var wr=document.getElementById('wres');wr.style.setProperty('--c',wcol(i,n));wr.querySelector('b').textContent=o[i];wheel.classList.remove('won');void wr.offsetWidth;wheel.classList.add('won')},4300);
 });
 /* oyun sonuçları */
 function pick(){

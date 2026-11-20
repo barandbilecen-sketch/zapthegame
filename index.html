@@ -1723,7 +1723,9 @@ function runEle(ids){
   })();
 }
 function labelDot(f,t){clr(f);f.el.classList.add('num','lab');f.el.textContent=t;ring(f)}
+var bBusy=false,bLift=false;
 function runBottle(ids){
+  bBusy=true;bLift=false;
   var cx=0,cy=0;ids.forEach(function(id){var f=fingers.get(id);cx+=f.x;cy+=f.y});cx/=ids.length;cy/=ids.length;
   var ask=ids[rnd(ids.length)],af=fingers.get(ask),ang=Math.atan2(af.y-cy,af.x-cx)*180/Math.PI;
   var back=ang+180,ans=null,bd=999;
@@ -1731,7 +1733,7 @@ function runBottle(ids){
   bottle.style.left=cx+'px';bottle.style.top=cy+'px';bottle.classList.add('show');
   bottle.animate([{transform:'rotate(0deg)'},{transform:'rotate('+(1800+ang)+'deg)'}],{duration:4200,easing:'cubic-bezier(.12,.7,.1,1)',fill:'forwards'});
   for(var k=1;k<=26;k++)(function(k){later(function(){play('pop1','A')},4000*Math.pow(k/26,1.7))})(k);
-  later(function(){ids.forEach(function(id){var f=fingers.get(id);if(id===ask)labelDot(f,'SOR');else if(id===ans)labelDot(f,'CEVAPLA');else mLose(f)});sndWin();flash();say('🍾 Şişe karar verdi!')},4400);
+  later(function(){ids.forEach(function(id){var f=fingers.get(id);if(id===ask)labelDot(f,'SOR');else if(id===ans)labelDot(f,'CEVAPLA');else mLose(f)});sndWin();flash();say('🍾 Şişe karar verdi!');bBusy=false;if(bLift){bLift=false;later(function(){reset();zapMainAd()},6000)}},4400);
 }
 /* hedef süre */
 var hT=null,hStart=0,hTarget=0;
@@ -2281,7 +2283,7 @@ hpDraw();
 
 function reset(){
   OL.seed=null;OL.locked=false;if(OL.prevMode){mode=OL.prevMode;OL.prevMode=null}clearTimeout(OL.dt);
-  clearTimer();phase='idle';hold=false;popEl.classList.remove('show');mt.forEach(clearTimeout);mt=[];clearInterval(hT);try{bottle.getAnimations().forEach(function(x){x.cancel()})}catch(e){}bottle.classList.remove('show');card.classList.remove('show');
+  clearTimer();phase='idle';hold=false;bBusy=false;bLift=false;popEl.classList.remove('show');mt.forEach(clearTimeout);mt=[];clearInterval(hT);try{bottle.getAnimations().forEach(function(x){x.cancel()})}catch(e){}bottle.classList.remove('show');card.classList.remove('show');
   document.querySelectorAll('.dot,.ring,.nm,#hres,#htg').forEach(function(e){e.remove()});
   fingers.clear();updateSize();var __t2=document.getElementById('toast');if(__t2)__t2.classList.remove('show');document.body.style.removeProperty('--dot');colorIdx=rnd(8);setHint(true);if(OL.on)OL.flush();
 }
@@ -3109,7 +3111,7 @@ function end(e){
     for(var j=0;j<e.changedTouches.length;j++){var f2=fingers.get(e.changedTouches[j].identifier);if(f2&&!f2.done)hedefRelease(f2)}
     return;
   }
-  if(phase==='done'){if(e.touches.length===0&&!hold){setTimeout(reset,1200);zapMainAd()}return}
+  if(phase==='done'){if(bBusy){if(e.touches.length===0)bLift=true;return}if(e.touches.length===0&&!hold){setTimeout(reset,1200);zapMainAd()}return}
   for(var i=0;i<e.changedTouches.length;i++){
     var id=e.changedTouches[i].identifier,f=fingers.get(id);
     if(f){f.el.remove();fingers.delete(id)}

@@ -269,7 +269,10 @@ body::before{content:"";position:fixed;left:50%;top:50%;width:170vmax;height:170
 @keyframes tiDrop{from{transform:translateY(-30px) scale(.4)}to{transform:none}}
 #gear{width:50px;height:50px;font-size:22px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
 #panel{font-family:var(--ff);background:rgba(18,12,38,.8);backdrop-filter:blur(26px) saturate(1.4);-webkit-backdrop-filter:blur(26px) saturate(1.4);border-top:1px solid rgba(255,255,255,.14);border-radius:32px 32px 0 0;padding-top:26px}
-#panel::before{content:"";position:absolute;left:50%;top:9px;width:40px;height:5px;margin-left:-20px;border-radius:3px;background:rgba(255,255,255,.28)}
+#pgrab{position:sticky;top:0;z-index:6;height:34px;margin:-26px -20px -6px;display:flex;align-items:center;justify-content:center;border-radius:32px 32px 0 0;background:rgb(24,16,48);touch-action:none;cursor:grab}
+#pgrab i{display:block;width:46px;height:5px;border-radius:3px;background:rgba(255,255,255,.4)}
+#pgrab::after{content:"";position:absolute;left:0;right:0;top:-12px;bottom:-8px}
+#panel.drag{transition:none}
 #panel h2{font-family:var(--ffd);font-weight:900;font-size:19px;letter-spacing:-.5px;margin-bottom:18px}
 .sec h3{font-family:var(--ff);font-weight:600;font-size:14px;letter-spacing:.3px;text-transform:uppercase;opacity:.7}
 .th{font-family:var(--ff);font-weight:600;font-size:15px;border-radius:20px;padding:14px 12px;border:1.5px solid rgba(255,255,255,.12)}
@@ -817,6 +820,7 @@ setTimeout(hide,2800);
 <button id="gear" aria-label="Renkler">🎨</button>
 
 <div id="panel">
+  <div id="pgrab"><i></i></div>
   <h2>🎨 Renkler<span class="pb2"><button id="reset">Sıfırla</button><button id="done">Tamam</button></span></h2>
   <div class="sec acc open" id="s-th"><h3>✨ Hazır temalar <small id="thc"></small></h3><div class="cats" id="cats"></div><div class="themes" id="themes"></div></div>
   <div class="sec acc" id="s-dot">
@@ -1200,7 +1204,22 @@ document.getElementById('reset').addEventListener('click',function(){cfg=JSON.pa
 
 var panel=document.getElementById('panel'),gear=document.getElementById('gear');
 function openP(){buildLook();panel.classList.add('open');gear.classList.add('hide')}
-function closeP(){panel.classList.remove('open');gear.classList.remove('hide')}
+function closeP(){panel.classList.remove('open');panel.style.transform='';gear.classList.remove('hide')}
+(function(){
+  var g=document.getElementById('pgrab'),y0=0,dy=0,on=false;
+  g.addEventListener('touchstart',function(e){on=true;y0=e.touches[0].clientY;dy=0;panel.classList.add('drag');e.stopPropagation()},{passive:true});
+  g.addEventListener('touchmove',function(e){if(!on)return;dy=Math.max(0,e.touches[0].clientY-y0);panel.style.transform='translateY('+dy+'px)';e.stopPropagation()},{passive:true});
+  function fin(e){if(!on)return;on=false;panel.classList.remove('drag');if(dy>70||dy<6)closeP();else panel.style.transform='';}
+  g.addEventListener('touchend',fin);g.addEventListener('touchcancel',fin);
+  g.addEventListener('click',function(){closeP()});
+  function out(e){
+    if(!panel.classList.contains('open'))return;
+    var t=e.target;if(t&&t.closest&&(t.closest('#panel')||t.closest('#gear')||t.closest('#dock')||t.closest('#dk4')||t.closest('#hdr')||t.closest('#pop')))return;
+    closeP();e.stopPropagation();if(e.cancelable)e.preventDefault();
+  }
+  window.addEventListener('touchstart',out,{capture:true,passive:false});
+  window.addEventListener('mousedown',out,true);
+})();
 gear.addEventListener('click',openP);
 document.getElementById('done').addEventListener('click',closeP);
 apply();

@@ -189,6 +189,10 @@ html,body{min-height:100vh;min-height:100lvh}body{background:#12082e linear-grad
 .dot.win{animation:none;transform:scale(1.5);box-shadow:0 0 calc(var(--sz)*.75) calc(var(--sz)*.25) var(--glow),0 0 calc(var(--sz)*1.6) calc(var(--sz)*.35) color-mix(in srgb,var(--glow) 45%,transparent)}
 .ring{position:fixed;width:var(--sz);height:var(--sz);margin:calc(var(--sz)/-2) 0 0 calc(var(--sz)/-2);border-radius:50%;border:4px solid var(--dot);pointer-events:none;animation:ring 1s infinite}
 @keyframes pop{to{transform:scale(1)}}
+.dot.fuse{animation:fuse 1.65s linear forwards!important}
+@keyframes fuse{0%{transform:scale(1);filter:brightness(1)}11%{transform:scale(1.2);filter:brightness(1.7)}22%{transform:scale(1);filter:brightness(1)}33%{transform:scale(1.25);filter:brightness(1.8)}44%{transform:scale(1.02);filter:brightness(1)}55%{transform:scale(1.3);filter:brightness(1.9)}64%{transform:scale(1.04);filter:brightness(1)}72%{transform:scale(1.38);filter:brightness(2)}80%{transform:scale(1.06);filter:brightness(1)}88%{transform:scale(1.48);filter:brightness(2.2)}100%{transform:scale(1.62);filter:brightness(2.5)}}
+.shard{position:fixed;left:0;top:0;z-index:60;width:var(--w,12px);height:var(--w,12px);margin:calc(var(--w,12px)/-2) 0 0 calc(var(--w,12px)/-2);border-radius:50%;background:var(--c,#fff);pointer-events:none;animation:shard .7s cubic-bezier(.1,.8,.3,1) forwards}
+@keyframes shard{from{transform:translate(var(--x),var(--y)) scale(1);opacity:1}to{transform:translate(calc(var(--x) + var(--dx)),calc(var(--y) + var(--dy) + 40px)) scale(.15);opacity:0}}
 @keyframes pulse{50%{transform:scale(1.12)}}
 @keyframes ring{from{transform:scale(1);opacity:.9}to{transform:scale(2.6);opacity:0}}
 body.won{animation:flash .6s}
@@ -1262,6 +1266,10 @@ function snd(key){
     ns.push({f:w[5],dur:.5,v:w[4]*.65,d:w[1].length*w[2]});
     if(w[6])ns.push({f:w[6][0],f2:w[6][1],dur:.25,v:.3,d:.25});
     u=synth(ns,w[1].length*w[2]+.6);
+  }else if(key==='pat'){
+    var nn=Math.floor(SR*.35),pb=new Float32Array(nn),rs=7,ii,tt,nz,th;
+    for(ii=0;ii<nn;ii++){tt=ii/SR;rs=(rs*16807)%2147483647;nz=(rs/2147483647)*2-1;th=Math.sin(2*Math.PI*(190-130*Math.min(1,tt/.12))*tt)*Math.exp(-tt*24)*.75;pb[ii]=Math.max(-1,Math.min(1,nz*Math.exp(-tt*95)*1.15+th))}
+    u=toWav(pb);
   }else u=synth([],.1);
   bufs[key]=lastBuf;return cache[key]=u;
 }
@@ -1274,7 +1282,7 @@ function themeName(){
 function applySoundPack(){
   var n=themeName();if(n===curPack)return;
   curPack=n;PK=SP[n]||SP['Klasik'];cache={};bufs={};abCache={};
-  var i;snd('silent');snd('win');for(i=0;i<8;i++)snd('pls'+i);for(i=1;i<=8;i++)snd('pop'+i);
+  var i;snd('silent');snd('win');snd('pat');for(i=0;i<8;i++)snd('pls'+i);for(i=1;i<=8;i++)snd('pop'+i);
   wowEls.forEach(function(e,j){if(e._ok){try{e.src=snd('pls'+j);e.load()}catch(x){}}});
   soundReady=true;
 }
@@ -1719,6 +1727,7 @@ function pick(){
   if(mode==='ele')return runEle(ids);
   if(mode==='sise')return runBottle(ids);
   var sh=shuf(ids);
+  if(mode==='bomba')return runBomb(ids,sh);
   if(mode==='zar'){var v=ids.map(function(){return rnd(6)+1}),mx=Math.max.apply(0,v),c=0;
     ids.forEach(function(id,i){var f=fingers.get(id),e=f.el;e.classList.add('num');e.textContent=v[i];if(v[i]===mx){ring(f);c++}else e.classList.add('dim')});
     sndWin();flash();say(c>1?'🎲 Beraberlik: '+mx:'🎲 En yüksek: '+mx);return}
@@ -1752,6 +1761,22 @@ function runEle(ids){
 }
 function labelDot(f,t){clr(f);f.el.classList.add('num','lab');f.el.textContent=t;ring(f)}
 var bBusy=false,bLift=false;
+function runBomb(ids,sh){
+  var wid=sh[0],wf=fingers.get(wid);bBusy=true;bLift=false;
+  ids.forEach(function(id){if(id!==wid)mLose(fingers.get(id))});
+  wf.el.classList.add('fuse');
+  [0,330,640,930,1180,1400].forEach(function(ms,i){later(function(){play('pop'+Math.min(8,2+i),'A')},ms)});
+  later(function(){
+    var cs=getComputedStyle(wf.el),c=cs.getPropertyValue('--dot').trim()||'#fff';
+    wf.el.classList.remove('fuse');wf.el.classList.add('lose');ring(wf);
+    for(var k=0;k<18;k++){var a=Math.random()*6.283,d=90+Math.random()*190,sp=document.createElement('div');sp.className='shard';
+      sp.style.setProperty('--x',wf.x+'px');sp.style.setProperty('--y',wf.y+'px');sp.style.setProperty('--dx',Math.cos(a)*d+'px');sp.style.setProperty('--dy',Math.sin(a)*d+'px');
+      sp.style.setProperty('--w',(8+Math.random()*12)+'px');sp.style.setProperty('--c',k%3?c:'#fff');document.body.appendChild(sp)}
+    play('pat','B');try{if(window.ZS&&ZS.vib)navigator.vibrate([50,30,80])}catch(e){}
+    flash();say(BOMB[rnd(BOMB.length)]);bBusy=false;
+    if(bLift){bLift=false;later(function(){reset();zapMainAd()},3500)}
+  },1650);
+}
 function runBottle(ids){
   bBusy=true;bLift=false;
   var cx=0,cy=0;ids.forEach(function(id){var f=fingers.get(id);cx+=f.x;cy+=f.y});cx/=ids.length;cy/=ids.length;
@@ -2312,7 +2337,7 @@ hpDraw();
 function reset(){
   OL.seed=null;OL.locked=false;if(OL.prevMode){mode=OL.prevMode;OL.prevMode=null}clearTimeout(OL.dt);
   clearTimer();phase='idle';hold=false;bBusy=false;bLift=false;popEl.classList.remove('show');mt.forEach(clearTimeout);mt=[];clearInterval(hT);try{bottle.getAnimations().forEach(function(x){x.cancel()})}catch(e){}bottle.classList.remove('show');card.classList.remove('show');
-  document.querySelectorAll('.dot,.ring,.nm,#hres,#htg').forEach(function(e){e.remove()});
+  document.querySelectorAll('.dot,.ring,.nm,#hres,#htg,.shard').forEach(function(e){e.remove()});
   fingers.clear();updateSize();var __t2=document.getElementById('toast');if(__t2)__t2.classList.remove('show');document.body.style.removeProperty('--dot');colorIdx=rnd(8);setHint(true);if(OL.on)OL.flush();
 }
 function inUI(e){return e.target.closest&&(e.target.closest('#panel')||e.target.closest('#gear')||e.target.closest('#gate')||e.target.closest('#cnt')||e.target.closest('#vp')||e.target.closest('#pg')||e.target.closest('#info')||e.target.closest('#pop')||e.target.closest('#foot')||e.target.closest('#dock')||e.target.closest('#mp2')||e.target.closest('#mpb')||e.target.closest('.hb')||e.target.closest('#zs')||e.target.closest('#mods')||e.target.closest('#wheel')||e.target.closest('#tool')||e.target.closest('#online')||e.target.closest('#oc')||e.target.closest('#zpro'))}

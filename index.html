@@ -1729,11 +1729,12 @@ function runBottle(ids){
 var hT=null,hStart=0,hTarget=0;
 function startHedef(){
   phase='hedef';hStart=Date.now();hTarget=(8+rnd(17))/2;
-  say('🎯 Hedef süre: '+hTarget.toFixed(1)+' sn · sayaç yok, içinden say!');
-  fingers.forEach(function(f){var e=document.createElement('em');e.className='tl';e.textContent='?';f.el.appendChild(e);f.tl=e;f.done=false});
+  say('🎯 Hedef süre: '+hTarget.toFixed(1)+' sn · içinden say, sonuç en sonda!');
+  var HH=[330,215,150,270,28,50,190,0,100,300],hi=0;
+  fingers.forEach(function(f){var h=HH[hi++%HH.length];f.col='hsl('+h+',100%,58%)';f.el.style.setProperty('--dot',f.col);f.el.style.setProperty('--glow','hsla('+h+',100%,58%,.75)');var e=document.createElement('em');e.className='tl';e.textContent='';f.el.appendChild(e);f.tl=e;f.done=false});
 }
 function hedefRelease(f){
-  f.done=true;f.t=(Date.now()-hStart)/1000;f.tl.textContent='✓';f.el.classList.add('rel');
+  f.done=true;f.t=(Date.now()-hStart)/1000;f.el.classList.add('rel');
   var all=true;fingers.forEach(function(g){if(!g.done)all=false});
   if(all)hedefFinish();
 }

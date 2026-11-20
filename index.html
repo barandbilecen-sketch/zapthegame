@@ -269,9 +269,11 @@ body::before{content:"";position:fixed;left:50%;top:50%;width:170vmax;height:170
 @keyframes tiDrop{from{transform:translateY(-30px) scale(.4)}to{transform:none}}
 #gear{width:50px;height:50px;font-size:22px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
 #panel{font-family:var(--ff);background:rgba(18,12,38,.8);backdrop-filter:blur(26px) saturate(1.4);-webkit-backdrop-filter:blur(26px) saturate(1.4);border-top:1px solid rgba(255,255,255,.14);border-radius:32px 32px 0 0;padding-top:26px}
-#pgrab{position:sticky;top:0;z-index:6;height:34px;margin:-26px -20px -6px;display:flex;align-items:center;justify-content:center;border-radius:32px 32px 0 0;background:rgb(24,16,48);touch-action:none;cursor:grab}
+#panel{display:flex;flex-direction:column;overflow:hidden;padding:0!important}
+#pscroll{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:4px 20px calc(env(safe-area-inset-bottom,0px) + 90px);overscroll-behavior:contain}
+#pgrab{position:relative;flex:0 0 auto;height:30px;display:flex;align-items:center;justify-content:center;touch-action:none;cursor:grab}
 #pgrab i{display:block;width:46px;height:5px;border-radius:3px;background:rgba(255,255,255,.4)}
-#pgrab::after{content:"";position:absolute;left:0;right:0;top:-12px;bottom:-8px}
+#pgrab::after{content:"";position:absolute;left:0;right:0;top:-6px;bottom:-6px}
 #panel.drag{transition:none}
 #panel h2{font-family:var(--ffd);font-weight:900;font-size:19px;letter-spacing:-.5px;margin-bottom:18px}
 .sec h3{font-family:var(--ff);font-weight:600;font-size:14px;letter-spacing:.3px;text-transform:uppercase;opacity:.7}
@@ -820,7 +822,7 @@ setTimeout(hide,2800);
 <button id="gear" aria-label="Renkler">🎨</button>
 
 <div id="panel">
-  <div id="pgrab"><i></i></div>
+  <div id="pgrab"><i></i></div><div id="pscroll">
   <h2>🎨 Renkler<span class="pb2"><button id="reset">Sıfırla</button><button id="done">Tamam</button></span></h2>
   <div class="sec acc open" id="s-th"><h3>✨ Hazır temalar <small id="thc"></small></h3><div class="cats" id="cats"></div><div class="themes" id="themes"></div></div>
   <div class="sec acc" id="s-dot">
@@ -834,7 +836,7 @@ setTimeout(hide,2800);
     <label>Renk tonu</label><input type="range" class="hue" min="0" max="360" step="1">
     <label>Parlaklık</label><input type="range" class="lum" min="0" max="100" step="1">
     <div class="sw"></div>
-  </div>
+  </div></div>
 </div>
 
 <script>

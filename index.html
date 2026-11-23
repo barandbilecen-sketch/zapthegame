@@ -2391,7 +2391,6 @@ function zsDraw(){
     h+=(window.ZPRO&&ZPRO.native?'<button class="rw" data-k="zpro"><span>⭐ Zap Pro<small>'+(ZPRO.on?'Aktif · teşekkürler':'Reklamsız + ek paketler')+'</small></span><span>›</span></button>':'')+'<h3>DİL / LANGUAGE</h3><div class="lg">'+LANGS.map(function(l){return'<button data-l="'+l[0]+'" class="'+(ZLANG===l[0]?'on':'')+'">'+l[1]+'</button>'}).join('')+'</div>'
      +'<button class="rw'+(ZS.snd?' on':'')+'" data-k="snd"><span>🔊 Ses<small>Oyun sesleri</small></span><i class="tgl"></i></button>'
      +'<button class="rw'+(ZS.vib?' on':'')+'" data-k="vib"><span>📳 Titreşim<small>Sonuç açıklanınca</small></span><i class="tgl"></i></button>'
-     +(window.ZapNotif?'<button class="rw" data-k="notif"><span>🔔 Bildirimler<small>'+['Kapalı','Az','Normal','Çok'][ZapNotif.getMode()]+'</small></span><span>›</span></button>':'')
      +'<button class="rw" data-k="theme"><span>🎨 Tema ve renkler<small>Arka plan, küre rengi, ses paketi</small></span><span>›</span></button>'
      +'<button class="rw" data-k="how"><span>ℹ️ Nasıl oynanır?</span><span>›</span></button>'
      +'<button class="rw" data-k="reset"><span>🔄 Soru geçmişini sıfırla<small>Kullanılan sorular yeniden gelir</small></span><span>›</span></button>'
@@ -3338,7 +3337,7 @@ window.ZPRO={on:true,native:false,price:''};
   var rounds=0,mrounds=0;
   var nrounds=0;
   window.zapAdMain=function(ok){
-    if(window.ZapNotif&&nrounds<3){nrounds++;if(nrounds===3){try{if(ok()&&!ZapNotif.asked())ZapNotif.offerOnce()}catch(e){}}}
+    if(window.ZapNotif&&nrounds<3){nrounds++;if(nrounds===3){}}
     if(!ZPRO.native||ZPRO.on)return;
     mrounds++;if(mrounds%3!==0)return;
     if(!ok()){mrounds--;return}
